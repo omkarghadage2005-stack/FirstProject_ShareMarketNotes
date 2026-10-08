@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nifty Next 50 - Live Data Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="liveniftynext50.css".css>
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+        <nav>
+    <a href="home_page.html">Home</a>
+    <a href="candle_notes.html">Candlestick</a>
+    <a href="#">Strategies</a>
+    <a href="about.html">about us</a>
+    <a href="#">Contact</a>
+    <div class="container">
+        <header>
+            <h1>📈 Nifty Next 50</h1>
+            <p class="header-subtitle">Real-time Live Market Data Dashboard</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Loading market data...</span>
+            </div>
+        </header>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Now</button>
+            <button onclick="toggleAutoRefresh()">⏱️ Auto Refresh: ON</button>
+            <button onclick="exportData()">📥 Export CSV</button>
+        </div>
+
+        <div class="main-stats">
+            <div class="stat-card">
+                <div class="stat-label">Index Value</div>
+                <div class="stat-value" id="indexValue">-</div>
+                <div class="stat-change" id="indexChange">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Day High</div>
+                <div class="stat-value" id="dayHigh">-</div>
+                <div class="stat-label" style="margin-top: 10px;">Day Low</div>
+                <div class="stat-value" id="dayLow">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week High</div>
+                <div class="stat-value" id="weekHigh">-</div>
+                <div class="stat-label" style="margin-top: 10px;">52 Week Low</div>
+                <div class="stat-value" id="weekLow">-</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Market Status</div>
+                <div class="stat-value" id="marketStatus">-</div>
+                <div class="stat-change" id="lastUpdate">Last update: -</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by stock symbol or name...">
+        </div>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Price (₹)</th>
+                        <th>Change (₹)</th>
+                        <th>Change (%)</th>
+                        <th>Volume</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 40px;">
+                            <div class="loading-spinner"></div> Loading data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>Data updates every 30 seconds | Powered by Live Market API | Last updated: <span id="footerTime">-</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Nifty Next 50 stocks data (sample - replace with real API data)
+        const niftyNext50Stocks = [
+            { symbol: 'APOLLOHOSP', name: 'Apollo Hospitals', price: 6850.50, change: 125.30, changePercent: 1.86 },
+            { symbol: 'ASIANPAINT', name: 'Asian Paints', price: 3245.75, change: -45.25, changePercent: -1.38 },
+            { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv', price: 1875.40, change: 85.60, changePercent: 4.78 },
+            { symbol: 'BAJAJHLDNG', name: 'Bajaj Holdings', price: 6450.00, change: 150.00, changePercent: 2.38 },
+            { symbol: 'BANKBARODA', name: 'Bank of Baroda', price: 245.80, change: 12.50, changePercent: 5.37 },
+            { symbol: 'BERGEPAINT', name: 'Berger Paints', price: 380.25, change: -8.75, changePercent: -2.25 },
+            { symbol: 'BHARTIARTL', name: 'Bharti Airtel', price: 1485.50, change: 45.30, changePercent: 3.15 },
+            { symbol: 'BOSCHLTD', name: 'Bosch Limited', price: 28450.00, change: 250.00, changePercent: 0.88 },
+            { symbol: 'BRITANNIA', name: 'Britannia Industries', price: 4580.75, change: -125.50, changePercent: -2.67 },
+            { symbol: 'CANBK', name: 'Canara Bank', price: 385.40, change: 28.60, changePercent: 7.99 },
+            { symbol: 'CHOLAFIN', name: 'Chola Finance', price: 1245.80, change: 65.40, changePercent: 5.53 },
+            { symbol: 'CIPLA', name: 'Cipla Limited', price: 1485.25, change: -35.75, changePercent: -2.35 },
+            { symbol: 'COLPAL', name: 'Colgate-Palmolive', price: 2485.50, change: 85.30, changePercent: 3.54 },
+            { symbol: 'DABUR', name: 'Dabur India', price: 625.80, change: -15.20, changePercent: -2.37 },
+            { symbol: 'DMART', name: 'Avenue Supermarts', price: 4850.75, change: 125.40, changePercent: 2.66 },
+            { symbol: 'ESCORTS', name: 'Escorts Limited', price: 3245.50, change: 145.60, changePercent: 4.69 },
+            { symbol: 'EXIDEIND', name: 'Exide Industries', price: 385.20, change: 28.50, changePercent: 7.99 },
+            { symbol: 'GAIL', name: 'GAIL (India)', price: 185.40, change: -5.60, changePercent: -2.93 },
+            { symbol: 'GRASIM', name: 'Grasim Industries', price: 2485.75, change: 95.30, changePercent: 3.98 },
+            { symbol: 'HAVELLS', name: 'Havells India', price: 1485.60, change: 65.40, changePercent: 4.61 },
+            { symbol: 'HCLTECH', name: 'HCL Technologies', price: 1885.25, change: -45.75, changePercent: -2.37 },
+            { symbol: 'HDFC', name: 'HDFC Bank', price: 1685.50, change: 85.30, changePercent: 5.33 },
+            { symbol: 'HDFCBANK', name: 'HDFC Bank Ltd', price: 1685.50, change: 85.30, changePercent: 5.33 },
+            { symbol: 'HEROMOTOCO', name: 'Hero MotoCorp', price: 4285.75, change: 125.40, changePercent: 3.02 },
+            { symbol: 'HINDALCO', name: 'Hindalco Industries', price: 685.40, change: 35.60, changePercent: 5.48 },
+            { symbol: 'HINDUNILVR', name: 'Hindustan Unilever', price: 2485.80, change: -65.20, changePercent: -2.55 },
+            { symbol: 'ICICIBANK', name: 'ICICI Bank', price: 1285.50, change: 65.30, changePercent: 5.35 },
+            { symbol: 'IDFCBANK', name: 'IDFC Bank', price: 85.40, change: 5.60, changePercent: 6.99 },
+            { symbol: 'INDIGO', name: 'InterGlobe Aviation', price: 3485.75, change: 145.40, changePercent: 4.35 },
+            { symbol: 'INFY', name: 'Infosys Limited', price: 1885.25, change: -45.75, changePercent: -2.37 },
+            { symbol: 'IOLCP', name: 'Indian Oil Corporation', price: 485.40, change: 15.60, changePercent: 3.32 },
+            { symbol: 'JSWSTEEL', name: 'JSW Steel Limited', price: 885.50, change: 45.30, changePercent: 5.38 },
+            { symbol: 'KOTAKBANK', name: 'Kotak Mahindra Bank', price: 1885.75, change: 85.40, changePercent: 4.74 },
+            { symbol: 'LTIM', name: 'LTI Mindtree', price: 5485.25, change: -125.75, changePercent: -2.24 },
+            { symbol: 'LT', name: 'Larsen & Toubro', price: 3485.50, change: 125.30, changePercent: 3.73 },
+            { symbol: 'MARUTI', name: 'Maruti Suzuki', price: 11485.75, change: 285.40, changePercent: 2.54 },
+            { symbol: 'MAXHEALTH', name: 'Max Healthcare', price: 1085.40, change: 45.60, changePercent: 4.38 },
+            { symbol: 'MCDOWELL', name: 'McDowell Holdings', price: 685.80, change: -25.20, changePercent: -3.55 },
+            { symbol: 'MOTHERSON', name: 'Motherson Sumi', price: 385.50, change: 15.30, changePercent: 4.13 },
+            { symbol: 'MUTHYALIND', name: 'Muthyalamma Industries', price: 285.75, change: -8.40, changePercent: -2.85 },
+            { symbol: 'NATIONALUM', name: 'National Aluminium', price: 185.40, change: 8.60, changePercent: 4.86 },
+            { symbol: 'NESTLEIND', name: 'Nestle India', price: 2485.50, change: 85.30, changePercent: 3.54 },
+            { symbol: 'NMDC', name: 'NMDC Limited', price: 185.80, change: -5.20, changePercent: -2.73 },
+            { symbol: 'NTPC', name: 'NTPC Limited', price: 385.40, change: 15.60, changePercent: 4.23 },
+            { symbol: 'ONGC', name: 'Oil & Natural Gas', price: 385.50, change: 12.30, changePercent: 3.30 },
+            { symbol: 'PAGEIND', name: 'Page Industries', price: 48500.75, change: 1250.40, changePercent: 2.65 },
+            { symbol: 'PIIND', name: 'Pharmaceutical Investments', price: 3485.25, change: -85.75, changePercent: -2.40 },
+            { symbol: 'POWERGRID', name: 'Power Grid Corporation', price: 285.40, change: 8.60, changePercent: 3.11 },
+            { symbol: 'RELIANCE', name: 'Reliance Industries', price: 2885.50, change: 85.30, changePercent: 3.05 },
+            { symbol: 'SBICARD', name: 'SBI Card', price: 685.75, change: 25.40, changePercent: 3.84 },
+            { symbol: 'SBIN', name: 'State Bank of India', price: 685.40, change: 35.60, changePercent: 5.48 }
+        ];
+
+        let autoRefreshEnabled = true;
+        let refreshInterval = null;
+        let filteredData = [...niftyNext50Stocks];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            startAutoRefresh();
+            setupSearch();
+        });
+
+        function refreshData() {
+            updateStatus('Loading market data...', 'loading');
+            
+            // Simulate API call with slight data variation
+            setTimeout(() => {
+                try {
+                    // Add some random variation to prices (simulating live data)
+                    const updatedData = niftyNext50Stocks.map(stock => ({
+                        ...stock,
+                        price: stock.price + (Math.random() - 0.5) * 10,
+                        change: stock.change + (Math.random() - 0.5) * 5,
+                        changePercent: stock.changePercent + (Math.random() - 0.5) * 0.5
+                    }));
+
+                    filteredData = [...updatedData];
+                    renderTable(filteredData);
+                    updateMainStats(updatedData);
+                    updateStatus('Market data live', 'success');
+                    updateTimestamp();
+                } catch (error) {
+                    showError('Failed to fetch market data: ' + error.message);
+                    updateStatus('Error loading data', 'error');
+                }
+            }, 500);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px;">No stocks found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(stock => `
+                <tr>
+                    <td class="symbol">${stock.symbol}</td>
+                    <td>${stock.name}</td>
+                    <td class="price">₹${stock.price.toFixed(2)}</td>
+                    <td class="${stock.change >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.change >= 0 ? '+' : ''}₹${stock.change.toFixed(2)}
+                    </td>
+                    <td class="${stock.changePercent >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(stock.changePercent).toFixed(2)}%
+                    </td>
+                    <td>${(Math.random() * 10000000).toFixed(0)}</td>
+                    <td>₹${(Math.random() * 500000000000).toFixed(0)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateMainStats(data) {
+            const avgPrice = data.reduce((sum, s) => sum + s.price, 0) / data.length;
+            const totalChange = data.reduce((sum, s) => sum + s.change, 0);
+            const totalChangePercent = data.reduce((sum, s) => sum + s.changePercent, 0) / data.length;
+            const maxPrice = Math.max(...data.map(s => s.price));
+            const minPrice = Math.min(...data.map(s => s.price));
+
+            document.getElementById('indexValue').textContent = `₹${avgPrice.toFixed(2)}`;
+            document.getElementById('indexChange').innerHTML = `
+                <span class="${totalChange >= 0 ? 'positive' : 'negative'}">
+                    ${totalChange >= 0 ? '▲' : '▼'} ${Math.abs(totalChange).toFixed(2)} (${totalChangePercent >= 0 ? '+' : ''}${totalChangePercent.toFixed(2)}%)
+                </span>
+            `;
+            document.getElementById('dayHigh').textContent = `₹${maxPrice.toFixed(2)}`;
+            document.getElementById('dayLow').textContent = `₹${minPrice.toFixed(2)}`;
+            document.getElementById('weekHigh').textContent = `₹${(maxPrice * 1.05).toFixed(2)}`;
+            document.getElementById('weekLow').textContent = `₹${(minPrice * 0.95).toFixed(2)}`;
+            document.getElementById('marketStatus').textContent = 'OPEN';
+        }
+
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('lastUpdate').textContent = `Last update: ${timeString}`;
+            document.getElementById('footerTime').textContent = timeString;
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 5000);
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refreshData, 30000); // Refresh every 30 seconds
+        }
+
+        function toggleAutoRefresh() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = event.target;
+            
+            if (autoRefreshEnabled) {
+                button.textContent = '⏱️ Auto Refresh: ON';
+                startAutoRefresh();
+            } else {
+                button.textContent = '⏱️ Auto Refresh: OFF';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                filteredData = niftyNext50Stocks.filter(stock => 
+                    stock.symbol.toLowerCase().includes(query) || 
+                    stock.name.toLowerCase().includes(query)
+                );
+                renderTable(filteredData);
+            });
+        }
+
+        function exportData() {
+            let csv = 'Symbol,Company Name,Price (₹),Change (₹),Change (%)\n';
+            filteredData.forEach(stock => {
+                csv += `${stock.symbol},"${stock.name}",${stock.price.toFixed(2)},${stock.change.toFixed(2)},${stock.changePercent.toFixed(2)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nifty-next-50-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

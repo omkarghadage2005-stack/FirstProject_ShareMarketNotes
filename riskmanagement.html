@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Risk Management - Complete Guide</title>
+    <link rel="stylesheet" href="riskmanagement.css">
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">🛡️ Risk Management Guide</div>
+            <nav>
+                <a href="#principles">Principles</a>
+                <a href="#strategies">Strategies</a>
+                <a href="#tools">Tools</a>
+                <a href="#calculators">Calculators</a>
+                <a href="#best-practices">Best Practices</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Stock Market Risk Management</h1>
+            <p>Master the art of protecting your capital and maximizing returns through effective risk management</p>
+        </div>
+    </section>
+
+    <!-- Why Risk Management Matters -->
+    <section>
+        <div class="container">
+            <h2>Why Risk Management Matters</h2>
+            <p>Risk management is the foundation of successful investing. It's not about avoiding losses entirely—it's about controlling them and protecting your capital for long-term growth.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>💰 Preserve Capital</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Your primary goal should be to preserve capital. Losing 50% requires a 100% gain to recover. Effective risk management prevents catastrophic losses.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📈 Consistent Returns</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Controlled risk leads to consistent, compounding returns over time. Small, consistent gains outperform large wins followed by devastating losses.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>😌 Peace of Mind</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Knowing your maximum loss upfront reduces emotional stress. You can sleep well knowing your portfolio is protected against catastrophic events.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Key Insight:</strong> Warren Buffett's first rule of investing is "Never lose money." His second rule is "Never forget rule number one." This emphasizes the paramount importance of capital preservation through risk management.
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Principles -->
+    <section id="principles">
+        <div class="container">
+            <h2>Core Risk Management Principles</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>1. Position Sizing</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Never risk more than 1-2% of your portfolio on a single trade. This ensures that even a series of losses won't significantly impact your total capital.</p>
+                        <p><strong>Rule:</strong> Risk per trade = Portfolio Size × Risk % (typically 1-2%)</p>
+                        <div class="badge badge-info">Fundamental</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>2. Stop Loss Orders</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Always set predetermined exit points before entering a trade. Stop losses protect you from emotional decisions and limit downside risk.</p>
+                        <p><strong>Types:</strong> Fixed %, Trailing, Volatility-based, Technical level</p>
+                        <div class="badge badge-danger">Critical</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>3. Diversification</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Spread investments across different sectors, asset classes, and geographies. Diversification reduces unsystematic risk and provides stability.</p>
+                        <p><strong>Benefit:</strong> Reduces portfolio volatility and correlation risk</p>
+                        <div class="badge badge-success">Essential</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>4. Risk-Reward Ratio</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Only take trades where potential reward exceeds potential risk. A 1:2 or 1:3 risk-reward ratio ensures profitability even with 50% win rate.</p>
+                        <p><strong>Formula:</strong> Reward ÷ Risk ≥ 2:1</p>
+                        <div class="badge badge-info">Strategic</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>5. Correlation Analysis</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Understand how your holdings move together. Low-correlation assets provide better diversification than highly correlated ones.</p>
+                        <p><strong>Target:</strong> Portfolio correlation &lt; 0.5</p>
+                        <div class="badge badge-warning">Advanced</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>6. Volatility Management</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Monitor portfolio volatility (standard deviation). Adjust position sizes and allocations based on market volatility levels.</p>
+                        <p><strong>Metric:</strong> Portfolio Beta and Sharpe Ratio</p>
+                        <div class="badge badge-info">Quantitative</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Management Strategies -->
+    <section id="strategies">
+        <div class="container">
+            <h2>Risk Management Strategies</h2>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'entry-exit')">Entry & Exit</button>
+                <button class="tab-btn" onclick="switchTab(event, 'portfolio')">Portfolio</button>
+                <button class="tab-btn" onclick="switchTab(event, 'market')">Market</button>
+            </div>
+
+            <!-- Entry & Exit Strategies -->
+            <div id="entry-exit" class="tab-content active">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Stop Loss Placement</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Technical Level Stop Loss</h4>
+                            <p>Place stops just below support levels or technical resistance. This minimizes false breakouts while protecting against significant moves.</p>
+                            <ul class="list-styled">
+                                <li><strong>Advantage:</strong> Based on technical levels, not arbitrary percentages</li>
+                                <li><strong>Disadvantage:</strong> May result in larger losses if support breaks</li>
+                                <li><strong>Best for:</strong> Swing trading and position trading</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Percentage-Based Stop Loss</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Fixed Percentage Stops</h4>
+                            <p>Set stops at a fixed percentage below entry (e.g., 5%, 10%). Simple and consistent, but doesn't account for volatility.</p>
+                            <ul class="list-styled">
+                                <li><strong>Advantage:</strong> Simple to calculate and implement</li>
+                                <li><strong>Disadvantage:</strong> Ignores volatility and technical levels</li>
+                                <li><strong>Best for:</strong> Beginners and systematic traders</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Trailing Stop Loss</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Dynamic Stop Loss</h4>
+                            <p>Automatically adjusts upward as price rises, locking in profits while allowing upside. Exits when price reverses by set amount.</p>
+                            <ul class="list-styled">
+                                <li><strong>Advantage:</strong> Locks in profits while allowing upside</li>
+                                <li><strong>Disadvantage:</strong> Can exit too early in volatile markets</li>
+                                <li><strong>Best for:</strong> Trending markets and momentum trades</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Volatility-Based Stop Loss</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>ATR-Based Stops</h4>
+                            <p>Use Average True Range (ATR) to set stops. In high volatility, stops are wider; in low volatility, stops are tighter.</p>
+                            <ul class="list-styled">
+                                <li><strong>Advantage:</strong> Adapts to market conditions</li>
+                                <li><strong>Disadvantage:</strong> Requires calculation of ATR</li>
+                                <li><strong>Best for:</strong> Adaptive trading systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Pro Tip:</strong> Combine multiple stop loss methods. Use technical levels as primary stops, but ensure they don't exceed your maximum acceptable loss (1-2% of portfolio).
+                </div>
+            </div>
+
+            <!-- Portfolio Strategies -->
+            <div id="portfolio" class="tab-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Diversification</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Spread Risk Across Holdings</h4>
+                            <p>Invest in different sectors, market caps, and asset classes. Reduces impact of any single stock's poor performance.</p>
+                            <p><strong>Target Allocation:</strong></p>
+                            <ul class="list-styled">
+                                <li>No single stock &gt; 5-10% of portfolio</li>
+                                <li>No single sector &gt; 20% of portfolio</li>
+                                <li>Mix of large, mid, small-cap stocks</li>
+                                <li>Include bonds, commodities, or cash</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Asset Allocation</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Strategic Portfolio Mix</h4>
+                            <p>Determine optimal mix of stocks, bonds, cash based on age, risk tolerance, and time horizon.</p>
+                            <p><strong>Age-Based Rule:</strong></p>
+                            <ul class="list-styled">
+                                <li>Age 30: 70% stocks, 30% bonds</li>
+                                <li>Age 40: 60% stocks, 40% bonds</li>
+                                <li>Age 50: 50% stocks, 50% bonds</li>
+                                <li>Age 60: 40% stocks, 60% bonds</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Hedging</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Protect Against Downside</h4>
+                            <p>Use options, futures, or inverse ETFs to protect against market downturns. Reduces portfolio volatility.</p>
+                            <ul class="list-styled">
+                                <li>Put options on major holdings</li>
+                                <li>Inverse ETFs for market hedges</li>
+                                <li>Protective collars</li>
+                                <li>Index futures</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Rebalancing</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Maintain Target Allocation</h4>
+                            <p>Periodically rebalance portfolio back to target allocation. Locks in gains and maintains risk level.</p>
+                            <ul class="list-styled">
+                                <li>Rebalance quarterly or semi-annually</li>
+                                <li>Rebalance when allocation drifts &gt; 5%</li>
+                                <li>Use new contributions to rebalance</li>
+                                <li>Consider tax implications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Strategies -->
+            <div id="market" class="tab-content">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Market Regime Analysis</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Adapt to Market Conditions</h4>
+                            <p>Identify whether market is trending, ranging, or volatile. Adjust risk accordingly.</p>
+                            <ul class="list-styled">
+                                <li><strong>Trending:</strong> Increase position sizes, use trailing stops</li>
+                                <li><strong>Ranging:</strong> Reduce position sizes, use tighter stops</li>
+                                <li><strong>Volatile:</strong> Reduce leverage, increase diversification</li>
+                                <li><strong>Uncertain:</strong> Reduce risk, wait for clarity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Correlation Management</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Monitor Correlation Levels</h4>
+                            <p>Track correlation between holdings. High correlation means less diversification benefit.</p>
+                            <ul class="list-styled">
+                                <li>Correlation &lt; 0.3: Good diversification</li>
+                                <li>Correlation 0.3-0.7: Moderate diversification</li>
+                                <li>Correlation &gt; 0.7: Poor diversification</li>
+                                <li>Negative correlation: Excellent hedge</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sector Rotation</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Rotate Based on Cycles</h4>
+                            <p>Different sectors perform better in different economic cycles. Rotate to reduce systematic risk.</p>
+                            <ul class="list-styled">
+                                <li><strong>Early Cycle:</strong> Technology, Discretionary</li>
+                                <li><strong>Mid Cycle:</strong> Financials, Industrials</li>
+                                <li><strong>Late Cycle:</strong> Utilities, Consumer Staples</li>
+                                <li><strong>Recession:</strong> Healthcare, Staples</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Drawdown Limits</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Set Portfolio Limits</h4>
+                            <p>Define maximum acceptable drawdown. Reduce risk or exit trades when approaching limit.</p>
+                            <ul class="list-styled">
+                                <li>Daily limit: -2% to -3%</li>
+                                <li>Weekly limit: -5% to -7%</li>
+                                <li>Monthly limit: -10% to -15%</li>
+                                <li>Yearly limit: -20% to -25%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Management Tools -->
+    <section id="tools">
+        <div class="container">
+            <h2>Risk Management Tools & Metrics</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Value at Risk (VaR)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Estimates maximum loss over a given period at a specific confidence level (e.g., 95%).</p>
+                        <p><strong>Example:</strong> VaR of $10,000 at 95% means there's a 95% chance of not losing more than $10,000.</p>
+                        <p><strong>Calculation:</strong> VaR = Portfolio Value × Z-score × Standard Deviation</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Conditional Value at Risk (CVaR)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Average loss when losses exceed VaR threshold. More conservative than VaR.</p>
+                        <p><strong>Example:</strong> CVaR of $15,000 means average loss in worst 5% of scenarios is $15,000.</p>
+                        <p><strong>Use:</strong> Better for tail-risk analysis</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Sharpe Ratio</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Measures risk-adjusted return. Higher ratio indicates better risk-adjusted performance.</p>
+                        <p><strong>Formula:</strong> (Return - Risk-free Rate) ÷ Standard Deviation</p>
+                        <p><strong>Interpretation:</strong> Sharpe &gt; 1 is good; &gt; 2 is excellent</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Sortino Ratio</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Like Sharpe Ratio but only considers downside volatility. More relevant for risk management.</p>
+                        <p><strong>Formula:</strong> (Return - Risk-free Rate) ÷ Downside Deviation</p>
+                        <p><strong>Advantage:</strong> Ignores upside volatility</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Maximum Drawdown</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Largest peak-to-trough decline in portfolio value. Shows worst-case scenario historically.</p>
+                        <p><strong>Example:</strong> If portfolio went from $100k to $70k, max drawdown is 30%.</p>
+                        <p><strong>Use:</strong> Assess historical risk and volatility</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Beta</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Measures stock's volatility relative to market. Beta &gt; 1 is more volatile than market.</p>
+                        <p><strong>Example:</strong> Beta of 1.5 means stock moves 1.5x more than market.</p>
+                        <p><strong>Use:</strong> Assess systematic risk</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Dashboard Metrics:</strong> Track Sharpe Ratio, Sortino Ratio, Maximum Drawdown, and Current Drawdown weekly. These four metrics provide comprehensive view of portfolio risk.
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators -->
+    <section id="calculators">
+        <div class="container">
+            <h2>Interactive Risk Management Calculators</h2>
+
+            <!-- Position Size Calculator -->
+            <div class="calculator">
+                <h3>Position Size Calculator</h3>
+                <p>Calculate optimal position size based on your risk tolerance and stop loss distance.</p>
+
+                <div class="grid-2">
+                    <div>
+                        <div class="calc-group">
+                            <label for="portfolio-size">Portfolio Size ($)</label>
+                            <input type="number" id="portfolio-size" placeholder="e.g., 100000" value="100000">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="risk-percent">Risk Per Trade (%)</label>
+                            <input type="number" id="risk-percent" placeholder="e.g., 2" value="2" min="0.1" max="10" step="0.1">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="entry-price">Entry Price ($)</label>
+                            <input type="number" id="entry-price" placeholder="e.g., 100" value="100">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="stop-loss-price">Stop Loss Price ($)</label>
+                            <input type="number" id="stop-loss-price" placeholder="e.g., 95" value="95">
+                        </div>
+
+                        <button class="calc-button" onclick="calculatePositionSize()">Calculate Position Size</button>
+                    </div>
+
+                    <div class="calc-result" id="position-result">
+                        <div class="result-item">
+                            <div class="result-label">Risk Amount</div>
+                            <div class="result-value" id="risk-amount">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Risk Per Share</div>
+                            <div class="result-value" id="risk-per-share">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Number of Shares</div>
+                            <div class="result-value" id="num-shares">0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Position Size</div>
+                            <div class="result-value" id="position-size">$0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk-Reward Ratio Calculator -->
+            <div class="calculator">
+                <h3>Risk-Reward Ratio Calculator</h3>
+                <p>Determine if a trade has acceptable risk-reward ratio (aim for 1:2 or better).</p>
+
+                <div class="grid-2">
+                    <div>
+                        <div class="calc-group">
+                            <label for="entry-price-rr">Entry Price ($)</label>
+                            <input type="number" id="entry-price-rr" placeholder="e.g., 100" value="100">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="stop-loss-rr">Stop Loss Price ($)</label>
+                            <input type="number" id="stop-loss-rr" placeholder="e.g., 95" value="95">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="target-price">Target Price ($)</label>
+                            <input type="number" id="target-price" placeholder="e.g., 110" value="110">
+                        </div>
+
+                        <button class="calc-button" onclick="calculateRiskReward()">Calculate Ratio</button>
+                    </div>
+
+                    <div class="calc-result" id="rr-result">
+                        <div class="result-item">
+                            <div class="result-label">Risk (Loss)</div>
+                            <div class="result-value" id="risk-amount-rr">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Reward (Gain)</div>
+                            <div class="result-value" id="reward-amount">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Risk-Reward Ratio</div>
+                            <div class="result-value" id="rr-ratio">1:0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Assessment</div>
+                            <div class="result-value" id="rr-assessment">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Volatility Calculator -->
+            <div class="calculator">
+                <h3>Portfolio Volatility Estimate</h3>
+                <p>Estimate portfolio volatility based on asset allocation.</p>
+
+                <div class="grid-2">
+                    <div>
+                        <div class="calc-group">
+                            <label for="stock-allocation">Stock Allocation (%)</label>
+                            <input type="number" id="stock-allocation" placeholder="e.g., 70" value="70" min="0" max="100">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="bond-allocation">Bond Allocation (%)</label>
+                            <input type="number" id="bond-allocation" placeholder="e.g., 30" value="30" min="0" max="100">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="stock-volatility">Stock Market Volatility (Annual %)</label>
+                            <input type="number" id="stock-volatility" placeholder="e.g., 15" value="15" min="1" max="50">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="bond-volatility">Bond Market Volatility (Annual %)</label>
+                            <input type="number" id="bond-volatility" placeholder="e.g., 5" value="5" min="1" max="20">
+                        </div>
+
+                        <button class="calc-button" onclick="calculateVolatility()">Calculate Volatility</button>
+                    </div>
+
+                    <div class="calc-result" id="volatility-result">
+                        <div class="result-item">
+                            <div class="result-label">Portfolio Volatility (Annual)</div>
+                            <div class="result-value" id="portfolio-volatility">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Monthly Volatility</div>
+                            <div class="result-value" id="monthly-volatility">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Daily Volatility</div>
+                            <div class="result-value" id="daily-volatility">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Risk Level</div>
+                            <div class="result-value" id="risk-level">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Maximum Loss Calculator -->
+            <div class="calculator">
+                <h3>Maximum Acceptable Loss Calculator</h3>
+                <p>Determine maximum loss you can afford while maintaining portfolio stability.</p>
+
+                <div class="grid-2">
+                    <div>
+                        <div class="calc-group">
+                            <label for="portfolio-value">Current Portfolio Value ($)</label>
+                            <input type="number" id="portfolio-value" placeholder="e.g., 100000" value="100000">
+                        </div>
+
+                        <div class="calc-group">
+                            <label for="max-drawdown-percent">Maximum Acceptable Drawdown (%)</label>
+                            <input type="number" id="max-drawdown-percent" placeholder="e.g., 20" value="20" min="1" max="50">
+                        </div>
+
+                        <button class="calc-button" onclick="calculateMaxLoss()">Calculate Max Loss</button>
+                    </div>
+
+                    <div class="calc-result" id="max-loss-result">
+                        <div class="result-item">
+                            <div class="result-label">Maximum Loss Amount</div>
+                            <div class="result-value" id="max-loss-amount">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Portfolio Floor Value</div>
+                            <div class="result-value" id="portfolio-floor">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Trades Until Limit (at 2% risk)</div>
+                            <div class="result-value" id="trades-until-limit">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices -->
+    <section id="best-practices">
+        <div class="container">
+            <h2>Risk Management Best Practices</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>✅ Do's</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-styled">
+                            <li>Always use stop losses on every trade</li>
+                            <li>Risk only 1-2% per trade</li>
+                            <li>Diversify across sectors and asset classes</li>
+                            <li>Track your risk metrics weekly</li>
+                            <li>Adjust position sizes for volatility</li>
+                            <li>Review and rebalance quarterly</li>
+                            <li>Keep a trading journal</li>
+                            <li>Use limit orders for entries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>❌ Don'ts</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-styled">
+                            <li>Never risk more than 2% per trade</li>
+                            <li>Don't trade without a stop loss</li>
+                            <li>Avoid concentrating in single stocks</li>
+                            <li>Don't ignore correlation between holdings</li>
+                            <li>Never add to losing positions</li>
+                            <li>Avoid emotional trading decisions</li>
+                            <li>Don't use excessive leverage</li>
+                            <li>Never ignore warning signs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box danger">
+                <strong>⚠️ Critical Warning:</strong> The most common mistake traders make is ignoring risk management during profitable periods. Discipline during gains is what separates successful traders from those who lose everything. Stick to your risk rules at all times.
+            </div>
+
+            <h3>The Risk Management Checklist</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Frequency</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Stop Loss Check</strong></td>
+                        <td>Before Every Trade</td>
+                        <td>Verify stop loss is set and reasonable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Position Size</strong></td>
+                        <td>Before Every Trade</td>
+                        <td>Confirm position size is ≤ 2% risk</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Risk-Reward Ratio</strong></td>
+                        <td>Before Every Trade</td>
+                        <td>Ensure ratio is at least 1:2</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Correlation Check</strong></td>
+                        <td>Weekly</td>
+                        <td>Review correlation between holdings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Volatility Review</strong></td>
+                        <td>Weekly</td>
+                        <td>Check portfolio volatility and VIX</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Drawdown Limit</strong></td>
+                        <td>Daily</td>
+                        <td>Monitor current drawdown vs. limit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portfolio Rebalance</strong></td>
+                        <td>Quarterly</td>
+                        <td>Rebalance to target allocation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Risk Metrics</strong></td>
+                        <td>Monthly</td>
+                        <td>Calculate Sharpe, Sortino, Max Drawdown</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trading Journal Review</strong></td>
+                        <td>Monthly</td>
+                        <td>Analyze trades and learn from mistakes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Strategy Review</strong></td>
+                        <td>Quarterly</td>
+                        <td>Evaluate strategy performance and adjust</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section>
+        <div class="container">
+            <h2>Quick Reference Guide</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <h4>Risk Per Trade</h4>
+                    <p><strong>Recommended:</strong> 1-2% of portfolio</p>
+                    <p><strong>Maximum:</strong> 3% (aggressive)</p>
+                    <p><strong>Minimum:</strong> 0.5% (conservative)</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>Risk-Reward Ratio</h4>
+                    <p><strong>Minimum:</strong> 1:1 (break-even)</p>
+                    <p><strong>Recommended:</strong> 1:2 or 1:3</p>
+                    <p><strong>Ideal:</strong> 1:3 or higher</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>Position Concentration</h4>
+                    <p><strong>Single Stock:</strong> Max 5-10%</p>
+                    <p><strong>Single Sector:</strong> Max 20%</p>
+                    <p><strong>Minimum Holdings:</strong> 10-15 stocks</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>Drawdown Limits</h4>
+                    <p><strong>Daily:</strong> -2% to -3%</p>
+                    <p><strong>Monthly:</strong> -10% to -15%</p>
+                    <p><strong>Yearly:</strong> -20% to -25%</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>Sharpe Ratio</h4>
+                    <p><strong>Poor:</strong> &lt; 0.5</p>
+                    <p><strong>Good:</strong> 1.0 - 2.0</p>
+                    <p><strong>Excellent:</strong> &gt; 2.0</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>Correlation Target</h4>
+                    <p><strong>Good:</strong> &lt; 0.3</p>
+                    <p><strong>Acceptable:</strong> 0.3 - 0.7</p>
+                    <p><strong>Poor:</strong> &gt; 0.7</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Stock Market Risk Management Guide. All rights reserved.</p>
+        <p>Disclaimer: This content is for educational purposes only. Not financial advice. Consult a financial advisor before investing.</p>
+    </footer>
+
+    <script>
+        // Position Size Calculator
+        function calculatePositionSize() {
+            const portfolioSize = parseFloat(document.getElementById('portfolio-size').value) || 0;
+            const riskPercent = parseFloat(document.getElementById('risk-percent').value) || 0;
+            const entryPrice = parseFloat(document.getElementById('entry-price').value) || 0;
+            const stopLossPrice = parseFloat(document.getElementById('stop-loss-price').value) || 0;
+
+            if (portfolioSize && riskPercent && entryPrice && stopLossPrice) {
+                const riskAmount = portfolioSize * (riskPercent / 100);
+                const riskPerShare = Math.abs(entryPrice - stopLossPrice);
+                const numShares = Math.floor(riskAmount / riskPerShare);
+                const positionSize = numShares * entryPrice;
+
+                document.getElementById('risk-amount').textContent = '$' + riskAmount.toFixed(2);
+                document.getElementById('risk-per-share').textContent = '$' + riskPerShare.toFixed(2);
+                document.getElementById('num-shares').textContent = numShares.toLocaleString();
+                document.getElementById('position-size').textContent = '$' + positionSize.toFixed(2);
+                document.getElementById('position-result').classList.add('show');
+            }
+        }
+
+        // Risk-Reward Calculator
+        function calculateRiskReward() {
+            const entryPrice = parseFloat(document.getElementById('entry-price-rr').value) || 0;
+            const stopLossPrice = parseFloat(document.getElementById('stop-loss-rr').value) || 0;
+            const targetPrice = parseFloat(document.getElementById('target-price').value) || 0;
+
+            if (entryPrice && stopLossPrice && targetPrice) {
+                const risk = Math.abs(entryPrice - stopLossPrice);
+                const reward = Math.abs(targetPrice - entryPrice);
+                const ratio = reward / risk;
+
+                let assessment = 'Poor';
+                if (ratio >= 3) assessment = 'Excellent ✓';
+                else if (ratio >= 2) assessment = 'Good ✓';
+                else if (ratio >= 1) assessment = 'Acceptable';
+                else assessment = 'Poor ✗';
+
+                document.getElementById('risk-amount-rr').textContent = '$' + risk.toFixed(2);
+                document.getElementById('reward-amount').textContent = '$' + reward.toFixed(2);
+                document.getElementById('rr-ratio').textContent = '1:' + ratio.toFixed(2);
+                document.getElementById('rr-assessment').textContent = assessment;
+                document.getElementById('rr-result').classList.add('show');
+            }
+        }
+
+        // Volatility Calculator
+        function calculateVolatility() {
+            const stockAlloc = parseFloat(document.getElementById('stock-allocation').value) || 0;
+            const bondAlloc = parseFloat(document.getElementById('bond-allocation').value) || 0;
+            const stockVol = parseFloat(document.getElementById('stock-volatility').value) || 0;
+            const bondVol = parseFloat(document.getElementById('bond-volatility').value) || 0;
+
+            if (stockAlloc + bondAlloc === 100) {
+                const portfolioVol = Math.sqrt(
+                    Math.pow((stockAlloc / 100) * stockVol, 2) +
+                    Math.pow((bondAlloc / 100) * bondVol, 2)
+                );
+
+                const monthlyVol = portfolioVol / Math.sqrt(12);
+                const dailyVol = portfolioVol / Math.sqrt(252);
+
+                let riskLevel = 'Low';
+                if (portfolioVol > 20) riskLevel = 'Very High';
+                else if (portfolioVol > 15) riskLevel = 'High';
+                else if (portfolioVol > 10) riskLevel = 'Medium';
+                else if (portfolioVol > 5) riskLevel = 'Low';
+
+                document.getElementById('portfolio-volatility').textContent = portfolioVol.toFixed(2) + '%';
+                document.getElementById('monthly-volatility').textContent = monthlyVol.toFixed(2) + '%';
+                document.getElementById('daily-volatility').textContent = dailyVol.toFixed(2) + '%';
+                document.getElementById('risk-level').textContent = riskLevel;
+                document.getElementById('volatility-result').classList.add('show');
+            }
+        }
+
+        // Maximum Loss Calculator
+        function calculateMaxLoss() {
+            const portfolioValue = parseFloat(document.getElementById('portfolio-value').value) || 0;
+            const maxDrawdown = parseFloat(document.getElementById('max-drawdown-percent').value) || 0;
+
+            if (portfolioValue && maxDrawdown) {
+                const maxLoss = portfolioValue * (maxDrawdown / 100);
+                const portfolioFloor = portfolioValue - maxLoss;
+                const tradesUntilLimit = Math.floor(maxDrawdown / 2);
+
+                document.getElementById('max-loss-amount').textContent = '$' + maxLoss.toFixed(2);
+                document.getElementById('portfolio-floor').textContent = '$' + portfolioFloor.toFixed(2);
+                document.getElementById('trades-until-limit').textContent = tradesUntilLimit;
+                document.getElementById('max-loss-result').classList.add('show');
+            }
+        }
+
+        // Tab switching
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

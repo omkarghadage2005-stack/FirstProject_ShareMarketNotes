@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensex Live - Real-Time BSE Index Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="livesensexdata.css">
+</head>
+
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 BSE Sensex Live</h1>
+            <p class="header-subtitle">Real-Time Stock Market Index Dashboard</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Loading market data...</span>
+            </div>
+        </header>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="main-display">
+            <div class="sensex-value" id="sensexValue">-</div>
+            <div class="sensex-change">
+                <div class="change-item">
+                    Change: <span id="sensexChange" class="change-neutral">-</span>
+                </div>
+                <div class="change-item">
+                    Change %: <span id="sensexChangePercent" class="change-neutral">-</span>
+                </div>
+            </div>
+            <div class="market-hours">
+                Market Status: <span id="marketStatus">Loading...</span> | Last Updated: <span id="lastUpdate">-</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Now</button>
+            <button onclick="toggleAutoRefresh()">⏱️ Auto Refresh: ON</button>
+            <button onclick="exportData()">📥 Export Data</button>
+            <button onclick="toggleChart()">📈 Toggle Chart</button>
+        </div>
+
+        <div class="main-stats">
+            <div class="stat-card">
+                <div class="stat-label">Day High</div>
+                <div class="stat-value" id="dayHigh">-</div>
+                <div class="stat-subvalue">Highest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Day Low</div>
+                <div class="stat-value" id="dayLow">-</div>
+                <div class="stat-subvalue">Lowest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week High</div>
+                <div class="stat-value" id="weekHigh">-</div>
+                <div class="stat-subvalue">52-week peak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week Low</div>
+                <div class="stat-value" id="weekLow">-</div>
+                <div class="stat-subvalue">52-week low</div>
+            </div>
+        </div>
+
+        <div class="indices-grid">
+            <div class="index-card">
+                <div class="index-name">Nifty 50</div>
+                <div class="index-value" id="nifty50">-</div>
+                <div class="index-change" id="nifty50Change">-</div>
+            </div>
+            <div class="index-card">
+                <div class="index-name">Nifty Next 50</div>
+                <div class="index-value" id="niftyNext50">-</div>
+                <div class="index-change" id="niftyNext50Change">-</div>
+            </div>
+            <div class="index-card">
+                <div class="index-name">Nifty Midcap 50</div>
+                <div class="index-value" id="niftyMidcap">-</div>
+                <div class="index-change" id="niftyMidcapChange">-</div>
+            </div>
+            <div class="index-card">
+                <div class="index-name">Nifty Smallcap 50</div>
+                <div class="index-value" id="niftySmallcap">-</div>
+                <div class="index-change" id="niftySmallcapChange">-</div>
+            </div>
+        </div>
+
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <div class="chart-title">Sensex Price Movement (Last 10 Days)</div>
+            <canvas id="sensexChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Sector</th>
+                        <th>Price (₹)</th>
+                        <th>Change (₹)</th>
+                        <th>Change (%)</th>
+                        <th>Weight (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px;">
+                            <div class="loading-spinner"></div> Loading Sensex components...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>📍 Bombay Stock Exchange (BSE) | Data updates every 30 seconds</p>
+            <p>Last updated: <span id="footerTime">-</span></p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #4b5563;">Disclaimer: This is a demo dashboard. For real-time trading, please use official BSE platforms.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Sensex top 30 companies (sample data)
+        const sensexCompanies = [
+            { name: 'Reliance Industries', sector: 'Energy', price: 2885.50, change: 85.30, changePercent: 3.05, weight: 12.5 },
+            { name: 'TCS', sector: 'IT', price: 3885.75, change: -95.25, changePercent: -2.39, weight: 11.2 },
+            { name: 'HDFC Bank', sector: 'Banking', price: 1685.50, change: 85.30, changePercent: 5.33, weight: 10.8 },
+            { name: 'ICICI Bank', sector: 'Banking', price: 1285.50, change: 65.30, changePercent: 5.35, weight: 8.5 },
+            { name: 'Infosys', sector: 'IT', price: 1885.25, change: -45.75, changePercent: -2.37, weight: 7.2 },
+            { name: 'Hindustan Unilever', sector: 'FMCG', price: 2485.80, change: -65.20, changePercent: -2.55, weight: 6.8 },
+            { name: 'Bajaj Finance', sector: 'Finance', price: 7485.50, change: 185.40, changePercent: 2.54, weight: 6.5 },
+            { name: 'Maruti Suzuki', sector: 'Automobile', price: 11485.75, change: 285.40, changePercent: 2.54, weight: 5.8 },
+            { name: 'NTPC', sector: 'Power', price: 385.40, change: 15.60, changePercent: 4.23, weight: 4.2 },
+            { name: 'State Bank of India', sector: 'Banking', price: 685.40, change: 35.60, changePercent: 5.48, weight: 4.5 },
+            { name: 'Larsen & Toubro', sector: 'Engineering', price: 3485.50, change: 125.30, changePercent: 3.73, weight: 5.2 },
+            { name: 'Asian Paints', sector: 'Paint', price: 3245.75, change: -45.25, changePercent: -1.38, weight: 3.8 },
+            { name: 'Nestlé India', sector: 'FMCG', price: 2485.50, change: 85.30, changePercent: 3.54, weight: 3.5 },
+            { name: 'Axis Bank', sector: 'Banking', price: 1085.40, change: 45.60, changePercent: 4.38, weight: 3.2 },
+            { name: 'Kotak Mahindra Bank', sector: 'Banking', price: 1885.75, change: 85.40, changePercent: 4.74, weight: 3.8 },
+            { name: 'Wipro', sector: 'IT', price: 485.25, change: -15.75, changePercent: -3.15, weight: 2.8 },
+            { name: 'ONGC', sector: 'Energy', price: 385.50, change: 12.30, changePercent: 3.30, weight: 2.5 },
+            { name: 'Bharti Airtel', sector: 'Telecom', price: 1485.50, change: 45.30, changePercent: 3.15, weight: 2.8 },
+            { name: 'Titan Company', sector: 'Retail', price: 3485.25, change: 85.75, changePercent: 2.52, weight: 2.6 },
+            { name: 'Power Grid', sector: 'Power', price: 285.40, change: 8.60, changePercent: 3.11, weight: 2.2 },
+            { name: 'Sundar Pharma', sector: 'Pharma', price: 685.80, change: 25.40, changePercent: 3.84, weight: 1.8 },
+            { name: 'Cipla', sector: 'Pharma', price: 1485.25, change: -35.75, changePercent: -2.35, weight: 1.6 },
+            { name: 'Dr. Reddy Labs', sector: 'Pharma', price: 4285.50, change: 125.30, changePercent: 3.02, weight: 2.2 },
+            { name: 'HCL Technologies', sector: 'IT', price: 1885.25, change: -45.75, changePercent: -2.37, weight: 1.9 },
+            { name: 'Grasim Industries', sector: 'Cement', price: 2485.75, change: 95.30, changePercent: 3.98, weight: 2.1 },
+            { name: 'Hindalco', sector: 'Metal', price: 685.40, change: 35.60, changePercent: 5.48, weight: 1.5 },
+            { name: 'JSW Steel', sector: 'Steel', price: 885.50, change: 45.30, changePercent: 5.38, weight: 1.8 },
+            { name: 'Bajaj Auto', sector: 'Automobile', price: 8485.75, change: 185.40, changePercent: 2.23, weight: 2.5 },
+            { name: 'Hero MotoCorp', sector: 'Automobile', price: 4285.75, change: 125.40, changePercent: 3.02, weight: 2.0 },
+            { name: 'Mahindra & Mahindra', sector: 'Automobile', price: 2885.50, change: 85.30, changePercent: 3.05, weight: 2.3 }
+        ];
+
+        let autoRefreshEnabled = true;
+        let refreshInterval = null;
+        let chartInstance = null;
+        let chartVisible = false;
+
+        // Historical data for chart
+        const historicalData = [
+            { date: '10 days ago', value: 78450 },
+            { date: '9 days ago', value: 78850 },
+            { date: '8 days ago', value: 78200 },
+            { date: '7 days ago', value: 79100 },
+            { date: '6 days ago', value: 78900 },
+            { date: '5 days ago', value: 79500 },
+            { date: '4 days ago', value: 79200 },
+            { date: '3 days ago', value: 80100 },
+            { date: '2 days ago', value: 80500 },
+            { date: 'Today', value: 81200 }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            startAutoRefresh();
+        });
+
+        function refreshData() {
+            updateStatus('Loading market data...', 'loading');
+            
+            setTimeout(() => {
+                try {
+                    // Simulate API call with slight data variation
+                    const updatedCompanies = sensexCompanies.map(company => ({
+                        ...company,
+                        price: company.price + (Math.random() - 0.5) * 50,
+                        change: company.change + (Math.random() - 0.5) * 10,
+                        changePercent: company.changePercent + (Math.random() - 0.5) * 0.5
+                    }));
+
+                    renderTable(updatedCompanies);
+                    updateMainStats(updatedCompanies);
+                    updateRelatedIndices();
+                    updateStatus('Market data live', 'success');
+                    updateTimestamp();
+                } catch (error) {
+                    showError('Failed to fetch market data: ' + error.message);
+                    updateStatus('Error loading data', 'error');
+                }
+            }, 500);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            
+            tbody.innerHTML = data.map(company => `
+                <tr>
+                    <td class="company-name">${company.name}</td>
+                    <td>${company.sector}</td>
+                    <td class="price">₹${company.price.toFixed(2)}</td>
+                    <td class="${company.change >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${company.change >= 0 ? '+' : ''}₹${company.change.toFixed(2)}
+                    </td>
+                    <td class="${company.changePercent >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${company.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(company.changePercent).toFixed(2)}%
+                    </td>
+                    <td>${company.weight.toFixed(1)}%</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateMainStats(data) {
+            // Calculate weighted average for Sensex
+            const totalValue = data.reduce((sum, c) => sum + (c.price * c.weight), 0) / 100;
+            const totalChange = data.reduce((sum, c) => sum + (c.change * c.weight), 0) / 100;
+            const totalChangePercent = (totalChange / (totalValue - totalChange)) * 100;
+            const maxPrice = Math.max(...data.map(c => c.price));
+            const minPrice = Math.min(...data.map(c => c.price));
+
+            document.getElementById('sensexValue').textContent = `₹${totalValue.toFixed(2)}`;
+            
+            const changeClass = totalChange >= 0 ? 'change-positive' : 'change-negative';
+            document.getElementById('sensexChange').className = changeClass;
+            document.getElementById('sensexChange').textContent = `${totalChange >= 0 ? '▲' : '▼'} ₹${Math.abs(totalChange).toFixed(2)}`;
+            
+            document.getElementById('sensexChangePercent').className = changeClass;
+            document.getElementById('sensexChangePercent').textContent = `${totalChangePercent >= 0 ? '+' : ''}${totalChangePercent.toFixed(2)}%`;
+            
+            document.getElementById('dayHigh').textContent = `₹${maxPrice.toFixed(2)}`;
+            document.getElementById('dayLow').textContent = `₹${minPrice.toFixed(2)}`;
+            document.getElementById('weekHigh').textContent = `₹${(maxPrice * 1.08).toFixed(2)}`;
+            document.getElementById('weekLow').textContent = `₹${(minPrice * 0.92).toFixed(2)}`;
+            document.getElementById('marketStatus').textContent = 'OPEN';
+        }
+
+        function updateRelatedIndices() {
+            const indices = [
+                { id: 'nifty50', value: 24850, change: 185.30 },
+                { id: 'niftyNext50', value: 18450, change: -125.40 },
+                { id: 'niftyMidcap', value: 28650, change: 245.50 },
+                { id: 'niftySmallcap', value: 16850, change: 85.20 }
+            ];
+
+            indices.forEach(index => {
+                const changePercent = (index.change / index.value) * 100;
+                const changeClass = index.change >= 0 ? 'change-positive' : 'change-negative';
+                
+                document.getElementById(index.id).textContent = index.value.toLocaleString('en-IN');
+                document.getElementById(index.id + 'Change').className = changeClass;
+                document.getElementById(index.id + 'Change').textContent = 
+                    `${index.change >= 0 ? '▲' : '▼'} ${Math.abs(changePercent).toFixed(2)}%`;
+            });
+        }
+
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('lastUpdate').textContent = timeString;
+            document.getElementById('footerTime').textContent = now.toLocaleString('en-IN');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 5000);
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refreshData, 30000); // Refresh every 30 seconds
+        }
+
+        function toggleAutoRefresh() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = event.target;
+            
+            if (autoRefreshEnabled) {
+                button.textContent = '⏱️ Auto Refresh: ON';
+                startAutoRefresh();
+            } else {
+                button.textContent = '⏱️ Auto Refresh: OFF';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function toggleChart() {
+            chartVisible = !chartVisible;
+            const container = document.getElementById('chartContainer');
+            
+            if (chartVisible) {
+                container.style.display = 'block';
+                initChart();
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('sensexChart');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historicalData.map(d => d.date),
+                    datasets: [{
+                        label: 'Sensex Index',
+                        data: historicalData.map(d => d.value),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#10b981',
+                        pointBorderColor: '#0f1419',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e5e7eb',
+                                font: { size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(139, 92, 246, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(139, 92, 246, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportData() {
+            let csv = 'Company,Sector,Price (₹),Change (₹),Change (%),Weight (%)\n';
+            sensexCompanies.forEach(company => {
+                csv += `"${company.name}","${company.sector}",${company.price.toFixed(2)},${company.change.toFixed(2)},${company.changePercent.toFixed(2)},${company.weight.toFixed(1)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sensex-data-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

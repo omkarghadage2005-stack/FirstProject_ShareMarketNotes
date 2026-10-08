@@ -1,0 +1,15 @@
+.back-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:transparent;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    border: 1px solid gray;
+    margin: 10px 10px 10px 10px;
+}
+
+.back-btn:hover{
+    background:transparent;
+}
+<a href="home_page.html" class="back-btn">⬅ Back</a>

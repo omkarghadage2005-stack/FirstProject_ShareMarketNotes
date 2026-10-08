@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Gap Theory - Complete Guide</title>
+    <link rel="stylesheet" href="gaptheory.css">
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📈 Stock Market Gap Theory</h1>
+            <p>Complete Guide to Understanding and Trading Market Gaps</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+            <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-btn" onclick="showSection('types')">Gap Types</button>
+            <button class="nav-btn" onclick="showSection('examples')">Visual Examples</button>
+            <button class="nav-btn" onclick="showSection('strategies')">Trading Strategies</button>
+            <button class="nav-btn" onclick="showSection('risk')">Risk Management</button>
+            <button class="nav-btn" onclick="showSection('faq')">FAQ</button>
+        </nav>
+
+        <!-- Overview Section -->
+        <div id="overview" class="section active">
+            <div class="card">
+                <h2>What is a Gap?</h2>
+                <p>A gap occurs when a stock opens at a price significantly different from its previous close. This creates a "gap" in the price chart where no trading occurs between the close and open prices.</p>
+                
+                <div class="key-points">
+                    <h4>Why Gaps Matter</h4>
+                    <ul>
+                        <li>Indicate significant changes in market sentiment</li>
+                        <li>Often signal important news or events</li>
+                        <li>Create trading opportunities for experienced traders</li>
+                        <li>Can indicate trend strength or weakness</li>
+                        <li>Frequently "fill" as price reverts to equilibrium</li>
+                    </ul>
+                </div>
+
+                <h3>Gap Statistics</h3>
+                <p>Research shows that approximately 80-90% of gaps eventually "fill" or close within days or weeks. However, the timing and manner of gap filling can vary significantly based on the gap type and market conditions.</p>
+
+                <div class="alert info">
+                    <strong>Key Insight:</strong> Not all gaps are created equal. Understanding the type of gap is crucial for predicting its behavior and trading it effectively.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>How Gaps Form</h2>
+                <p>Gaps typically form due to:</p>
+                <ul>
+                    <li><strong>Earnings Announcements:</strong> Unexpected earnings can cause significant price jumps</li>
+                    <li><strong>News Events:</strong> Major news releases, regulatory changes, or geopolitical events</li>
+                    <li><strong>Market Gaps:</strong> When markets close (weekends, holidays) and open with different sentiment</li>
+                    <li><strong>Analyst Upgrades/Downgrades:</strong> Major changes in analyst ratings</li>
+                    <li><strong>Merger & Acquisition News:</strong> M&A announcements can cause large gaps</li>
+                    <li><strong>Dividend Announcements:</strong> Unexpected dividend changes</li>
+                    <li><strong>Sector Rotation:</strong> Broad market movements affecting entire sectors</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Gap Types Section -->
+        <div id="types" class="section">
+            <div class="card">
+                <h2>Four Types of Gaps</h2>
+                <p>Understanding the four main gap types is essential for gap trading. Each type has different characteristics, causes, and trading implications.</p>
+            </div>
+
+            <div class="gap-grid">
+                <!-- Common Gap -->
+                <div class="gap-card common">
+                    <span class="type-badge">Common Gap</span>
+                    <h3>Common Gap</h3>
+                    <p><strong>Occurrence:</strong> Most frequent type of gap</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul style="margin-left: 15px;">
+                        <li>Small price movement</li>
+                        <li>No significant news catalyst</li>
+                        <li>Occurs in low-volume periods</li>
+                        <li>Fills within days</li>
+                    </ul>
+                    <p><strong>Trading Implication:</strong> Often filled quickly; low profit potential</p>
+                </div>
+
+                <!-- Breakaway Gap -->
+                <div class="gap-card breakaway">
+                    <span class="type-badge">Breakaway Gap</span>
+                    <h3>Breakaway Gap</h3>
+                    <p><strong>Occurrence:</strong> At the end of a consolidation pattern</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul style="margin-left: 15px;">
+                        <li>Breaks through resistance/support</li>
+                        <li>Accompanied by high volume</li>
+                        <li>Signals start of new trend</li>
+                        <li>Usually doesn't fill</li>
+                    </ul>
+                    <p><strong>Trading Implication:</strong> Strong signal to enter in trend direction</p>
+                </div>
+
+                <!-- Runaway Gap -->
+                <div class="gap-card runaway">
+                    <span class="type-badge">Runaway Gap</span>
+                    <h3>Runaway Gap</h3>
+                    <p><strong>Occurrence:</strong> During the middle of a strong trend</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul style="margin-left: 15px;">
+                        <li>Occurs mid-trend</li>
+                        <li>Indicates trend acceleration</li>
+                        <li>High volume confirmation</li>
+                        <li>Rarely fills</li>
+                    </ul>
+                    <p><strong>Trading Implication:</strong> Confirm trend strength; continue in trend direction</p>
+                </div>
+
+                <!-- Exhaustion Gap -->
+                <div class="gap-card exhaustion">
+                    <span class="type-badge">Exhaustion Gap</span>
+                    <h3>Exhaustion Gap</h3>
+                    <p><strong>Occurrence:</strong> Near the end of a strong trend</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul style="margin-left: 15px;">
+                        <li>Final push of trend</li>
+                        <li>Often accompanied by high volume</li>
+                        <li>Signals trend reversal coming</li>
+                        <li>Usually fills quickly</li>
+                    </ul>
+                    <p><strong>Trading Implication:</strong> Potential reversal signal; consider exiting</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Comparison Table</h2>
+                <table class="strategy-table">
+                    <thead>
+                        <tr>
+                            <th>Gap Type</th>
+                            <th>Location</th>
+                            <th>Volume</th>
+                            <th>Fills?</th>
+                            <th>Trading Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Common</strong></td>
+                            <td>Random</td>
+                            <td>Low</td>
+                            <td>Usually Yes</td>
+                            <td>Neutral</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Breakaway</strong></td>
+                            <td>At resistance/support</td>
+                            <td>High</td>
+                            <td>Rarely</td>
+                            <td>Strong Buy/Sell</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Runaway</strong></td>
+                            <td>Mid-trend</td>
+                            <td>High</td>
+                            <td>Rarely</td>
+                            <td>Continue Trend</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exhaustion</strong></td>
+                            <td>End of trend</td>
+                            <td>Very High</td>
+                            <td>Usually Yes</td>
+                            <td>Reversal Warning</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Visual Examples Section -->
+        <div id="examples" class="section">
+            <div class="card">
+                <h2>Visual Examples of Gap Types</h2>
+                <p>Below are visual representations of each gap type with real-world characteristics.</p>
+            </div>
+
+            <!-- Common Gap Example -->
+            <div class="card">
+                <h3>1. Common Gap Example</h3>
+                <p>A small gap during normal trading with no significant catalyst. This gap typically fills within a few days.</p>
+                <div class="chart-container">
+                    <div class="candlestick-chart">
+                        <div class="candle">
+                            <div class="candle-label">Day 1</div>
+                            <div class="wick" style="height: 40px;"></div>
+                            <div class="body bullish" style="height: 30px;">C: 100</div>
+                            <div class="wick" style="height: 20px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 2</div>
+                            <div class="wick" style="height: 30px;"></div>
+                            <div class="body bullish" style="height: 25px;">O: 101</div>
+                            <div class="wick" style="height: 25px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 3</div>
+                            <div class="wick" style="height: 35px;"></div>
+                            <div class="body bearish" style="height: 20px;">C: 100.5</div>
+                            <div class="wick" style="height: 30px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap-indicator">↑ Small Gap (0.5-1%) - Fills in 2-3 days</div>
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <p><strong>Stock ABC closes at $100</strong> → <strong>Opens next day at $101</strong> (1% gap)</p>
+                    <p>No major news. During the day, price drifts back toward $100.50. Gap fills within 2 days.</p>
+                </div>
+            </div>
+
+            <!-- Breakaway Gap Example -->
+            <div class="card">
+                <h3>2. Breakaway Gap Example</h3>
+                <p>A significant gap breaking through resistance with high volume. This gap typically doesn't fill as it signals a new trend.</p>
+                <div class="chart-container">
+                    <div class="candlestick-chart">
+                        <div class="candle">
+                            <div class="candle-label">Day 1</div>
+                            <div class="wick" style="height: 30px;"></div>
+                            <div class="body bullish" style="height: 35px;">C: 100</div>
+                            <div class="wick" style="height: 15px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 2</div>
+                            <div class="wick" style="height: 50px;"></div>
+                            <div class="body bullish" style="height: 45px;">O: 105</div>
+                            <div class="wick" style="height: 10px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 3</div>
+                            <div class="wick" style="height: 55px;"></div>
+                            <div class="body bullish" style="height: 40px;">C: 110</div>
+                            <div class="wick" style="height: 5px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap-indicator">↑ Large Gap (5%) - Breaks Resistance - Doesn't Fill</div>
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <p><strong>Stock XYZ closes at $100</strong> → <strong>Earnings announcement overnight</strong> → <strong>Opens at $105</strong> (5% gap)</p>
+                    <p>High volume confirms breakout. Stock continues higher to $110. Gap never fills.</p>
+                </div>
+            </div>
+
+            <!-- Runaway Gap Example -->
+            <div class="card">
+                <h3>3. Runaway Gap Example</h3>
+                <p>A gap occurring in the middle of a strong uptrend. Indicates trend acceleration and strong momentum.</p>
+                <div class="chart-container">
+                    <div class="candlestick-chart">
+                        <div class="candle">
+                            <div class="candle-label">Day 1</div>
+                            <div class="wick" style="height: 20px;"></div>
+                            <div class="body bullish" style="height: 40px;">C: 100</div>
+                            <div class="wick" style="height: 10px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 2</div>
+                            <div class="wick" style="height: 35px;"></div>
+                            <div class="body bullish" style="height: 35px;">O: 103</div>
+                            <div class="wick" style="height: 5px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 3</div>
+                            <div class="wick" style="height: 40px;"></div>
+                            <div class="body bullish" style="height: 38px;">C: 108</div>
+                            <div class="wick" style="height: 2px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 4</div>
+                            <div class="wick" style="height: 45px;"></div>
+                            <div class="body bullish" style="height: 35px;">C: 115</div>
+                            <div class="wick" style="height: 0px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap-indicator">↑ Mid-Trend Gap (3%) - Confirms Uptrend - Continues Higher</div>
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <p><strong>Stock in strong uptrend</strong> → <strong>Closes at $100</strong> → <strong>Opens at $103</strong> (3% gap)</p>
+                    <p>Positive analyst upgrade. Stock continues rallying to $115. Gap never fills as trend accelerates.</p>
+                </div>
+            </div>
+
+            <!-- Exhaustion Gap Example -->
+            <div class="card">
+                <h3>4. Exhaustion Gap Example</h3>
+                <p>A gap at the end of a strong trend with very high volume. Often signals an imminent reversal.</p>
+                <div class="chart-container">
+                    <div class="candlestick-chart">
+                        <div class="candle">
+                            <div class="candle-label">Day 1</div>
+                            <div class="wick" style="height: 10px;"></div>
+                            <div class="body bullish" style="height: 45px;">C: 120</div>
+                            <div class="wick" style="height: 5px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 2</div>
+                            <div class="wick" style="height: 35px;"></div>
+                            <div class="body bullish" style="height: 50px;">O: 123</div>
+                            <div class="wick" style="height: 0px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 3</div>
+                            <div class="wick" style="height: 50px;"></div>
+                            <div class="body bearish" style="height: 40px;">C: 118</div>
+                            <div class="wick" style="height: 15px;"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="candle-label">Day 4</div>
+                            <div class="wick" style="height: 40px;"></div>
+                            <div class="body bearish" style="height: 50px;">C: 110</div>
+                            <div class="wick" style="height: 5px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gap-indicator">↑ End-of-Trend Gap (2.5%) - Very High Volume - Reversal Follows</div>
+                <div class="example-box">
+                    <h4>Example:</h4>
+                    <p><strong>Stock at $120 after strong rally</strong> → <strong>Opens at $123</strong> (2.5% gap)</p>
+                    <p>Massive volume spike. Stock briefly hits $125 but then reverses sharply. Gap fills by day 4 at $118.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Strategies Section -->
+        <div id="strategies" class="section">
+            <div class="card">
+                <h2>Gap Trading Strategies</h2>
+                <p>Different gap types require different trading approaches. Here are proven strategies for each scenario.</p>
+            </div>
+
+            <div class="card">
+                <h3>Strategy 1: Gap Fill Trading</h3>
+                <p>This is the most common gap trading strategy. It assumes that gaps, especially common gaps, will eventually fill.</p>
+                
+                <table class="strategy-table">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Identify Gap</td>
+                            <td>Look for gaps on the daily chart, especially common gaps with low volume</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Confirm Type</td>
+                            <td>Verify it's a common gap (no major news, low volume)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Enter Trade</td>
+                            <td>Trade in direction opposite to the gap (if gap up, short; if gap down, long)</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Set Target</td>
+                            <td>Target is the previous close (gap fill point)</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Stop Loss</td>
+                            <td>Place stop beyond the gap extreme (opposite side)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Setup:</strong> Stock ABC gaps up from $100 to $101.50 on light volume with no news</p>
+                    <p><strong>Trade:</strong> Short 100 shares at $101.30</p>
+                    <p><strong>Target:</strong> $100 (gap fill)</p>
+                    <p><strong>Stop Loss:</strong> $102 (above gap high)</p>
+                    <p><strong>Result:</strong> Stock fills gap in 2 days. Profit: $130</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Strategy 2: Breakaway Gap Trading</h3>
+                <p>Trade in the direction of breakaway gaps as they signal the start of new trends.</p>
+                
+                <table class="strategy-table">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Identify Consolidation</td>
+                            <td>Look for tight trading range (support/resistance)</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Spot Breakaway Gap</td>
+                            <td>Gap breaks through resistance/support with high volume</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Enter Trade</td>
+                            <td>Buy on breakaway up, sell on breakaway down</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Set Target</td>
+                            <td>Use previous consolidation width as profit target</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Stop Loss</td>
+                            <td>Place stop just inside the consolidation range</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Setup:</strong> Stock consolidates between $95-$100 for 3 weeks</p>
+                    <p><strong>Catalyst:</strong> Positive earnings gap up to $105 on high volume</p>
+                    <p><strong>Trade:</strong> Buy 100 shares at $105.50</p>
+                    <p><strong>Target:</strong> $115 (consolidation width = $5)</p>
+                    <p><strong>Stop Loss:</strong> $100 (below resistance)</p>
+                    <p><strong>Result:</strong> Stock rallies to $118. Profit: $1,250</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Strategy 3: Exhaustion Gap Trading</h3>
+                <p>Trade exhaustion gaps as reversal signals. These gaps often precede trend reversals.</p>
+                
+                <table class="strategy-table">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Action</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Identify Strong Trend</td>
+                            <td>Look for extended uptrend or downtrend (5+ days)</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Spot Exhaustion Gap</td>
+                            <td>Gap in trend direction with VERY high volume</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Wait for Confirmation</td>
+                            <td>Wait for reversal candle (opposite color)</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Enter Trade</td>
+                            <td>Trade opposite to the trend direction</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Target & Stop</td>
+                            <td>Target gap fill; stop above/below gap extreme</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Setup:</strong> Stock in strong uptrend, up 20% in 2 weeks</p>
+                    <p><strong>Signal:</strong> Gaps up 3% on massive volume (10x normal)</p>
+                    <p><strong>Confirmation:</strong> Next day opens lower and closes red</p>
+                    <p><strong>Trade:</strong> Short 100 shares at previous close</p>
+                    <p><strong>Target:</strong> Gap fill point</p>
+                    <p><strong>Result:</strong> Stock reverses, gap fills. Profit: $300</p>
+                </div>
+            </div>
+
+            <div class="alert warning">
+                <strong>Important:</strong> Gap trading carries higher risk than traditional trading. Always use stop losses and never risk more than 2% of your account on a single trade.
+            </div>
+        </div>
+
+        <!-- Risk Management Section -->
+        <div id="risk" class="section">
+            <div class="card">
+                <h2>Risk Management in Gap Trading</h2>
+                <p>Proper risk management is critical for gap trading success. Gaps can move quickly and violently, so strict rules are essential.</p>
+
+                <div class="key-points">
+                    <h4>Golden Rules of Gap Trading</h4>
+                    <ul>
+                        <li>Never trade without a stop loss</li>
+                        <li>Risk no more than 2% of account per trade</li>
+                        <li>Confirm gap type before entering</li>
+                        <li>Check volume to confirm gap strength</li>
+                        <li>Avoid trading gaps during earnings season volatility</li>
+                        <li>Use limit orders, not market orders</li>
+                        <li>Trade only liquid stocks (high volume)</li>
+                        <li>Keep a trading journal to track results</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Position Sizing</h3>
+                <p>Calculate position size based on your risk tolerance and account size:</p>
+                
+                <div class="example-box">
+                    <h4>Position Sizing Formula:</h4>
+                    <p><strong>Position Size = (Account Size × Risk %) / (Entry Price - Stop Loss)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Example:</strong></p>
+                    <p>Account: $10,000 | Risk per trade: 2% ($200)</p>
+                    <p>Entry: $100 | Stop Loss: $98 (2-point risk)</p>
+                    <p>Position Size = $200 / $2 = 100 shares</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Common Mistakes to Avoid</h3>
+                <ul>
+                    <li><strong>Over-trading:</strong> Not every gap is tradeable. Be selective.</li>
+                    <li><strong>Ignoring Volume:</strong> Low volume gaps are unreliable.</li>
+                    <li><strong>Chasing Gaps:</strong> Don't enter after the gap has already moved significantly.</li>
+                    <li><strong>No Stop Loss:</strong> Always use a stop loss, no exceptions.</li>
+                    <li><strong>Trading Illiquid Stocks:</strong> Stick to stocks with high daily volume.</li>
+                    <li><strong>Averaging Down:</strong> Don't add to losing positions.</li>
+                    <li><strong>Ignoring News:</strong> Always check for catalysts that caused the gap.</li>
+                    <li><strong>Emotional Trading:</strong> Stick to your plan, don't let emotions override logic.</li>
+                </ul>
+            </div>
+
+            <div class="alert danger">
+                <strong>Warning:</strong> Gap trading can result in rapid losses. Only trade with capital you can afford to lose. Consider paper trading first to practice without real money at risk.
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div id="faq" class="section">
+            <div class="card">
+                <h2>Frequently Asked Questions</h2>
+
+                <h3>Q: What percentage of gaps fill?</h3>
+                <p>A: Approximately 80-90% of gaps eventually fill, but the timing varies significantly. Common gaps fill within days, while breakaway gaps may never fill.</p>
+
+                <h3>Q: Can I trade gaps on intraday charts?</h3>
+                <p>A: Yes, gaps occur on all timeframes. However, daily and weekly gaps tend to be more reliable for trading. Intraday gaps are more noise.</p>
+
+                <h3>Q: What's the best time to trade gaps?</h3>
+                <p>A: The first 30-60 minutes after market open is typically best. This is when gap-fill trades are most active. Avoid trading during earnings season.</p>
+
+                <h3>Q: How do I distinguish between gap types?</h3>
+                <p>A: Look at volume, news catalysts, and position in the trend. High volume + news = breakaway. Mid-trend + high volume = runaway. End of trend + very high volume = exhaustion.</p>
+
+                <h3>Q: Should I trade all gaps?</h3>
+                <p>A: No. Trade only gaps that meet your criteria. Common gaps are easiest to trade. Avoid gaps with unclear catalysts.</p>
+
+                <h3>Q: What's the average profit from gap trading?</h3>
+                <p>A: This varies widely. Gap-fill trades typically target 1-3% profit. Breakaway trades can offer 5-10%+ but with higher risk.</p>
+
+                <h3>Q: Can I use gap trading with options?</h3>
+                <p>A: Yes, but it's more complex. Options can amplify both gains and losses. Consider using spreads to limit risk.</p>
+
+                <h3>Q: How do I backtest gap trading strategies?</h3>
+                <p>A: Use stock charting software like TradingView or TC2000. Manually review past gaps and track how they behaved. Keep detailed records.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Stock Market Gap Theory Guide. Educational content only. Not financial advice.</p>
+            <p>Always consult with a financial advisor before making investment decisions.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

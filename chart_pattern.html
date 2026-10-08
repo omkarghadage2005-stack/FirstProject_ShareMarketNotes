@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Chart Patterns - Complete Guide</title>
+    <link rel="stylesheet" href="chart_pattern.css">
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">📊 Chart Patterns Guide</div>
+            <nav>
+                <a href="#reversal">Reversal</a>
+                <a href="#continuation">Continuation</a>
+                <a href="#candlestick">Candlestick</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#trading">Trading Tips</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Stock Market Chart Patterns</h1>
+            <p>Master all chart patterns for technical analysis and trading success</p>
+        </div>
+    </section>
+
+    <!-- Reversal Patterns -->
+    <section id="reversal">
+        <div class="container">
+            <h2>Reversal Patterns</h2>
+            <p>Reversal patterns indicate a change in the prevailing trend. They form after an extended price movement and signal a potential trend reversal.</p>
+
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterPatterns('all')">All</button>
+                <button class="filter-btn" onclick="filterPatterns('bullish')">Bullish</button>
+                <button class="filter-btn" onclick="filterPatterns('bearish')">Bearish</button>
+            </div>
+
+            <div class="pattern-grid">
+                <!-- Head and Shoulders -->
+                <div class="pattern-card" data-pattern="bearish">
+                    <div class="pattern-header">
+                        <h3>Head and Shoulders</h3>
+                        <div class="pattern-type">Bearish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,100 40,60 60,80 80,40 100,80 120,60 140,100" stroke="#dc2626" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="100" x2="140" y2="100" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="60" y="50" font-size="12" fill="#1f2937">Left Shoulder</text>
+                                <text x="85" y="35" font-size="12" fill="#1f2937">Head</text>
+                                <text x="110" y="50" font-size="12" fill="#1f2937">Right Shoulder</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Three peaks with the middle peak (head) higher than the two outer peaks (shoulders). Forms after an uptrend and signals a bearish reversal.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Downtrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Very High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Decreasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Enter short when price breaks below neckline. Target = neckline - (head height). Stop loss above right shoulder.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inverse Head and Shoulders -->
+                <div class="pattern-card" data-pattern="bullish">
+                    <div class="pattern-header">
+                        <h3>Inverse Head and Shoulders</h3>
+                        <div class="pattern-type">Bullish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,50 40,90 60,70 80,110 100,70 120,90 140,50" stroke="#10b981" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="50" x2="140" y2="50" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="60" y="130" font-size="12" fill="#1f2937">Left Shoulder</text>
+                                <text x="85" y="130" font-size="12" fill="#1f2937">Head</text>
+                                <text x="110" y="130" font-size="12" fill="#1f2937">Right Shoulder</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Inverted version of head and shoulders. Three troughs with the middle trough (head) lower than the two outer troughs (shoulders). Forms after a downtrend and signals a bullish reversal.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Uptrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Very High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Enter long when price breaks above neckline. Target = neckline + (head depth). Stop loss below left shoulder.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Double Top -->
+                <div class="pattern-card" data-pattern="bearish">
+                    <div class="pattern-header">
+                        <h3>Double Top</h3>
+                        <div class="pattern-type">Bearish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,100 40,50 60,80 80,50 100,80 120,100" stroke="#dc2626" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="50" x2="80" y2="50" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="20" y1="100" x2="120" y2="100" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="35" y="35" font-size="12" fill="#1f2937">Peak 1</text>
+                                <text x="75" y="35" font-size="12" fill="#1f2937">Peak 2</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Two peaks at approximately the same level with a trough in between. Forms an 'M' shape. Indicates strong resistance and potential downtrend.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Downtrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Weeks to Months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Decreasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Sell when price breaks below the support level (trough). Target = support - (peak height - support). Stop loss above peaks.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Double Bottom -->
+                <div class="pattern-card" data-pattern="bullish">
+                    <div class="pattern-header">
+                        <h3>Double Bottom</h3>
+                        <div class="pattern-type">Bullish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,50 40,100 60,70 80,100 100,70 120,50" stroke="#10b981" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="100" x2="80" y2="100" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="20" y1="50" x2="120" y2="50" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="35" y="120" font-size="12" fill="#1f2937">Trough 1</text>
+                                <text x="75" y="120" font-size="12" fill="#1f2937">Trough 2</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Two troughs at approximately the same level with a peak in between. Forms a 'W' shape. Indicates strong support and potential uptrend.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Uptrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Weeks to Months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Buy when price breaks above the resistance level (peak). Target = resistance + (resistance - trough). Stop loss below troughs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rounding Bottom -->
+                <div class="pattern-card" data-pattern="bullish">
+                    <div class="pattern-header">
+                        <h3>Rounding Bottom (Saucer)</h3>
+                        <div class="pattern-type">Bullish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 20 60 Q 70 110 120 60" stroke="#10b981" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="60" x2="120" y2="60" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="50" y="130" font-size="12" fill="#1f2937">Gradual Bottom Formation</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Smooth, rounded bottom formation. Indicates gradual shift from selling to buying pressure. Gentle reversal pattern with high reliability.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Uptrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Weeks to Months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Gradually Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Buy when price breaks above the resistance line. Volume should increase significantly. Stop loss at the lowest point of the saucer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cup and Handle -->
+                <div class="pattern-card" data-pattern="bullish">
+                    <div class="pattern-header">
+                        <h3>Cup and Handle</h3>
+                        <div class="pattern-type">Bullish Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 20 60 Q 50 100 80 60 L 100 75 L 120 65" stroke="#10b981" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="60" x2="120" y2="60" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="40" y="130" font-size="12" fill="#1f2937">Cup</text>
+                                <text x="95" y="130" font-size="12" fill="#1f2937">Handle</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            U-shaped cup followed by a small pullback (handle). Indicates consolidation before a breakout. Very bullish pattern with strong follow-through.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Uptrend Reversal</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Very High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Weeks to Months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Buy when price breaks above the cup rim. Volume should increase significantly. Target = cup rim + cup depth. Stop loss at cup bottom.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Continuation Patterns -->
+    <section id="continuation">
+        <div class="container">
+            <h2>Continuation Patterns</h2>
+            <p>Continuation patterns indicate that the current trend will continue after a period of consolidation. They form during temporary pauses in the trend.</p>
+
+            <div class="pattern-grid">
+                <!-- Triangles -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Ascending Triangle</h3>
+                        <div class="pattern-type">Bullish Continuation</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,100 40,80 60,85 80,75 100,80 120,70" stroke="#10b981" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="100" x2="120" y2="100" stroke="#6b7280" stroke-width="2"/>
+                                <line x1="20" y1="100" x2="120" y2="70" stroke="#6b7280" stroke-width="2"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Breakout Up</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Horizontal resistance with rising support line. Converging pattern indicating buying pressure. Breakout usually occurs upward.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Bullish Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Buy on breakout above resistance. Volume should increase. Target = resistance + triangle height. Stop loss below support line.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Descending Triangle -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Descending Triangle</h3>
+                        <div class="pattern-type">Bearish Continuation</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,70 40,90 60,85 80,95 100,90 120,100" stroke="#dc2626" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="70" x2="120" y2="70" stroke="#6b7280" stroke-width="2"/>
+                                <line x1="20" y1="70" x2="120" y2="100" stroke="#6b7280" stroke-width="2"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Breakout Down</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Horizontal support with declining resistance line. Converging pattern indicating selling pressure. Breakout usually occurs downward.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Bearish Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Sell on breakout below support. Volume should increase. Target = support - triangle height. Stop loss above resistance line.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symmetrical Triangle -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Symmetrical Triangle</h3>
+                        <div class="pattern-type">Neutral Continuation</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,60 40,75 60,70 80,80 100,75 120,85" stroke="#f59e0b" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="60" x2="120" y2="85" stroke="#6b7280" stroke-width="2"/>
+                                <line x1="20" y1="85" x2="120" y2="60" stroke="#6b7280" stroke-width="2"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Breakout Direction Unclear</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Both support and resistance lines converging at equal angles. Indicates equilibrium between buyers and sellers. Breakout direction depends on volume.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Neutral Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Medium</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Decreasing then Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Wait for breakout confirmation with volume. Trade in direction of breakout. Target = entry + triangle height. Stop loss at opposite boundary.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flags -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Flag (Bullish)</h3>
+                        <div class="pattern-type">Bullish Continuation</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="20" y1="100" x2="40" y2="50" stroke="#10b981" stroke-width="3"/>
+                                <polyline points="40,50 60,60 80,55 100,65 120,60" stroke="#6b7280" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="50" x2="120" y2="50" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="40" y1="65" x2="120" y2="65" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Consolidation</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Sharp price move followed by rectangular consolidation. Indicates brief pause before trend continuation. Very reliable continuation pattern.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Bullish Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Very High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days to Weeks</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Decreasing then Increasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Buy on breakout above upper flag line. Volume should increase. Target = entry + pole height. Stop loss below lower flag line.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pennant -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Pennant</h3>
+                        <div class="pattern-type">Continuation</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="20" y1="100" x2="40" y2="50" stroke="#10b981" stroke-width="3"/>
+                                <polyline points="40,50 60,65 80,60 100,70 120,65" stroke="#6b7280" stroke-width="2" fill="none"/>
+                                <line x1="40" y1="50" x2="120" y2="65" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="40" y1="65" x2="120" y2="65" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Small Triangle</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Small symmetrical triangle after a sharp price move. Represents brief consolidation. Similar to flag but smaller and more compact.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Days</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Increasing on Breakout</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Trade in direction of preceding trend. Target = entry + pole height. Stop loss at opposite boundary of pennant.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wedge -->
+                <div class="pattern-card">
+                    <div class="pattern-header">
+                        <h3>Wedge</h3>
+                        <div class="pattern-type">Continuation/Reversal</div>
+                    </div>
+                    <div class="pattern-body">
+                        <div class="pattern-chart">
+                            <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20,70 40,75 60,80 80,85 100,90 120,95" stroke="#6b7280" stroke-width="2" fill="none"/>
+                                <line x1="20" y1="70" x2="120" y2="95" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <line x1="20" y1="60" x2="120" y2="85" stroke="#6b7280" stroke-width="1" stroke-dasharray="5,5"/>
+                                <text x="70" y="130" font-size="12" fill="#1f2937">Converging Trend Lines</text>
+                            </svg>
+                        </div>
+                        <div class="pattern-description">
+                            Two trend lines converging at an angle. Can be bullish (rising wedge) or bearish (falling wedge). Indicates consolidation before breakout.
+                        </div>
+                        <div class="pattern-info">
+                            <div class="info-item">
+                                <div class="info-label">Trend</div>
+                                <div class="info-value">Reversal/Continuation</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Reliability</div>
+                                <div class="info-value">Medium-High</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Time Frame</div>
+                                <div class="info-value">Weeks to Months</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Volume</div>
+                                <div class="info-value">Decreasing</div>
+                            </div>
+                        </div>
+                        <div class="pattern-trading">
+                            <h4>Trading Strategy</h4>
+                            <p>Trade breakout in direction indicated by wedge. Rising wedge often breaks down; falling wedge often breaks up. Use volume confirmation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Candlestick Patterns -->
+    <section id="candlestick">
+        <div class="container">
+            <h2>Candlestick Patterns</h2>
+            <p>Single and multi-candle patterns that provide quick signals about market sentiment and potential price movements.</p>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'bullish-candles')">Bullish</button>
+                <button class="tab-btn" onclick="switchTab(event, 'bearish-candles')">Bearish</button>
+            </div>
+
+            <!-- Bullish Candlestick Patterns -->
+            <div id="bullish-candles" class="tab-content active">
+                <div class="pattern-grid">
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Hammer</h3>
+                            <div class="pattern-type">Bullish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="50" y1="30" x2="50" y2="80" stroke="#10b981" stroke-width="2"/>
+                                    <rect x="40" y="80" width="20" height="30" fill="#10b981" stroke="#10b981" stroke-width="1"/>
+                                    <line x1="50" y1="110" x2="50" y2="130" stroke="#10b981" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Small body with long lower wick. Forms at bottoms. Indicates rejection of lower prices and potential reversal.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bullish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Bullish Engulfing</h3>
+                            <div class="pattern-type">Bullish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="30" y="70" width="10" height="30" fill="#dc2626" stroke="#dc2626"/>
+                                    <rect x="45" y="50" width="20" height="50" fill="#10b981" stroke="#10b981"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Large green candle completely engulfs previous red candle. Indicates strong buying pressure and reversal.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bullish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">Very High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Morning Star</h3>
+                            <div class="pattern-type">Bullish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="20" y="70" width="15" height="40" fill="#dc2626"/>
+                                    <rect x="50" y="85" width="8" height="10" fill="#10b981"/>
+                                    <rect x="80" y="60" width="15" height="30" fill="#10b981"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Three candles: red, small (gap down), green. Indicates shift from selling to buying. Strong reversal signal.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bullish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">Very High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Three White Soldiers</h3>
+                            <div class="pattern-type">Bullish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="20" y="80" width="12" height="30" fill="#10b981"/>
+                                    <rect x="50" y="70" width="12" height="40" fill="#10b981"/>
+                                    <rect x="80" y="60" width="12" height="50" fill="#10b981"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Three consecutive green candles with higher closes. Indicates strong uptrend and sustained buying pressure.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bullish Continuation</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bearish Candlestick Patterns -->
+            <div id="bearish-candles" class="tab-content">
+                <div class="pattern-grid">
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Hanging Man</h3>
+                            <div class="pattern-type">Bearish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="50" y1="30" x2="50" y2="60" stroke="#dc2626" stroke-width="2"/>
+                                    <rect x="40" y="60" width="20" height="20" fill="#dc2626" stroke="#dc2626"/>
+                                    <line x1="50" y1="80" x2="50" y2="130" stroke="#dc2626" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Small body with long lower wick at tops. Indicates rejection of higher prices and potential reversal downward.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bearish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Bearish Engulfing</h3>
+                            <div class="pattern-type">Bearish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="30" y="50" width="10" height="30" fill="#10b981"/>
+                                    <rect x="45" y="40" width="20" height="50" fill="#dc2626"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Large red candle completely engulfs previous green candle. Indicates strong selling pressure and reversal.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bearish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">Very High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Evening Star</h3>
+                            <div class="pattern-type">Bearish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="20" y="60" width="15" height="30" fill="#10b981"/>
+                                    <rect x="50" y="75" width="8" height="10" fill="#dc2626"/>
+                                    <rect x="80" y="80" width="15" height="40" fill="#dc2626"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Three candles: green, small (gap up), red. Indicates shift from buying to selling. Strong reversal signal.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bearish Reversal</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">Very High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pattern-card">
+                        <div class="pattern-header">
+                            <h3>Three Black Crows</h3>
+                            <div class="pattern-type">Bearish Reversal</div>
+                        </div>
+                        <div class="pattern-body">
+                            <div class="pattern-chart">
+                                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="20" y="60" width="12" height="30" fill="#dc2626"/>
+                                    <rect x="50" y="50" width="12" height="40" fill="#dc2626"/>
+                                    <rect x="80" y="40" width="12" height="50" fill="#dc2626"/>
+                                </svg>
+                            </div>
+                            <div class="pattern-description">
+                                Three consecutive red candles with lower closes. Indicates strong downtrend and sustained selling pressure.
+                            </div>
+                            <div class="pattern-info">
+                                <div class="info-item">
+                                    <div class="info-label">Signal</div>
+                                    <div class="info-value">Bearish Continuation</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Reliability</div>
+                                    <div class="info-value">High</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="comparison">
+        <div class="container">
+            <h2>Pattern Comparison & Quick Reference</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pattern Name</th>
+                        <th>Type</th>
+                        <th>Signal</th>
+                        <th>Reliability</th>
+                        <th>Time Frame</th>
+                        <th>Volume Signal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Head and Shoulders</strong></td>
+                        <td><span class="badge badge-bearish">Reversal</span></td>
+                        <td>Bearish</td>
+                        <td>Very High</td>
+                        <td>Weeks-Months</td>
+                        <td>Decreasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inverse H&S</strong></td>
+                        <td><span class="badge badge-bullish">Reversal</span></td>
+                        <td>Bullish</td>
+                        <td>Very High</td>
+                        <td>Weeks-Months</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Double Top</strong></td>
+                        <td><span class="badge badge-bearish">Reversal</span></td>
+                        <td>Bearish</td>
+                        <td>High</td>
+                        <td>Weeks-Months</td>
+                        <td>Decreasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Double Bottom</strong></td>
+                        <td><span class="badge badge-bullish">Reversal</span></td>
+                        <td>Bullish</td>
+                        <td>High</td>
+                        <td>Weeks-Months</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cup and Handle</strong></td>
+                        <td><span class="badge badge-bullish">Reversal</span></td>
+                        <td>Bullish</td>
+                        <td>Very High</td>
+                        <td>Weeks-Months</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ascending Triangle</strong></td>
+                        <td><span class="badge badge-continuation">Continuation</span></td>
+                        <td>Bullish</td>
+                        <td>High</td>
+                        <td>Days-Weeks</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Descending Triangle</strong></td>
+                        <td><span class="badge badge-continuation">Continuation</span></td>
+                        <td>Bearish</td>
+                        <td>High</td>
+                        <td>Days-Weeks</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flag</strong></td>
+                        <td><span class="badge badge-continuation">Continuation</span></td>
+                        <td>Trend Direction</td>
+                        <td>Very High</td>
+                        <td>Days-Weeks</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pennant</strong></td>
+                        <td><span class="badge badge-continuation">Continuation</span></td>
+                        <td>Trend Direction</td>
+                        <td>High</td>
+                        <td>Days</td>
+                        <td>Increasing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hammer</strong></td>
+                        <td><span class="badge badge-bullish">Reversal</span></td>
+                        <td>Bullish</td>
+                        <td>High</td>
+                        <td>Single Candle</td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hanging Man</strong></td>
+                        <td><span class="badge badge-bearish">Reversal</span></td>
+                        <td>Bearish</td>
+                        <td>High</td>
+                        <td>Single Candle</td>
+                        <td>Variable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bullish Engulfing</strong></td>
+                        <td><span class="badge badge-bullish">Reversal</span></td>
+                        <td>Bullish</td>
+                        <td>Very High</td>
+                        <td>2 Candles</td>
+                        <td>Increasing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Trading Tips -->
+    <section id="trading">
+        <div class="container">
+            <h2>Trading Tips & Best Practices</h2>
+
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <h4>📊 Confirm with Volume</h4>
+                    <p>Always check volume when a pattern breaks out. Increasing volume confirms the breakout; low volume suggests weakness.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>🎯 Set Profit Targets</h4>
+                    <p>Calculate target prices based on pattern height. For reversal patterns, target = resistance/support ± pattern height.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>🛑 Use Stop Losses</h4>
+                    <p>Always place stop losses at logical points. For reversals, place stops beyond the opposite boundary of the pattern.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>⏰ Timeframe Matters</h4>
+                    <p>Patterns on longer timeframes (daily, weekly) are more reliable than shorter ones. Combine multiple timeframes for confirmation.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>🔄 Combine Indicators</h4>
+                    <p>Use technical indicators (RSI, MACD, Moving Averages) to confirm pattern signals. Avoid trading patterns in isolation.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>📈 Consider Trend</h4>
+                    <p>Continuation patterns are more reliable in strong trends. Reversal patterns work best after extended moves.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>💡 Wait for Confirmation</h4>
+                    <p>Don't trade at the first sign of a pattern. Wait for confirmation signals like breakout with volume or closing above/below key levels.</p>
+                </div>
+
+                <div class="comparison-item">
+                    <h4>📝 Keep a Journal</h4>
+                    <p>Track your pattern trades. Document which patterns work best for your trading style and market conditions.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Key Takeaway:</strong> Chart patterns are powerful tools but not foolproof. Combine them with other technical analysis tools, fundamental analysis, and proper risk management for best results. Always trade with a plan and stick to your rules.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Stock Market Chart Patterns Guide. All rights reserved.</p>
+        <p>Disclaimer: This content is for educational purposes only. Not financial advice. Consult a financial advisor before trading.</p>
+    </footer>
+
+    <script>
+        // Filter patterns
+        function filterPatterns(type) {
+            const cards = document.querySelectorAll('[data-pattern]');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (type === 'all' || card.dataset.pattern === type) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Tab switching
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

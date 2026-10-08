@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-color: #111;
+
+}
+nav{
+    display: flex;
+    background-color: aqua;
+    padding: 10px;
+}
+.nav1{
+    display: flex;
+}
+.nav1 img{
+    height: 50px;
+    gap:20px;
+    border-radius: 50%;
+}
+.nav2{
+    display: flex;
+    align-items: center
+}
+.nav2{
+    height: 25px;
+    border-radius: 50%;
+
+}
+.wellcome{
+    font-size: 2vh;
+    font-size: 2vw;
+}
+.well2{
+    font-size: 3em;
+    text-align: center;
+    justify-content: center;
+}

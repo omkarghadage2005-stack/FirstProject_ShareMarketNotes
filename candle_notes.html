@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Common Candlestick Patterns - Trading Guide</title>
+    <link rel="stylesheet" href="candle_notes.css">
+<body>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+    <div class="container">
+        <header>
+            <h1>📊 20 Common Candlestick Patterns</h1>
+            <p>A comprehensive guide to recognizing and trading the most popular candlestick patterns in technical analysis.</p>
+        </header>
+        
+        <div class="content">
+            <div class="grid" id="patternGrid"></div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Candlestick Pattern Guide | For Educational Purposes Only</p>
+        </footer>
+    </div>
+
+    <script>
+        const patterns = [
+            {
+                name: "Hammer",
+                type: "Bullish Reversal",
+                description: "A small body near the top with a long lower wick, typically 2-3 times the body length. Occurs after a downtrend and signals potential price reversal upward.",
+                keyPoint: "Indicates strong buying pressure after selling pressure."
+            },
+            {
+                name: "Inverted Hammer",
+                type: "Bullish Reversal",
+                description: "A small body near the bottom with a long upper wick. Appears after a downtrend and suggests buyers are attempting to push prices higher.",
+                keyPoint: "Shows potential reversal but needs confirmation from the next candle."
+            },
+            {
+                name: "Bullish Engulfing",
+                type: "Bullish Reversal",
+                description: "A large green candle completely engulfs the previous small red candle's body. Strong signal of buying pressure overcoming selling pressure.",
+                keyPoint: "One of the most reliable bullish reversal patterns."
+            },
+            {
+                name: "Morning Star",
+                type: "Bullish Reversal",
+                description: "A three-candle pattern: long red candle, small body candle (gap down), then long green candle. Indicates shift from selling to buying pressure.",
+                keyPoint: "Signals potential end of downtrend and start of uptrend."
+            },
+            {
+                name: "Piercing Line",
+                type: "Bullish Reversal",
+                description: "A long red candle followed by a long green candle that opens below the red candle's close but closes above the midpoint of its body.",
+                keyPoint: "Shows buyers regaining control in a downtrend."
+            },
+            {
+                name: "Shooting Star",
+                type: "Bearish Reversal",
+                description: "A small body near the bottom with a long upper wick. Occurs after an uptrend and signals that buyers failed to sustain higher prices.",
+                keyPoint: "Indicates potential reversal from uptrend to downtrend."
+            },
+            {
+                name: "Bearish Engulfing",
+                type: "Bearish Reversal",
+                description: "A large red candle completely engulfs the previous small green candle's body. Strong signal of selling pressure overcoming buying pressure.",
+                keyPoint: "Reliable bearish reversal pattern at resistance levels."
+            },
+            {
+                name: "Evening Star",
+                type: "Bearish Reversal",
+                description: "A three-candle pattern: long green candle, small body candle (gap up), then long red candle. Indicates shift from buying to selling pressure.",
+                keyPoint: "Signals potential end of uptrend and start of downtrend."
+            },
+            {
+                name: "Hanging Man",
+                type: "Bearish Reversal",
+                description: "Visually identical to hammer but appears at the top of an uptrend. Small body near the top with long lower wick signals weakening buying pressure.",
+                keyPoint: "Suggests potential reversal after an uptrend."
+            },
+            {
+                name: "Dark Cloud Cover",
+                type: "Bearish Reversal",
+                description: "A long green candle followed by a red candle that opens above the green candle's close but closes below its midpoint.",
+                keyPoint: "Shows sellers regaining control in an uptrend."
+            },
+            {
+                name: "Doji",
+                type: "Indecision",
+                description: "Open and close prices are nearly identical, creating a cross or plus-sign shape. Indicates extreme market indecision and potential reversal.",
+                keyPoint: "Suggests a potential change in market direction."
+            },
+            {
+                name: "Spinning Top",
+                type: "Indecision",
+                description: "Small body with long upper and lower wicks of similar length. Shows market indecision and potential for consolidation or reversal.",
+                keyPoint: "Indicates uncertainty in the market direction."
+            },
+            {
+                name: "Three White Soldiers",
+                type: "Bullish Reversal",
+                description: "Three consecutive long green candles with small or no lower wicks. Each candle closes near or at its high, showing strong bullish momentum.",
+                keyPoint: "Powerful bullish signal indicating strong uptrend continuation."
+            },
+            {
+                name: "Three Black Crows",
+                type: "Bearish Reversal",
+                description: "Three consecutive long red candles with small or no upper wicks. Each candle closes near or at its low, showing strong bearish momentum.",
+                keyPoint: "Powerful bearish signal indicating strong downtrend continuation."
+            },
+            {
+                name: "Bullish Harami",
+                type: "Bullish Reversal",
+                description: "A large red candle followed by a small green candle completely contained within the red candle's body. Shows weakening selling pressure.",
+                keyPoint: "Suggests potential reversal from downtrend to uptrend."
+            },
+            {
+                name: "Bearish Harami",
+                type: "Bearish Reversal",
+                description: "A large green candle followed by a small red candle completely contained within the green candle's body. Shows weakening buying pressure.",
+                keyPoint: "Suggests potential reversal from uptrend to downtrend."
+            },
+            {
+                name: "Tweezer Top",
+                type: "Bearish Reversal",
+                description: "Two consecutive candles with identical or nearly identical high prices. Indicates rejection at resistance and potential reversal.",
+                keyPoint: "Signals potential bearish reversal at resistance levels."
+            },
+            {
+                name: "Tweezer Bottom",
+                type: "Bullish Reversal",
+                description: "Two consecutive candles with identical or nearly identical low prices. Indicates support and potential reversal upward.",
+                keyPoint: "Signals potential bullish reversal at support levels."
+            },
+            {
+                name: "Rising Three Methods",
+                type: "Continuation",
+                description: "A long green candle followed by three small red candles within its range, then another long green candle. Shows temporary consolidation in uptrend.",
+                keyPoint: "Indicates continuation of uptrend after brief pullback."
+            },
+            {
+                name: "Falling Three Methods",
+                type: "Continuation",
+                description: "A long red candle followed by three small green candles within its range, then another long red candle. Shows temporary consolidation in downtrend.",
+                keyPoint: "Indicates continuation of downtrend after brief rally."
+            }
+        ];
+
+        function drawCandlestick(canvas, type) {
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Draw grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = (height / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            
+            // Helper function to draw a candle
+            function drawCandle(x, open, close, high, low, color) {
+                const scale = height / 100;
+                const bodyWidth = 20;
+                
+                const openY = height - (open * scale);
+                const closeY = height - (close * scale);
+                const highY = height - (high * scale);
+                const lowY = height - (low * scale);
+                
+                // Draw wick
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x, highY);
+                ctx.lineTo(x, lowY);
+                ctx.stroke();
+                
+                // Draw body
+                const bodyTop = Math.min(openY, closeY);
+                const bodyHeight = Math.abs(closeY - openY);
+                ctx.fillStyle = color;
+                ctx.fillRect(x - bodyWidth / 2, bodyTop, bodyWidth, bodyHeight || 2);
+                ctx.strokeStyle = color;
+                ctx.strokeRect(x - bodyWidth / 2, bodyTop, bodyWidth, bodyHeight || 2);
+            }
+            
+            // Draw different patterns
+            switch(type) {
+                case 'Hammer':
+                    drawCandle(centerX - 40, 70, 75, 75, 30, '#27ae60');
+                    break;
+                case 'Inverted Hammer':
+                    drawCandle(centerX - 40, 30, 35, 70, 30, '#27ae60');
+                    break;
+                case 'Bullish Engulfing':
+                    drawCandle(centerX - 60, 60, 50, 65, 45, '#e74c3c');
+                    drawCandle(centerX - 20, 45, 75, 80, 40, '#27ae60');
+                    break;
+                case 'Morning Star':
+                    drawCandle(centerX - 80, 70, 40, 75, 35, '#e74c3c');
+                    drawCandle(centerX - 40, 35, 40, 45, 30, '#95a5a6');
+                    drawCandle(centerX, 35, 70, 75, 30, '#27ae60');
+                    break;
+                case 'Piercing Line':
+                    drawCandle(centerX - 60, 70, 40, 75, 35, '#e74c3c');
+                    drawCandle(centerX - 20, 35, 65, 70, 30, '#27ae60');
+                    break;
+                case 'Shooting Star':
+                    drawCandle(centerX - 40, 35, 30, 75, 25, '#e74c3c');
+                    break;
+                case 'Bearish Engulfing':
+                    drawCandle(centerX - 60, 40, 75, 80, 35, '#27ae60');
+                    drawCandle(centerX - 20, 70, 45, 75, 40, '#e74c3c');
+                    break;
+                case 'Evening Star':
+                    drawCandle(centerX - 80, 30, 70, 75, 25, '#27ae60');
+                    drawCandle(centerX - 40, 65, 70, 75, 60, '#95a5a6');
+                    drawCandle(centerX, 70, 40, 75, 35, '#e74c3c');
+                    break;
+                case 'Hanging Man':
+                    drawCandle(centerX - 40, 65, 70, 75, 30, '#e74c3c');
+                    break;
+                case 'Dark Cloud Cover':
+                    drawCandle(centerX - 60, 30, 70, 75, 25, '#27ae60');
+                    drawCandle(centerX - 20, 75, 40, 80, 35, '#e74c3c');
+                    break;
+                case 'Doji':
+                    drawCandle(centerX - 40, 50, 50, 70, 30, '#95a5a6');
+                    break;
+                case 'Spinning Top':
+                    drawCandle(centerX - 40, 45, 55, 70, 30, '#95a5a6');
+                    break;
+                case 'Three White Soldiers':
+                    drawCandle(centerX - 80, 40, 70, 75, 35, '#27ae60');
+                    drawCandle(centerX - 40, 50, 75, 80, 45, '#27ae60');
+                    drawCandle(centerX, 60, 80, 85, 55, '#27ae60');
+                    break;
+                case 'Three Black Crows':
+                    drawCandle(centerX - 80, 75, 40, 80, 35, '#e74c3c');
+                    drawCandle(centerX - 40, 70, 35, 75, 30, '#e74c3c');
+                    drawCandle(centerX, 60, 25, 65, 20, '#e74c3c');
+                    break;
+                case 'Bullish Harami':
+                    drawCandle(centerX - 60, 75, 30, 80, 25, '#e74c3c');
+                    drawCandle(centerX - 20, 50, 55, 60, 45, '#27ae60');
+                    break;
+                case 'Bearish Harami':
+                    drawCandle(centerX - 60, 25, 70, 75, 20, '#27ae60');
+                    drawCandle(centerX - 20, 50, 45, 60, 40, '#e74c3c');
+                    break;
+                case 'Tweezer Top':
+                    drawCandle(centerX - 60, 40, 70, 75, 35, '#27ae60');
+                    drawCandle(centerX - 20, 50, 65, 75, 45, '#e74c3c');
+                    break;
+                case 'Tweezer Bottom':
+                    drawCandle(centerX - 60, 70, 40, 75, 30, '#e74c3c');
+                    drawCandle(centerX - 20, 50, 65, 70, 30, '#27ae60');
+                    break;
+                case 'Rising Three Methods':
+                    drawCandle(centerX - 100, 30, 70, 75, 25, '#27ae60');
+                    drawCandle(centerX - 60, 60, 45, 65, 40, '#e74c3c');
+                    drawCandle(centerX - 20, 50, 40, 55, 35, '#e74c3c');
+                    drawCandle(centerX + 20, 45, 35, 50, 30, '#e74c3c');
+                    drawCandle(centerX + 60, 40, 75, 80, 35, '#27ae60');
+                    break;
+                case 'Falling Three Methods':
+                    drawCandle(centerX - 100, 75, 30, 80, 25, '#e74c3c');
+                    drawCandle(centerX - 60, 45, 60, 65, 40, '#27ae60');
+                    drawCandle(centerX - 20, 55, 65, 70, 50, '#27ae60');
+                    drawCandle(centerX + 20, 60, 70, 75, 55, '#27ae60');
+                    drawCandle(centerX + 60, 70, 30, 75, 25, '#e74c3c');
+                    break;
+            }
+        }
+
+        function createPatternCard(pattern) {
+            const card = document.createElement('div');
+            card.className = 'pattern-card';
+            
+            let typeClass = 'bullish';
+            if (pattern.type.includes('Bearish')) typeClass = 'bearish';
+            else if (pattern.type.includes('Continuation')) typeClass = 'continuation';
+            else if (pattern.type.includes('Indecision')) typeClass = 'continuation';
+            
+            card.innerHTML = `
+                <h2>${pattern.name}</h2>
+                <span class="pattern-type ${typeClass}">${pattern.type}</span>
+                <div class="canvas-container">
+                    <canvas id="canvas-${pattern.name.replace(/\s+/g, '-')}" width="280" height="150"></canvas>
+                </div>
+                <p class="description">${pattern.description}</p>
+                <div class="key-points">
+                    <strong>Key Signal:</strong> ${pattern.keyPoint}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Populate grid
+        const grid = document.getElementById('patternGrid');
+        patterns.forEach(pattern => {
+            const card = createPatternCard(pattern);
+            grid.appendChild(card);
+            
+            // Draw candlestick after card is added to DOM
+            setTimeout(() => {
+                const canvas = document.getElementById(`canvas-${pattern.name.replace(/\s+/g, '-')}`);
+                if (canvas) {
+                    drawCandlestick(canvas, pattern.name);
+                }
+            }, 0);
+        });
+    </script>
+</body>
+</head>
+</html>

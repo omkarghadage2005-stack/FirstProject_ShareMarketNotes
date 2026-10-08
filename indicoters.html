@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Useful Indicators - Complete Guide</title>
+    <link rel="stylesheet" href="indicotars.css">
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📊 Stock Market Useful Indicators</h1>
+            <p>Master the Essential Technical Indicators for Profitable Trading</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+            <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-btn" onclick="showSection('trend')">Trend Indicators</button>
+            <button class="nav-btn" onclick="showSection('momentum')">Momentum</button>
+            <button class="nav-btn" onclick="showSection('volatility')">Volatility</button>
+            <button class="nav-btn" onclick="showSection('volume')">Volume</button>
+            <button class="nav-btn" onclick="showSection('combinations')">Combinations</button>
+            <button class="nav-btn" onclick="showSection('tips')">Pro Tips</button>
+        </nav>
+
+        <!-- Overview Section -->
+        <div id="overview" class="section active">
+            <div class="card">
+                <h2>Why Use Technical Indicators?</h2>
+                <p>Technical indicators help traders identify trends, momentum, volatility, and volume patterns. They transform raw price and volume data into actionable signals.</p>
+                
+                <div class="key-points">
+                    <h4>Benefits of Technical Indicators</h4>
+                    <ul>
+                        <li>Identify entry and exit points with precision</li>
+                        <li>Confirm trend direction and strength</li>
+                        <li>Spot overbought and oversold conditions</li>
+                        <li>Measure market volatility</li>
+                        <li>Detect divergences that signal reversals</li>
+                        <li>Automate trading decisions</li>
+                    </ul>
+                </div>
+
+                <h3>Indicator Categories</h3>
+                <p>Technical indicators fall into four main categories:</p>
+                
+                <div class="two-column">
+                    <div class="column">
+                        <h4>Trend Indicators</h4>
+                        <p>Identify direction and strength of trends</p>
+                        <ul>
+                            <li>Moving Averages</li>
+                            <li>MACD</li>
+                            <li>ADX</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Momentum Indicators</h4>
+                        <p>Measure speed and strength of price changes</p>
+                        <ul>
+                            <li>RSI</li>
+                            <li>Stochastic</li>
+                            <li>MACD</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="column">
+                        <h4>Volatility Indicators</h4>
+                        <p>Measure price fluctuation intensity</p>
+                        <ul>
+                            <li>Bollinger Bands</li>
+                            <li>ATR</li>
+                            <li>Standard Deviation</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Volume Indicators</h4>
+                        <p>Analyze trading volume patterns</p>
+                        <ul>
+                            <li>OBV</li>
+                            <li>VWAP</li>
+                            <li>Money Flow Index</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert info">
+                    <strong>Pro Tip:</strong> Use indicators from different categories together. Combining trend + momentum + volume creates more reliable signals.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trend Indicators Section -->
+        <div id="trend" class="section">
+            <div class="card">
+                <h2>Trend Indicators</h2>
+                <p>Trend indicators help identify the direction and strength of market trends. They smooth price data to reveal underlying trends.</p>
+            </div>
+
+            <div class="indicator-grid">
+                <!-- Moving Averages -->
+                <div class="indicator-card trend">
+                    <span class="indicator-badge">Trend</span>
+                    <h3>Moving Averages (MA)</h3>
+                    <p>Smooths price data to identify trend direction. SMA (Simple), EMA (Exponential), and WMA (Weighted) variants.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> Price crosses above MA<br>
+                        <strong>Sell Signal:</strong> Price crosses below MA
+                    </div>
+                </div>
+
+                <!-- MACD -->
+                <div class="indicator-card trend">
+                    <span class="indicator-badge">Trend</span>
+                    <h3>MACD</h3>
+                    <p>Moving Average Convergence Divergence. Combines two moving averages to identify trend changes and momentum.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> MACD crosses above signal line<br>
+                        <strong>Sell Signal:</strong> MACD crosses below signal line
+                    </div>
+                </div>
+
+                <!-- ADX -->
+                <div class="indicator-card trend">
+                    <span class="indicator-badge">Trend</span>
+                    <h3>ADX (Average Directional Index)</h3>
+                    <p>Measures trend strength (0-100). Higher values indicate stronger trends. Doesn't show direction, only strength.</p>
+                    <div class="signal-box">
+                        <strong>Strong Trend:</strong> ADX > 25<br>
+                        <strong>Weak Trend:</strong> ADX < 20
+                    </div>
+                </div>
+
+                <!-- Ichimoku -->
+                <div class="indicator-card trend">
+                    <span class="indicator-badge">Trend</span>
+                    <h3>Ichimoku Cloud</h3>
+                    <p>Complete trend trading system showing support, resistance, and trend direction. Japanese indicator with multiple components.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> Price above cloud<br>
+                        <strong>Sell Signal:</strong> Price below cloud
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Moving Averages - Detailed Example</h3>
+                <div class="chart-container">
+                    <div class="chart-title">Price with 20-day and 50-day Moving Averages</div>
+                    <div class="line-chart">
+                        <div class="chart-grid"></div>
+                        <div class="chart-line">
+                            <div class="chart-bar" style="height: 30%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 35%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 40%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 45%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 50%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 55%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 60%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 65%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 70%; background: linear-gradient(to top, #059669, #10b981);"></div>
+                            <div class="chart-bar" style="height: 75%; background: linear-gradient(to top, #059669, #10b981);"></div>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Interpretation:</strong> Green bars show price above moving averages (bullish). Blue bars show price below moving averages (bearish).</p>
+            </div>
+
+            <div class="card">
+                <h3>When to Use Trend Indicators</h3>
+                <ul>
+                    <li><strong>Trending Markets:</strong> Best used when market is clearly trending up or down</li>
+                    <li><strong>Avoid Choppy Markets:</strong> Can give false signals in sideways/ranging markets</li>
+                    <li><strong>Longer Timeframes:</strong> More reliable on daily and weekly charts</li>
+                    <li><strong>Combine with Other Indicators:</strong> Use with momentum or volume for confirmation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Momentum Indicators Section -->
+        <div id="momentum" class="section">
+            <div class="card">
+                <h2>Momentum Indicators</h2>
+                <p>Momentum indicators measure the speed and strength of price changes. They help identify overbought/oversold conditions and divergences.</p>
+            </div>
+
+            <div class="indicator-grid">
+                <!-- RSI -->
+                <div class="indicator-card momentum">
+                    <span class="indicator-badge">Momentum</span>
+                    <h3>RSI (Relative Strength Index)</h3>
+                    <p>Measures momentum on a 0-100 scale. Shows overbought (>70) and oversold (<30) conditions.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> RSI < 30 (oversold)<br>
+                        <strong>Sell Signal:</strong> RSI > 70 (overbought)
+                    </div>
+                </div>
+
+                <!-- Stochastic -->
+                <div class="indicator-card momentum">
+                    <span class="indicator-badge">Momentum</span>
+                    <h3>Stochastic Oscillator</h3>
+                    <p>Compares closing price to price range. Shows momentum and overbought/oversold levels (0-100).</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> %K crosses above %D<br>
+                        <strong>Sell Signal:</strong> %K crosses below %D
+                    </div>
+                </div>
+
+                <!-- CCI -->
+                <div class="indicator-card momentum">
+                    <span class="indicator-badge">Momentum</span>
+                    <h3>CCI (Commodity Channel Index)</h3>
+                    <p>Measures deviation from average price. Identifies overbought/oversold and trend changes.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> CCI > +100<br>
+                        <strong>Sell Signal:</strong> CCI < -100
+                    </div>
+                </div>
+
+                <!-- ROC -->
+                <div class="indicator-card momentum">
+                    <span class="indicator-badge">Momentum</span>
+                    <h3>ROC (Rate of Change)</h3>
+                    <p>Measures percentage change in price over time. Positive ROC = uptrend, Negative ROC = downtrend.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> ROC turns positive<br>
+                        <strong>Sell Signal:</strong> ROC turns negative
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>RSI - Detailed Example</h3>
+                <div class="chart-container">
+                    <div class="chart-title">RSI Indicator (14-period)</div>
+                    <div class="oscillator-chart">
+                        <div class="oscillator-line"></div>
+                        <div class="oscillator-bars">
+                            <div class="oscillator-bar positive" style="height: 20%;"></div>
+                            <div class="oscillator-bar positive" style="height: 35%;"></div>
+                            <div class="oscillator-bar positive" style="height: 50%;"></div>
+                            <div class="oscillator-bar positive" style="height: 65%;"></div>
+                            <div class="oscillator-bar positive" style="height: 75%;"></div>
+                            <div class="oscillator-bar negative" style="height: -60%;"></div>
+                            <div class="oscillator-bar negative" style="height: -45%;"></div>
+                            <div class="oscillator-bar positive" style="height: 40%;"></div>
+                            <div class="oscillator-bar positive" style="height: 55%;"></div>
+                            <div class="oscillator-bar positive" style="height: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Interpretation:</strong> Green bars above center line = positive momentum. Red bars below = negative momentum. Extremes (top/bottom) show overbought/oversold.</p>
+            </div>
+
+            <div class="card">
+                <h3>Divergences - Advanced Concept</h3>
+                <p>A divergence occurs when price and indicator move in opposite directions. This often signals a reversal.</p>
+                <ul>
+                    <li><strong>Bullish Divergence:</strong> Price makes lower low, but indicator makes higher low → Potential upside reversal</li>
+                    <li><strong>Bearish Divergence:</strong> Price makes higher high, but indicator makes lower high → Potential downside reversal</li>
+                </ul>
+                <div class="alert warning">
+                    <strong>Note:</strong> Divergences are powerful but can occur multiple times before reversal. Use with other confirmations.
+                </div>
+            </div>
+        </div>
+
+        <!-- Volatility Indicators Section -->
+        <div id="volatility" class="section">
+            <div class="card">
+                <h2>Volatility Indicators</h2>
+                <p>Volatility indicators measure the intensity of price fluctuations. They help identify breakout opportunities and risk levels.</p>
+            </div>
+
+            <div class="indicator-grid">
+                <!-- Bollinger Bands -->
+                <div class="indicator-card volatility">
+                    <span class="indicator-badge">Volatility</span>
+                    <h3>Bollinger Bands</h3>
+                    <p>Shows support/resistance based on volatility. Three lines: middle (MA), upper, and lower bands.</p>
+                    <div class="signal-box">
+                        <strong>Squeeze:</strong> Bands narrow = low volatility<br>
+                        <strong>Breakout:</strong> Price breaks bands = high volatility
+                    </div>
+                </div>
+
+                <!-- ATR -->
+                <div class="indicator-card volatility">
+                    <span class="indicator-badge">Volatility</span>
+                    <h3>ATR (Average True Range)</h3>
+                    <p>Measures average price range per period. Higher ATR = higher volatility. Useful for stop loss placement.</p>
+                    <div class="signal-box">
+                        <strong>High ATR:</strong> High volatility, wider stops<br>
+                        <strong>Low ATR:</strong> Low volatility, tighter stops
+                    </div>
+                </div>
+
+                <!-- Keltner Channels -->
+                <div class="indicator-card volatility">
+                    <span class="indicator-badge">Volatility</span>
+                    <h3>Keltner Channels</h3>
+                    <p>Similar to Bollinger Bands but uses ATR instead of standard deviation. Often more responsive to volatility changes.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> Price breaks above upper channel<br>
+                        <strong>Sell Signal:</strong> Price breaks below lower channel
+                    </div>
+                </div>
+
+                <!-- Standard Deviation -->
+                <div class="indicator-card volatility">
+                    <span class="indicator-badge">Volatility</span>
+                    <h3>Standard Deviation</h3>
+                    <p>Measures how far prices deviate from the average. Higher values indicate higher volatility.</p>
+                    <div class="signal-box">
+                        <strong>Use:</strong> Identify volatility extremes<br>
+                        <strong>Application:</strong> Risk management, position sizing
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Bollinger Bands - Detailed Example</h3>
+                <div class="chart-container">
+                    <div class="chart-title">Price with Bollinger Bands (20-period, 2 std dev)</div>
+                    <div class="line-chart">
+                        <div class="chart-grid"></div>
+                        <div class="chart-line">
+                            <div class="chart-bar" style="height: 40%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 45%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 50%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 55%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 60%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 65%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 70%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 75%; background: linear-gradient(to top, #3b82f6, #60a5fa);"></div>
+                            <div class="chart-bar" style="height: 80%; background: linear-gradient(to top, #059669, #10b981);"></div>
+                            <div class="chart-bar" style="height: 85%; background: linear-gradient(to top, #059669, #10b981);"></div>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Interpretation:</strong> Upper band (resistance), Middle band (MA), Lower band (support). Squeeze = low volatility, expansion = high volatility.</p>
+            </div>
+
+            <div class="card">
+                <h3>Volatility Strategies</h3>
+                <ul>
+                    <li><strong>Bollinger Band Squeeze:</strong> When bands narrow, expect breakout soon. Trade the breakout direction.</li>
+                    <li><strong>Mean Reversion:</strong> When price touches band extremes, it often reverts to the middle.</li>
+                    <li><strong>ATR Stops:</strong> Place stops at 2x ATR from entry for volatility-adjusted risk management.</li>
+                    <li><strong>Volatility Expansion:</strong> Increasing ATR often precedes significant price moves.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Volume Indicators Section -->
+        <div id="volume" class="section">
+            <div class="card">
+                <h2>Volume Indicators</h2>
+                <p>Volume indicators analyze trading volume to confirm trends and identify potential reversals. "Volume tells the story."</p>
+            </div>
+
+            <div class="indicator-grid">
+                <!-- OBV -->
+                <div class="indicator-card volume">
+                    <span class="indicator-badge">Volume</span>
+                    <h3>OBV (On-Balance Volume)</h3>
+                    <p>Cumulative volume indicator. Adds volume on up days, subtracts on down days. Shows accumulation/distribution.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> OBV trending up<br>
+                        <strong>Sell Signal:</strong> OBV trending down
+                    </div>
+                </div>
+
+                <!-- VWAP -->
+                <div class="indicator-card volume">
+                    <span class="indicator-badge">Volume</span>
+                    <h3>VWAP (Volume Weighted Average Price)</h3>
+                    <p>Average price weighted by volume. Shows fair value. Institutional traders use this heavily.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> Price below VWAP<br>
+                        <strong>Sell Signal:</strong> Price above VWAP
+                    </div>
+                </div>
+
+                <!-- MFI -->
+                <div class="indicator-card volume">
+                    <span class="indicator-badge">Volume</span>
+                    <h3>MFI (Money Flow Index)</h3>
+                    <p>Volume-weighted RSI. Combines price and volume. Shows overbought/oversold on 0-100 scale.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> MFI < 20 (oversold)<br>
+                        <strong>Sell Signal:</strong> MFI > 80 (overbought)
+                    </div>
+                </div>
+
+                <!-- Accumulation/Distribution -->
+                <div class="indicator-card volume">
+                    <span class="indicator-badge">Volume</span>
+                    <h3>Accumulation/Distribution Line</h3>
+                    <p>Measures cumulative flow of money into/out of security. Shows if smart money is buying or selling.</p>
+                    <div class="signal-box">
+                        <strong>Buy Signal:</strong> A/D line rising<br>
+                        <strong>Sell Signal:</strong> A/D line falling
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Volume Analysis - Detailed Example</h3>
+                <div class="chart-container">
+                    <div class="chart-title">Price Action with Volume Confirmation</div>
+                    <div class="line-chart">
+                        <div class="chart-grid"></div>
+                        <div class="chart-line">
+                            <div class="chart-bar positive" style="height: 40%;"></div>
+                            <div class="chart-bar positive" style="height: 50%;"></div>
+                            <div class="chart-bar positive" style="height: 60%;"></div>
+                            <div class="chart-bar positive" style="height: 70%;"></div>
+                            <div class="chart-bar positive" style="height: 80%;"></div>
+                            <div class="chart-bar negative" style="height: 30%;"></div>
+                            <div class="chart-bar negative" style="height: 25%;"></div>
+                            <div class="chart-bar positive" style="height: 65%;"></div>
+                            <div class="chart-bar positive" style="height: 75%;"></div>
+                            <div class="chart-bar positive" style="height: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Interpretation:</strong> Green bars with high volume confirm uptrend strength. Red bars with low volume suggest weak selling pressure.</p>
+            </div>
+
+            <div class="card">
+                <h3>Volume Confirmation Rules</h3>
+                <ul>
+                    <li><strong>Breakouts:</strong> Should occur on above-average volume (at least 1.5x normal)</li>
+                    <li><strong>Reversals:</strong> Often accompanied by spike in volume at reversal point</li>
+                    <li><strong>Trends:</strong> Strong trends show increasing volume in trend direction</li>
+                    <li><strong>Divergences:</strong> Price makes new high but volume decreases = warning sign</li>
+                    <li><strong>Support/Resistance:</strong> Bounces from support on high volume are more reliable</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Indicator Combinations Section -->
+        <div id="combinations" class="section">
+            <div class="card">
+                <h2>Powerful Indicator Combinations</h2>
+                <p>Using multiple indicators together creates more reliable signals. Here are proven combinations used by professional traders.</p>
+            </div>
+
+            <div class="card">
+                <h3>Combination 1: Trend + Momentum + Volume</h3>
+                <p><strong>Indicators:</strong> Moving Average + RSI + Volume</p>
+                <p><strong>Setup:</strong></p>
+                <ul>
+                    <li>Price above 50-day moving average (uptrend)</li>
+                    <li>RSI between 50-70 (strong momentum, not overbought)</li>
+                    <li>Volume above average (confirmation)</li>
+                </ul>
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Stock ABC:</strong> Price $100, above 50-day MA</p>
+                    <p><strong>RSI:</strong> 65 (strong but not overbought)</p>
+                    <p><strong>Volume:</strong> 2M shares (2x average)</p>
+                    <p><strong>Action:</strong> BUY on pullback to moving average</p>
+                    <p><strong>Stop Loss:</strong> Below 50-day MA</p>
+                    <p><strong>Target:</strong> Previous resistance at $110</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Combination 2: Bollinger Bands + RSI + MACD</h3>
+                <p><strong>Indicators:</strong> Bollinger Bands + RSI + MACD</p>
+                <p><strong>Setup:</strong></p>
+                <ul>
+                    <li>Price touches lower Bollinger Band</li>
+                    <li>RSI < 30 (oversold)</li>
+                    <li>MACD crosses above signal line (momentum turning)</li>
+                </ul>
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Stock XYZ:</strong> Price touches lower band at $50</p>
+                    <p><strong>RSI:</strong> 25 (oversold)</p>
+                    <p><strong>MACD:</strong> Just crossed above signal line</p>
+                    <p><strong>Action:</strong> BUY with tight stop</p>
+                    <p><strong>Stop Loss:</strong> Below lower band</p>
+                    <p><strong>Target:</strong> Middle Bollinger Band ($55)</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Combination 3: ADX + Stochastic + Volume</h3>
+                <p><strong>Indicators:</strong> ADX + Stochastic + Volume</p>
+                <p><strong>Setup:</strong></p>
+                <ul>
+                    <li>ADX > 25 (strong trend confirmed)</li>
+                    <li>Stochastic < 20 (oversold in uptrend)</li>
+                    <li>Volume spike on pullback</li>
+                </ul>
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Stock DEF:</strong> In strong uptrend (ADX = 35)</p>
+                    <p><strong>Pullback:</strong> Stochastic drops to 15</p>
+                    <p><strong>Volume:</strong> Spike on pullback (accumulation)</p>
+                    <p><strong>Action:</strong> BUY the pullback</p>
+                    <p><strong>Stop Loss:</strong> Below pullback low</p>
+                    <p><strong>Target:</strong> Previous high</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Combination 4: MACD + OBV + Bollinger Bands</h3>
+                <p><strong>Indicators:</strong> MACD + OBV + Bollinger Bands</p>
+                <p><strong>Setup:</strong></p>
+                <ul>
+                    <li>MACD crosses above signal line</li>
+                    <li>OBV trending up (accumulation)</li>
+                    <li>Price breaks above upper Bollinger Band</li>
+                </ul>
+                <div class="example-box">
+                    <h4>Example Trade:</h4>
+                    <p><strong>Stock GHI:</strong> MACD bullish crossover</p>
+                    <p><strong>OBV:</strong> Rising steadily (smart money buying)</p>
+                    <p><strong>Price:</strong> Breaks above upper band at $75</p>
+                    <p><strong>Action:</strong> BUY breakout</p>
+                    <p><strong>Stop Loss:</strong> Below upper band</p>
+                    <p><strong>Target:</strong> 2x ATR above entry</p>
+                </div>
+            </div>
+
+            <div class="alert success">
+                <strong>Golden Rule:</strong> Never use indicators from the same category. Combine Trend + Momentum + Volume for best results.
+            </div>
+        </div>
+
+        <!-- Pro Tips Section -->
+        <div id="tips" class="section">
+            <div class="card">
+                <h2>Professional Trading Tips</h2>
+                <p>These are the strategies and mindsets that separate successful traders from the rest.</p>
+            </div>
+
+            <div class="card">
+                <h3>Indicator Best Practices</h3>
+                <ul>
+                    <li><strong>Avoid Indicator Overload:</strong> Use 3-4 indicators maximum. More doesn't mean better.</li>
+                    <li><strong>Confirm with Price Action:</strong> Indicators should confirm what you see in price, not replace it.</li>
+                    <li><strong>Use Appropriate Timeframes:</strong> 14-period RSI for daily, 9-period for intraday.</li>
+                    <li><strong>Adjust for Market Conditions:</strong> Use shorter periods in fast markets, longer in slow markets.</li>
+                    <li><strong>Test on Historical Data:</strong> Backtest combinations before trading live.</li>
+                    <li><strong>Keep a Trading Journal:</strong> Track which combinations work best for you.</li>
+                    <li><strong>Combine with Support/Resistance:</strong> Indicators work best near key price levels.</li>
+                    <li><strong>Use Divergences:</strong> Price vs. indicator divergences are powerful reversal signals.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Common Indicator Mistakes</h3>
+                <ul>
+                    <li><strong>Lagging Signals:</strong> Most indicators lag price. Enter early, not after full signal.</li>
+                    <li><strong>Whipsaws in Choppy Markets:</strong> Indicators fail in ranging/sideways markets.</li>
+                    <li><strong>Over-Optimization:</strong> Don't tweak settings to fit past data perfectly.</li>
+                    <li><strong>Ignoring Divergences:</strong> Divergences often precede reversals by days/weeks.</li>
+                    <li><strong>Trading Against Trend:</strong> Don't short oversold in uptrend or buy overbought in downtrend.</li>
+                    <li><strong>Ignoring Volume:</strong> Volume is the most important confirmation.</li>
+                    <li><strong>No Risk Management:</strong> Always use stops, regardless of indicator signals.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Indicator Settings by Timeframe</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Indicator</th>
+                            <th>Intraday (5-15m)</th>
+                            <th>Swing (Daily)</th>
+                            <th>Position (Weekly)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Moving Average</strong></td>
+                            <td>9, 21</td>
+                            <td>20, 50, 200</td>
+                            <td>50, 200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RSI</strong></td>
+                            <td>9</td>
+                            <td>14</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stochastic</strong></td>
+                            <td>5, 3, 3</td>
+                            <td>14, 3, 3</td>
+                            <td>21, 3, 3</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MACD</strong></td>
+                            <td>5, 13, 1</td>
+                            <td>12, 26, 9</td>
+                            <td>12, 26, 9</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bollinger Bands</strong></td>
+                            <td>10, 1.5</td>
+                            <td>20, 2</td>
+                            <td>20, 2.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Step-by-Step Trading Process</h3>
+                <ol style="margin-left: 20px; color: var(--gray);">
+                    <li><strong>Identify Trend:</strong> Use moving averages or ADX to confirm trend direction</li>
+                    <li><strong>Wait for Pullback:</strong> Don't chase. Wait for price to retrace to support</li>
+                    <li><strong>Confirm with Momentum:</strong> Use RSI or Stochastic to find oversold levels</li>
+                    <li><strong>Check Volume:</strong> Ensure pullback occurs on declining volume (accumulation)</li>
+                    <li><strong>Set Entry Point:</strong> Enter when momentum indicator shows reversal (e.g., RSI crosses 30)</li>
+                    <li><strong>Place Stop Loss:</strong> Below support level or 2x ATR from entry</li>
+                    <li><strong>Set Profit Target:</strong> Use previous resistance or 2:1 risk/reward ratio</li>
+                    <li><strong>Manage Trade:</strong> Move stop to breakeven after 1:1 profit, then trail</li>
+                </ol>
+            </div>
+
+            <div class="alert warning">
+                <strong>Remember:</strong> Indicators are tools, not crystal balls. They improve odds but don't guarantee profits. Risk management is always more important than indicators.
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Stock Market Useful Indicators Guide. Educational content only. Not financial advice.</p>
+            <p>Always consult with a financial advisor before making investment decisions. Past performance does not guarantee future results.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

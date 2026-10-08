@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+}
+.back-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:transparent;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    border: 1px solid gray;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.back-btn:hover{
+    background:transparent;
+}
+body{
+    background-image: url("sector_Imeage/bear_blue.jpg");
+}
+h1{
+    text-align: center;
+    margin-top: 20px;
+}
+p{
+    text-align: center;
+    padding: 30px 20px;
+    max-width: 1000px;
+    margin: 20px 200px 10px 200px;
+    background: transparent;
+    border-radius: 10px;
+    height: inherit;
+}
+.points{
+    text-align: center;
+}
+li{
+    margin-top: 10px;
+}
+.high{
+    color: orange;
+}
+h3{
+    text-align: center;
+    margin-top: auto;
+    margin: 20px 200px 10px 200px;
+    border-radius: 10px;
+    padding: 30px 20px;
+}
+.first{
+     backdrop-filter: blur(1.5px);
+}
+footer{
+    text-align: center;
+    text-shadow: 3px;
+}

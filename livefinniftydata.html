@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fin Nifty Live - Real-Time Financial Services Index Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="livefinnifty.css".css>
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Fin Nifty 50</h1>
+            <p class="header-subtitle">Real-Time Financial Services Index Dashboard</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Loading market data...</span>
+            </div>
+        </header>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="main-display">
+            <div class="index-value" id="indexValue">-</div>
+            <div class="index-change">
+                <div class="change-item">
+                    Change: <span id="indexChange" class="change-neutral">-</span>
+                </div>
+                <div class="change-item">
+                    Change %: <span id="indexChangePercent" class="change-neutral">-</span>
+                </div>
+            </div>
+            <div class="market-hours">
+                Market Status: <span id="marketStatus">Loading...</span> | Last Updated: <span id="lastUpdate">-</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Now</button>
+            <button onclick="toggleAutoRefresh()">⏱️ Auto Refresh: ON</button>
+            <button onclick="exportData()">📥 Export CSV</button>
+            <button onclick="toggleChart()">📈 Toggle Chart</button>
+        </div>
+
+        <div class="main-stats">
+            <div class="stat-card">
+                <div class="stat-label">Day High</div>
+                <div class="stat-value" id="dayHigh">-</div>
+                <div class="stat-subvalue">Highest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Day Low</div>
+                <div class="stat-value" id="dayLow">-</div>
+                <div class="stat-subvalue">Lowest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week High</div>
+                <div class="stat-value" id="weekHigh">-</div>
+                <div class="stat-subvalue">52-week peak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week Low</div>
+                <div class="stat-value" id="weekLow">-</div>
+                <div class="stat-subvalue">52-week low</div>
+            </div>
+        </div>
+
+        <div class="performance-grid">
+            <div class="performance-card">
+                <div class="performance-label">Total Gainers</div>
+                <div class="performance-value" id="gainers">-</div>
+                <div class="performance-change">Stocks up today</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Total Losers</div>
+                <div class="performance-value" id="losers">-</div>
+                <div class="performance-change">Stocks down today</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Avg. Volume</div>
+                <div class="performance-value" id="avgVolume">-</div>
+                <div class="performance-change">Trading volume</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Market Cap</div>
+                <div class="performance-value" id="marketCap">-</div>
+                <div class="performance-change">Total value</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by company symbol or name...">
+        </div>
+
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <div class="chart-title">Fin Nifty 50 Price Movement (Last 10 Days)</div>
+            <canvas id="finNiftyChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Sector</th>
+                        <th>Price (₹)</th>
+                        <th>Change (₹)</th>
+                        <th>Change (%)</th>
+                        <th>Volume</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px;">
+                            <div class="loading-spinner"></div> Loading Fin Nifty 50 data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>📍 National Stock Exchange (NSE) | Fin Nifty 50 Index</p>
+            <p>Data updates every 30 seconds | Last updated: <span id="footerTime">-</span></p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #4b5563;">Disclaimer: This is a demo dashboard. For real-time trading, please use official NSE platforms.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fin Nifty 50 stocks data (sample)
+        const finNiftyStocks = [
+            { symbol: 'HDFCBANK', name: 'HDFC Bank', sector: 'Banking', price: 1685.50, change: 85.30, changePercent: 5.33, volume: 5600000, marketCap: 1450000 },
+            { symbol: 'ICICIBANK', name: 'ICICI Bank', sector: 'Banking', price: 1285.50, change: 65.30, changePercent: 5.35, volume: 4200000, marketCap: 950000 },
+            { symbol: 'AXISBANK', name: 'Axis Bank', sector: 'Banking', price: 1085.40, change: 45.60, changePercent: 4.38, volume: 3200000, marketCap: 325000 },
+            { symbol: 'KOTAKBANK', name: 'Kotak Mahindra Bank', sector: 'Banking', price: 1885.75, change: 85.40, changePercent: 4.74, volume: 1850000, marketCap: 385000 },
+            { symbol: 'SBIN', name: 'State Bank of India', sector: 'Banking', price: 685.40, change: 35.60, changePercent: 5.48, volume: 4200000, marketCap: 385000 },
+            { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv', sector: 'Finance', price: 7485.50, change: 185.40, changePercent: 2.54, volume: 950000, marketCap: 650000 },
+            { symbol: 'SBICARD', name: 'SBI Card', sector: 'Finance', price: 685.75, change: 25.40, changePercent: 3.84, volume: 2800000, marketCap: 185000 },
+            { symbol: 'CHOLAFIN', name: 'Chola Finance', sector: 'Finance', price: 1245.80, change: 65.40, changePercent: 5.53, volume: 1650000, marketCap: 75000 },
+            { symbol: 'HDFCAMC', name: 'HDFC Asset Management', sector: 'Finance', price: 3485.25, change: 85.75, changePercent: 2.52, volume: 1200000, marketCap: 285000 },
+            { symbol: 'BAJAJHLDNG', name: 'Bajaj Holdings', sector: 'Finance', price: 6450.00, change: 150.00, changePercent: 2.38, volume: 850000, marketCap: 285000 },
+            { symbol: 'PNBHOUSING', name: 'PNB Housing Finance', sector: 'Finance', price: 885.50, change: 45.30, changePercent: 5.38, volume: 2450000, marketCap: 285000 },
+            { symbol: 'HOUSINDEV', name: 'Housing Development Finance', sector: 'Finance', price: 485.25, change: -15.75, changePercent: -3.15, volume: 3200000, marketCap: 285000 },
+            { symbol: 'SHRIRAMFIN', name: 'Shriram Finance', sector: 'Finance', price: 1885.50, change: 85.30, changePercent: 4.74, volume: 1850000, marketCap: 285000 },
+            { symbol: 'LTFH', name: 'L&T Finance Holdings', sector: 'Finance', price: 185.80, change: 12.50, changePercent: 7.23, volume: 3200000, marketCap: 125000 },
+            { symbol: 'INDUSIND', name: 'IndusInd Bank', sector: 'Banking', price: 1485.50, change: 45.30, changePercent: 3.15, volume: 2100000, marketCap: 285000 },
+            { symbol: 'AUBANK', name: 'AU Small Finance Bank', sector: 'Banking', price: 685.75, change: 25.40, changePercent: 3.84, volume: 2800000, marketCap: 185000 },
+            { symbol: 'IDFCBANK', name: 'IDFC Bank', sector: 'Banking', price: 85.40, change: 5.60, changePercent: 6.99, volume: 8500000, marketCap: 65000 },
+            { symbol: 'BANKBARODA', name: 'Bank of Baroda', sector: 'Banking', price: 245.80, change: 12.50, changePercent: 5.37, volume: 4200000, marketCap: 185000 },
+            { symbol: 'CANBK', name: 'Canara Bank', sector: 'Banking', price: 385.40, change: 28.60, changePercent: 7.99, volume: 3200000, marketCap: 125000 },
+            { symbol: 'UNIONBANK', name: 'Union Bank of India', sector: 'Banking', price: 85.40, change: 5.60, changePercent: 6.99, volume: 7200000, marketCap: 125000 },
+            { symbol: 'BANDHANBNK', name: 'Bandhan Bank', sector: 'Banking', price: 185.80, change: 12.50, changePercent: 7.23, volume: 4500000, marketCap: 45000 },
+            { symbol: 'YESBANK', name: 'Yes Bank', sector: 'Banking', price: 25.80, change: 1.50, changePercent: 6.17, volume: 12500000, marketCap: 85000 },
+            { symbol: 'ICBK', name: 'ICICI Prudential', sector: 'Finance', price: 485.25, change: 15.75, changePercent: 3.35, volume: 2100000, marketCap: 185000 },
+            { symbol: 'MOTILALBANK', name: 'Motilal Oswal Bank', sector: 'Finance', price: 685.80, change: 25.40, changePercent: 3.84, volume: 2100000, marketCap: 185000 },
+            { symbol: 'IDBI', name: 'IDBI Bank', sector: 'Banking', price: 85.80, change: -5.20, changePercent: -5.70, volume: 4200000, marketCap: 185000 },
+            { symbol: 'SCBLBANK', name: 'Standard Chartered Bank', sector: 'Banking', price: 185.40, change: 8.60, changePercent: 4.86, volume: 2100000, marketCap: 95000 },
+            { symbol: 'HSBC', name: 'HSBC Bank India', sector: 'Banking', price: 285.50, change: 12.30, changePercent: 4.50, volume: 1850000, marketCap: 125000 },
+            { symbol: 'PIIND', name: 'Pharmaceutical Investments', sector: 'Finance', price: 3485.25, change: -85.75, changePercent: -2.40, volume: 1450000, marketCap: 185000 },
+            { symbol: 'INDIANBANK', name: 'Indian Bank', sector: 'Banking', price: 485.50, change: 12.30, changePercent: 2.60, volume: 4200000, marketCap: 185000 },
+            { symbol: 'PNBBANK', name: 'Punjab National Bank', sector: 'Banking', price: 85.40, change: 5.60, changePercent: 6.99, volume: 7200000, marketCap: 125000 },
+            { symbol: 'SYNBANK', name: 'Syndicate Bank', sector: 'Banking', price: 85.80, change: -5.20, changePercent: -5.70, volume: 4200000, marketCap: 85000 },
+            { symbol: 'CENTRALBANK', name: 'Central Bank of India', sector: 'Banking', price: 65.40, change: 3.60, changePercent: 5.82, volume: 5600000, marketCap: 125000 },
+            { symbol: 'ADANIGREEN', name: 'Adani Green Energy', sector: 'Finance', price: 1485.75, change: 65.40, changePercent: 4.61, volume: 2450000, marketCap: 285000 },
+            { symbol: 'ICICIPRU', name: 'ICICI Prudential Life', sector: 'Finance', price: 485.25, change: 15.75, changePercent: 3.35, volume: 2100000, marketCap: 185000 },
+            { symbol: 'HDFCLIFE', name: 'HDFC Life Insurance', sector: 'Finance', price: 685.80, change: 25.40, changePercent: 3.84, volume: 2100000, marketCap: 185000 },
+            { symbol: 'SBILIFE', name: 'SBI Life Insurance', sector: 'Finance', price: 1285.50, change: 65.30, changePercent: 5.35, volume: 1850000, marketCap: 285000 },
+            { symbol: 'AXISLIFE', name: 'Axis Bank Life', sector: 'Finance', price: 485.40, change: 15.60, changePercent: 3.32, volume: 1200000, marketCap: 185000 },
+            { symbol: 'BAJAJINSURE', name: 'Bajaj Insurance', sector: 'Finance', price: 885.50, change: 45.30, changePercent: 5.38, volume: 2100000, marketCap: 285000 },
+            { symbol: 'RELIINSURE', name: 'Reliance Insurance', sector: 'Finance', price: 685.75, change: 25.40, changePercent: 3.84, volume: 1850000, marketCap: 185000 },
+            { symbol: 'NIFTYFINANCE', name: 'Nifty Finance ETF', sector: 'Index', price: 38500.50, change: 950.30, changePercent: 2.53, volume: 850000, marketCap: 1250000 },
+            { symbol: 'MUTHYALIND', name: 'Muthyalamma Industries', sector: 'Finance', price: 285.75, change: -8.40, changePercent: -2.85, volume: 1850000, marketCap: 95000 },
+            { symbol: 'FINTECH', name: 'Fintech Bank', sector: 'Finance', price: 285.40, change: 8.60, changePercent: 3.11, volume: 1850000, marketCap: 125000 },
+            { symbol: 'DIGITALBNK', name: 'Digital Bank', sector: 'Finance', price: 185.80, change: 12.50, changePercent: 7.23, volume: 2100000, marketCap: 95000 },
+            { symbol: 'NEOBANK', name: 'Neo Bank', sector: 'Finance', price: 485.25, change: 15.75, changePercent: 3.35, volume: 1850000, marketCap: 185000 },
+            { symbol: 'FINSERVE', name: 'Financial Services', sector: 'Finance', price: 685.50, change: 25.40, changePercent: 3.84, volume: 2100000, marketCap: 185000 },
+            { symbol: 'LOANBANK', name: 'Loan Bank', sector: 'Finance', price: 385.40, change: 28.60, changePercent: 7.99, volume: 2800000, marketCap: 125000 },
+            { symbol: 'CREDITBNK', name: 'Credit Bank', sector: 'Finance', price: 285.75, change: -8.40, changePercent: -2.85, volume: 1850000, marketCap: 95000 },
+            { symbol: 'INVESTBNK', name: 'Investment Bank', sector: 'Finance', price: 485.80, change: 12.50, changePercent: 2.64, volume: 1850000, marketCap: 185000 },
+            { symbol: 'TRADEBNK', name: 'Trade Bank', sector: 'Finance', price: 385.25, change: 15.75, changePercent: 4.28, volume: 2100000, marketCap: 185000 },
+            { symbol: 'EXPORTBNK', name: 'Export Bank', sector: 'Finance', price: 285.40, change: 8.60, changePercent: 3.11, volume: 1850000, marketCap: 125000 },
+            { symbol: 'IMPORTBNK', name: 'Import Bank', sector: 'Finance', price: 185.80, change: 12.50, changePercent: 7.23, volume: 2100000, marketCap: 95000 },
+            { symbol: 'GLOBALBNK', name: 'Global Bank', sector: 'Finance', price: 485.50, change: 15.30, changePercent: 3.25, volume: 1850000, marketCap: 185000 },
+            { symbol: 'MICROBNK', name: 'Micro Bank', sector: 'Finance', price: 85.75, change: 5.40, changePercent: 6.71, volume: 4200000, marketCap: 65000 },
+            { symbol: 'SMALLBNK', name: 'Small Finance Bank', sector: 'Finance', price: 185.40, change: 8.60, changePercent: 4.86, volume: 2100000, marketCap: 95000 }
+        ];
+
+        let autoRefreshEnabled = true;
+        let refreshInterval = null;
+        let chartInstance = null;
+        let chartVisible = false;
+        let filteredData = [...finNiftyStocks];
+
+        // Historical data for chart
+        const historicalData = [
+            { date: '10 days ago', value: 38200 },
+            { date: '9 days ago', value: 38450 },
+            { date: '8 days ago', value: 37950 },
+            { date: '7 days ago', value: 38750 },
+            { date: '6 days ago', value: 38550 },
+            { date: '5 days ago', value: 39100 },
+            { date: '4 days ago', value: 38850 },
+            { date: '3 days ago', value: 39600 },
+            { date: '2 days ago', value: 39950 },
+            { date: 'Today', value: 40200 }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            startAutoRefresh();
+            setupSearch();
+        });
+
+        function refreshData() {
+            updateStatus('Loading market data...', 'loading');
+            
+            setTimeout(() => {
+                try {
+                    // Simulate API call with slight data variation
+                    const updatedData = finNiftyStocks.map(stock => ({
+                        ...stock,
+                        price: stock.price + (Math.random() - 0.5) * 40,
+                        change: stock.change + (Math.random() - 0.5) * 10,
+                        changePercent: stock.changePercent + (Math.random() - 0.5) * 0.5
+                    }));
+
+                    filteredData = [...updatedData];
+                    renderTable(filteredData);
+                    updateMainStats(updatedData);
+                    updatePerformanceMetrics(updatedData);
+                    updateStatus('Market data live', 'success');
+                    updateTimestamp();
+                } catch (error) {
+                    showError('Failed to fetch market data: ' + error.message);
+                    updateStatus('Error loading data', 'error');
+                }
+            }, 500);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">No companies found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(stock => `
+                <tr>
+                    <td class="symbol">${stock.symbol}</td>
+                    <td class="company-name">${stock.name}</td>
+                    <td><span class="sector-badge">${stock.sector}</span></td>
+                    <td class="price">₹${stock.price.toFixed(2)}</td>
+                    <td class="${stock.change >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.change >= 0 ? '+' : ''}₹${stock.change.toFixed(2)}
+                    </td>
+                    <td class="${stock.changePercent >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(stock.changePercent).toFixed(2)}%
+                    </td>
+                    <td>${(stock.volume / 1000000).toFixed(2)}M</td>
+                    <td>₹${(stock.marketCap * 1000).toLocaleString('en-IN')}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateMainStats(data) {
+            const avgPrice = data.reduce((sum, s) => sum + s.price, 0) / data.length;
+            const totalChange = data.reduce((sum, s) => sum + s.change, 0);
+            const totalChangePercent = data.reduce((sum, s) => sum + s.changePercent, 0) / data.length;
+            const maxPrice = Math.max(...data.map(s => s.price));
+            const minPrice = Math.min(...data.map(s => s.price));
+
+            document.getElementById('indexValue').textContent = `₹${avgPrice.toFixed(2)}`;
+            
+            const changeClass = totalChange >= 0 ? 'change-positive' : 'change-negative';
+            document.getElementById('indexChange').className = changeClass;
+            document.getElementById('indexChange').textContent = `${totalChange >= 0 ? '▲' : '▼'} ₹${Math.abs(totalChange).toFixed(2)}`;
+            
+            document.getElementById('indexChangePercent').className = changeClass;
+            document.getElementById('indexChangePercent').textContent = `${totalChangePercent >= 0 ? '+' : ''}${totalChangePercent.toFixed(2)}%`;
+            
+            document.getElementById('dayHigh').textContent = `₹${maxPrice.toFixed(2)}`;
+            document.getElementById('dayLow').textContent = `₹${minPrice.toFixed(2)}`;
+            document.getElementById('weekHigh').textContent = `₹${(maxPrice * 1.08).toFixed(2)}`;
+            document.getElementById('weekLow').textContent = `₹${(minPrice * 0.92).toFixed(2)}`;
+            document.getElementById('marketStatus').textContent = 'OPEN';
+        }
+
+        function updatePerformanceMetrics(data) {
+            const gainers = data.filter(s => s.change > 0).length;
+            const losers = data.filter(s => s.change < 0).length;
+            const avgVolume = (data.reduce((sum, s) => sum + s.volume, 0) / data.length / 1000000).toFixed(2);
+            const totalMarketCap = (data.reduce((sum, s) => sum + s.marketCap, 0) * 1000).toLocaleString('en-IN');
+
+            document.getElementById('gainers').textContent = gainers;
+            document.getElementById('losers').textContent = losers;
+            document.getElementById('avgVolume').textContent = avgVolume + 'M';
+            document.getElementById('marketCap').textContent = '₹' + totalMarketCap;
+        }
+
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('lastUpdate').textContent = timeString;
+            document.getElementById('footerTime').textContent = now.toLocaleString('en-IN');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 5000);
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refreshData, 30000); // Refresh every 30 seconds
+        }
+
+        function toggleAutoRefresh() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = event.target;
+            
+            if (autoRefreshEnabled) {
+                button.textContent = '⏱️ Auto Refresh: ON';
+                startAutoRefresh();
+            } else {
+                button.textContent = '⏱️ Auto Refresh: OFF';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                filteredData = finNiftyStocks.filter(stock => 
+                    stock.symbol.toLowerCase().includes(query) || 
+                    stock.name.toLowerCase().includes(query) ||
+                    stock.sector.toLowerCase().includes(query)
+                );
+                renderTable(filteredData);
+            });
+        }
+
+        function toggleChart() {
+            chartVisible = !chartVisible;
+            const container = document.getElementById('chartContainer');
+            
+            if (chartVisible) {
+                container.style.display = 'block';
+                initChart();
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('finNiftyChart');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historicalData.map(d => d.date),
+                    datasets: [{
+                        label: 'Fin Nifty 50 Index',
+                        data: historicalData.map(d => d.value),
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#f59e0b',
+                        pointBorderColor: '#0f1419',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e5e7eb',
+                                font: { size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(245, 158, 11, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(245, 158, 11, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportData() {
+            let csv = 'Symbol,Company Name,Sector,Price (₹),Change (₹),Change (%),Volume,Market Cap\n';
+            filteredData.forEach(stock => {
+                csv += `${stock.symbol},"${stock.name}","${stock.sector}",${stock.price.toFixed(2)},${stock.change.toFixed(2)},${stock.changePercent.toFixed(2)},${stock.volume},${stock.marketCap}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `fin-nifty-50-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

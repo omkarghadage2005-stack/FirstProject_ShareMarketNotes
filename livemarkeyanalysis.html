@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Market Live Analysis - Advanced Stock Market Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="livemarketdataanalysis.css">
+</head>
+ <a href="home_page.html" class="back-btn">⬅ Back</a> 
+<body>
+        <header>
+            <h1>📊 Indian Market Live Analysis</h1>
+            <p class="header-subtitle">Advanced Real-Time Stock Market Analytics Dashboard</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Loading market analysis...</span>
+            </div>
+        </header>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Analysis</button>
+            <button onclick="toggleAutoRefresh()">⏱️ Auto Refresh: ON</button>
+            <button onclick="exportAnalysis()">📥 Export Report</button>
+            <button onclick="toggleCharts()">📈 Toggle Charts</button>
+        </div>
+
+        <h2>📈 Market Overview</h2>
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-title">🎯 Market Sentiment</div>
+                <div class="card-value" id="sentiment">-</div>
+                <div class="card-subtext">Overall market trend</div>
+            </div>
+            <div class="card">
+                <div class="card-title">📊 Breadth Ratio</div>
+                <div class="card-value" id="breadthRatio">-</div>
+                <div class="card-subtext">Gainers vs Losers</div>
+            </div>
+            <div class="card">
+                <div class="card-title">💹 Market Cap</div>
+                <div class="card-value" id="marketCap">-</div>
+                <div class="card-subtext">Total valuation</div>
+            </div>
+        </div>
+
+        <h2>📋 Key Metrics</h2>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">Nifty 50 Analysis</div>
+                <div class="metric-row">
+                    <span class="metric-label">Current Value</span>
+                    <span class="metric-value" id="nifty50Val">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Day Change</span>
+                    <span class="metric-value positive" id="nifty50Change">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">52W High</span>
+                    <span class="metric-value" id="nifty50High">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">52W Low</span>
+                    <span class="metric-value" id="nifty50Low">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">PE Ratio</span>
+                    <span class="metric-value neutral" id="nifty50PE">-</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Sensex Analysis</div>
+                <div class="metric-row">
+                    <span class="metric-label">Current Value</span>
+                    <span class="metric-value" id="sensexVal">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Day Change</span>
+                    <span class="metric-value positive" id="sensexChange">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">52W High</span>
+                    <span class="metric-value" id="sensexHigh">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">52W Low</span>
+                    <span class="metric-value" id="sensexLow">-</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Dividend Yield</span>
+                    <span class="metric-value neutral" id="sensexDiv">-</span>
+                </div>
+            </div>
+        </div>
+
+        <h2>🏭 Sector Performance</h2>
+        <div class="card">
+            <div id="sectorPerformance"></div>
+        </div>
+
+        <h2>📊 Market Heatmap</h2>
+        <div class="card">
+            <div class="heatmap" id="marketHeatmap"></div>
+        </div>
+
+        <h2>📈 Technical Analysis</h2>
+        <div class="grid-2">
+            <div class="chart-container">
+                <div class="chart-title">Nifty 50 - 10 Day Trend</div>
+                <canvas id="niftyChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">Sector Distribution</div>
+                <canvas id="sectorChart"></canvas>
+            </div>
+        </div>
+
+        <h2>📊 Market Statistics</h2>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">Total Gainers</div>
+                <div class="stat-number positive" id="gainersCount">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Total Losers</div>
+                <div class="stat-number negative" id="losersCount">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Avg Volume</div>
+                <div class="stat-number" id="avgVolume">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Market Volatility</div>
+                <div class="stat-number neutral" id="volatility">-</div>
+            </div>
+        </div>
+
+        <h2>💼 Top Performers</h2>
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('gainers')">📈 Top Gainers</button>
+            <button class="tab-button" onclick="switchTab('losers')">📉 Top Losers</button>
+            <button class="tab-button" onclick="switchTab('volume')">🔄 High Volume</button>
+        </div>
+
+        <div id="gainers" class="tab-content active">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company</th>
+                            <th>Sector</th>
+                            <th>Price</th>
+                            <th>Change %</th>
+                            <th>Volume</th>
+                            <th>PE Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gainersBody">
+                        <tr><td colspan="7" style="text-align: center; padding: 20px;"><div class="loading-spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="losers" class="tab-content">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company</th>
+                            <th>Sector</th>
+                            <th>Price</th>
+                            <th>Change %</th>
+                            <th>Volume</th>
+                            <th>PE Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="losersBody">
+                        <tr><td colspan="7" style="text-align: center; padding: 20px;"><div class="loading-spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="volume" class="tab-content">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Company</th>
+                            <th>Sector</th>
+                            <th>Price</th>
+                            <th>Change %</th>
+                            <th>Volume</th>
+                            <th>PE Ratio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="volumeBody">
+                        <tr><td colspan="7" style="text-align: center; padding: 20px;"><div class="loading-spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h2>📌 Market Insights</h2>
+        <div class="info-box">
+            <div class="info-title">Today's Market Summary</div>
+            <div class="info-text" id="marketSummary">
+                Loading market insights...
+            </div>
+        </div>
+
+        <footer>
+            <p>📍 National Stock Exchange (NSE) & Bombay Stock Exchange (BSE)</p>
+            <p>Real-time analysis updated every 30 seconds | Last updated: <span id="footerTime">-</span></p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #4b5563;">Disclaimer: This is a demo dashboard for educational purposes. Always consult with financial advisors before making investment decisions.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Market data
+        const marketData = {
+            nifty50: { value: 23450.50, change: 285.30, high: 24500, low: 22800, pe: 24.5 },
+            sensex: { value: 77850.25, change: 450.75, high: 80200, low: 76500, div: 1.8 },
+            gainers: [
+                { symbol: 'RELIANCE', name: 'Reliance Industries', sector: 'Energy', price: 2850.50, change: 4.59, volume: 5600000, pe: 22.5 },
+                { symbol: 'INFY', name: 'Infosys Limited', sector: 'IT', price: 1685.25, change: 2.67, volume: 4200000, pe: 28.3 },
+                { symbol: 'WIPRO', name: 'Wipro Limited', sector: 'IT', price: 485.80, change: 5.51, volume: 1850000, pe: 18.2 },
+                { symbol: 'SUNPHARMA', name: 'Sun Pharmaceutical', sector: 'Pharma', price: 685.80, change: 3.84, volume: 2800000, pe: 20.1 },
+                { symbol: 'LUPIN', name: 'Lupin Limited', sector: 'Pharma', price: 1485.75, change: 4.61, volume: 1850000, pe: 19.5 }
+            ],
+            losers: [
+                { symbol: 'CIPLA', name: 'Cipla Limited', sector: 'Pharma', price: 1485.25, change: -2.35, volume: 2100000, pe: 25.8 },
+                { symbol: 'MARUTI', name: 'Maruti Suzuki India', sector: 'Auto', price: 11285.50, change: -2.47, volume: 850000, pe: 32.1 },
+                { symbol: 'HEROMOTOCORP', name: 'Hero MotoCorp', sector: 'Auto', price: 3985.40, change: -1.85, volume: 1200000, pe: 15.2 },
+                { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv', sector: 'Finance', price: 7485.50, change: -0.54, volume: 950000, pe: 35.2 },
+                { symbol: 'SBICARD', name: 'SBI Card', sector: 'Finance', price: 685.75, change: -1.24, volume: 2800000, pe: 42.5 }
+            ],
+            sectors: [
+                { name: 'IT', change: 2.15, weight: 22 },
+                { name: 'Banking', change: 1.85, weight: 28 },
+                { name: 'Pharma', change: 0.95, weight: 12 },
+                { name: 'Energy', change: 1.45, weight: 15 },
+                { name: 'Auto', change: -1.25, weight: 8 },
+                { name: 'Finance', change: 2.35, weight: 15 }
+            ]
+        };
+
+        let autoRefreshEnabled = true;
+        let refreshInterval = null;
+        let chartsVisible = true;
+        let niftyChart = null;
+        let sectorChart = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            startAutoRefresh();
+        });
+
+        function refreshData() {
+            updateStatus('Analyzing market data...', 'loading');
+            
+            setTimeout(() => {
+                try {
+                    updateMarketOverview();
+                    updateKeyMetrics();
+                    updateSectorPerformance();
+                    updateMarketHeatmap();
+                    updateStatistics();
+                    updateTopPerformers();
+                    updateMarketInsights();
+                    initCharts();
+                    updateStatus('Market analysis live', 'success');
+                    updateTimestamp();
+                } catch (error) {
+                    updateStatus('Error loading analysis', 'error');
+                }
+            }, 500);
+        }
+
+        function updateMarketOverview() {
+            const gainersCount = marketData.gainers.length;
+            const losersCount = marketData.losers.length;
+            const breadth = (gainersCount / (gainersCount + losersCount) * 100).toFixed(1);
+            
+            document.getElementById('sentiment').textContent = breadth > 50 ? 'Bullish 📈' : 'Bearish 📉';
+            document.getElementById('breadthRatio').textContent = `${breadth}% / ${(100 - breadth).toFixed(1)}%`;
+            document.getElementById('marketCap').textContent = '₹' + (marketData.nifty50.value * 1000000).toLocaleString('en-IN', { notation: 'compact' });
+        }
+
+        function updateKeyMetrics() {
+            document.getElementById('nifty50Val').textContent = `₹${marketData.nifty50.value.toFixed(2)}`;
+            document.getElementById('nifty50Change').textContent = `+${marketData.nifty50.change.toFixed(2)}`;
+            document.getElementById('nifty50High').textContent = `₹${marketData.nifty50.high}`;
+            document.getElementById('nifty50Low').textContent = `₹${marketData.nifty50.low}`;
+            document.getElementById('nifty50PE').textContent = marketData.nifty50.pe.toFixed(1);
+
+            document.getElementById('sensexVal').textContent = `₹${marketData.sensex.value.toFixed(2)}`;
+            document.getElementById('sensexChange').textContent = `+${marketData.sensex.change.toFixed(2)}`;
+            document.getElementById('sensexHigh').textContent = `₹${marketData.sensex.high}`;
+            document.getElementById('sensexLow').textContent = `₹${marketData.sensex.low}`;
+            document.getElementById('sensexDiv').textContent = `${marketData.sensex.div}%`;
+        }
+
+        function updateSectorPerformance() {
+            const html = marketData.sectors.map(sector => `
+                <div class="sector-row">
+                    <div class="sector-name">${sector.name}</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${sector.weight}%"></div>
+                    </div>
+                    <div class="sector-value ${sector.change >= 0 ? 'positive' : 'negative'}">
+                        ${sector.change >= 0 ? '+' : ''}${sector.change.toFixed(2)}%
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('sectorPerformance').innerHTML = html;
+        }
+
+        function updateMarketHeatmap() {
+            const allStocks = [...marketData.gainers, ...marketData.losers];
+            const html = allStocks.map(stock => {
+                const className = stock.change >= 2 ? 'heatmap-positive' : stock.change < -1 ? 'heatmap-negative' : 'heatmap-neutral';
+                return `
+                    <div class="heatmap-cell ${className}" title="${stock.symbol}: ${stock.change > 0 ? '+' : ''}${stock.change.toFixed(2)}%">
+                        <div>${stock.symbol}</div>
+                        <div>${stock.change > 0 ? '+' : ''}${stock.change.toFixed(1)}%</div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('marketHeatmap').innerHTML = html;
+        }
+
+        function updateStatistics() {
+            const gainersCount = marketData.gainers.length;
+            const losersCount = marketData.losers.length;
+            const avgVolume = (marketData.gainers.reduce((sum, s) => sum + s.volume, 0) / marketData.gainers.length / 1000000).toFixed(2);
+            
+            document.getElementById('gainersCount').textContent = gainersCount;
+            document.getElementById('losersCount').textContent = losersCount;
+            document.getElementById('avgVolume').textContent = avgVolume + 'M';
+            document.getElementById('volatility').textContent = (Math.random() * 20 + 10).toFixed(1) + '%';
+        }
+
+        function updateTopPerformers() {
+            const gainers = [...marketData.gainers].sort((a, b) => b.change - a.change);
+            const losers = [...marketData.losers].sort((a, b) => a.change - b.change);
+            const byVolume = [...marketData.gainers, ...marketData.losers].sort((a, b) => b.volume - a.volume);
+
+            renderStockTable('gainersBody', gainers);
+            renderStockTable('losersBody', losers);
+            renderStockTable('volumeBody', byVolume);
+        }
+
+        function renderStockTable(elementId, stocks) {
+            const tbody = document.getElementById(elementId);
+            tbody.innerHTML = stocks.map(stock => `
+                <tr>
+                    <td class="symbol">${stock.symbol}</td>
+                    <td>${stock.name}</td>
+                    <td><span class="badge">${stock.sector}</span></td>
+                    <td>₹${stock.price.toFixed(2)}</td>
+                    <td class="${stock.change >= 0 ? 'positive' : 'negative'}">
+                        ${stock.change >= 0 ? '▲' : '▼'} ${Math.abs(stock.change).toFixed(2)}%
+                    </td>
+                    <td>${(stock.volume / 1000000).toFixed(2)}M</td>
+                    <td>${stock.pe.toFixed(1)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateMarketInsights() {
+            const gainersCount = marketData.gainers.length;
+            const losersCount = marketData.losers.length;
+            const sentiment = gainersCount > losersCount ? 'positive' : 'negative';
+            
+            const insights = `
+                The market is showing a <strong>${sentiment}</strong> trend with <strong>${gainersCount}</strong> gainers and <strong>${losersCount}</strong> losers.
+                Nifty 50 is trading at <strong>₹${marketData.nifty50.value.toFixed(2)}</strong> with a change of <strong>+${marketData.nifty50.change.toFixed(2)}</strong> points.
+                The IT sector is leading the gains with <strong>+2.15%</strong> performance, while Auto sector is lagging with <strong>-1.25%</strong> change.
+                Market breadth indicates strong buying interest in large-cap stocks. Banking sector continues to be the major contributor to market movements.
+            `;
+            
+            document.getElementById('marketSummary').innerHTML = insights;
+        }
+
+        function initCharts() {
+            if (chartsVisible) {
+                initNiftyChart();
+                initSectorChart();
+            }
+        }
+
+        function initNiftyChart() {
+            const ctx = document.getElementById('niftyChart');
+            if (!ctx) return;
+            
+            if (niftyChart) niftyChart.destroy();
+            
+            niftyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'],
+                    datasets: [{
+                        label: 'Nifty 50',
+                        data: [23100, 23200, 23150, 23300, 23250, 23400, 23380, 23420, 23450, 23450],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#e5e7eb' } } },
+                    scales: {
+                        y: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(59, 130, 246, 0.1)' } },
+                        x: { ticks: { color: '#9ca3af' }, grid: { color: 'rgba(59, 130, 246, 0.1)' } }
+                    }
+                }
+            });
+        }
+
+        function initSectorChart() {
+            const ctx = document.getElementById('sectorChart');
+            if (!ctx) return;
+            
+            if (sectorChart) sectorChart.destroy();
+            
+            sectorChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: marketData.sectors.map(s => s.name),
+                    datasets: [{
+                        data: marketData.sectors.map(s => s.weight),
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.8)',
+                            'rgba(16, 185, 129, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(251, 191, 36, 0.8)',
+                            'rgba(139, 92, 246, 0.8)',
+                            'rgba(236, 72, 153, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#e5e7eb' } } }
+                }
+            });
+        }
+
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        }
+
+        function updateTimestamp() {
+            document.getElementById('footerTime').textContent = new Date().toLocaleString('en-IN');
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refreshData, 30000);
+        }
+
+        function toggleAutoRefresh() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = event.target;
+            if (autoRefreshEnabled) {
+                button.textContent = '⏱️ Auto Refresh: ON';
+                startAutoRefresh();
+            } else {
+                button.textContent = '⏱️ Auto Refresh: OFF';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function toggleCharts() {
+            chartsVisible = !chartsVisible;
+            const charts = document.querySelectorAll('.chart-container');
+            charts.forEach(chart => {
+                chart.style.display = chartsVisible ? 'block' : 'none';
+            });
+            if (chartsVisible) initCharts();
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function exportAnalysis() {
+            let csv = 'Market Analysis Report\n';
+            csv += `Generated: ${new Date().toLocaleString('en-IN')}\n\n`;
+            csv += 'MARKET OVERVIEW\n';
+            csv += `Nifty 50,${marketData.nifty50.value},${marketData.nifty50.change}\n`;
+            csv += `Sensex,${marketData.sensex.value},${marketData.sensex.change}\n\n`;
+            csv += 'TOP GAINERS\n';
+            csv += 'Symbol,Company,Sector,Price,Change %,Volume\n';
+            marketData.gainers.forEach(s => {
+                csv += `${s.symbol},"${s.name}","${s.sector}",${s.price},${s.change},${s.volume}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `market-analysis-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+    </script>
+</body>
+</html>

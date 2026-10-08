@@ -1,0 +1,170 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: transparent;
+        }
+        .back-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:transparent;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    border: 1px solid gray;
+    margin: 10px 10px 10px 10px;
+}
+
+.back-btn:hover{
+    background:transparent;
+}
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: white;
+            background: transparent;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: url("sector_Imeage/bear_blue.jpg");
+            background-color: transparent;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: transparent;
+            border-radius: 12px;
+            background-color: transparent;
+            backdrop-filter: blur(2px);
+            overflow: hidden;
+        }
+        
+        header {
+            background-color: transparent;
+            backdrop-filter: blur(2px);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0.7px 0.7px 0.6px rgb(247, 243, 237);
+        }
+        
+        header p {
+            font-size: 1.7em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 20px;
+            background-color: transparent;
+            backdrop-filter: blur(2px);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .pattern-card {
+            background-color: transparent;
+             backdrop-filter: blur(2px);
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 4px rgb(230, 221, 221);
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-2px);
+            border: 1px solid gray;
+        }
+        
+        .pattern-card h2 {
+            font-size: 1.7em;
+            color: white;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pattern-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .bullish {
+            background-color: transparent;
+            color: #155724;
+            font-size: large;
+        }
+        
+        .bearish {
+            background-color: transparent;
+            font-size: large;
+            color: #721c24;
+        }
+        
+        .continuation {
+            background-color: transparent;
+            font-size: large;
+            color: #0c5460;
+        }
+        
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background-color: transparent;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        canvas {
+            border: 1px solid #dee2e6;
+            background: transparent;
+            border-radius: 4px;
+        }
+        
+        .description {
+            font-size: 0.95em;
+            color: white;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+        
+        .key-points {
+            background: transparent;
+            backdrop-filter: blur(2px);
+            border-left: 4px solid #667eea;
+            padding: 12px 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .key-points strong {
+            color: white;
+        }
+        
+        footer {
+            background: transparent;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }

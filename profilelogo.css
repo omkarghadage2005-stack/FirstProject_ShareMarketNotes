@@ -1,0 +1,45 @@
+body{
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Profile Logo */
+.profile-logo{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#60a5fa,#a78bfa);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Hover Effect */
+.profile-logo:hover{
+    transform:scale(1.1);
+    box-shadow:0 8px 20px rgba(0,0,0,0.5);
+}
+.back-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:transparent;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    border: 1px solid gray;
+    margin: 10px 10px 10px 10px;
+}
+
+.back-btn:hover{
+    background:transparent;
+}

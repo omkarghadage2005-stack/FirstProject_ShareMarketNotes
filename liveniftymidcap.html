@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nifty Midcap Live - Real-Time Market Data Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="liveniftymidcap.css">
+
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Nifty Midcap 50</h1>
+            <p class="header-subtitle">Real-Time Mid-Cap Stock Market Index Dashboard</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span>Loading market data...</span>
+            </div>
+        </header>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="main-display">
+            <div class="index-value" id="indexValue">-</div>
+            <div class="index-change">
+                <div class="change-item">
+                    Change: <span id="indexChange" class="change-neutral">-</span>
+                </div>
+                <div class="change-item">
+                    Change %: <span id="indexChangePercent" class="change-neutral">-</span>
+                </div>
+            </div>
+            <div class="market-hours">
+                Market Status: <span id="marketStatus">Loading...</span> | Last Updated: <span id="lastUpdate">-</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 Refresh Now</button>
+            <button onclick="toggleAutoRefresh()">⏱️ Auto Refresh: ON</button>
+            <button onclick="exportData()">📥 Export CSV</button>
+            <button onclick="toggleChart()">📈 Toggle Chart</button>
+        </div>
+
+        <div class="main-stats">
+            <div class="stat-card">
+                <div class="stat-label">Day High</div>
+                <div class="stat-value" id="dayHigh">-</div>
+                <div class="stat-subvalue">Highest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Day Low</div>
+                <div class="stat-value" id="dayLow">-</div>
+                <div class="stat-subvalue">Lowest today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week High</div>
+                <div class="stat-value" id="weekHigh">-</div>
+                <div class="stat-subvalue">52-week peak</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">52 Week Low</div>
+                <div class="stat-value" id="weekLow">-</div>
+                <div class="stat-subvalue">52-week low</div>
+            </div>
+        </div>
+
+        <div class="performance-grid">
+            <div class="performance-card">
+                <div class="performance-label">Total Gainers</div>
+                <div class="performance-value" id="gainers">-</div>
+                <div class="performance-change">Stocks up today</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Total Losers</div>
+                <div class="performance-value" id="losers">-</div>
+                <div class="performance-change">Stocks down today</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Avg. Volume</div>
+                <div class="performance-value" id="avgVolume">-</div>
+                <div class="performance-change">Trading volume</div>
+            </div>
+            <div class="performance-card">
+                <div class="performance-label">Market Cap</div>
+                <div class="performance-value" id="marketCap">-</div>
+                <div class="performance-change">Total value</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by stock symbol or company name...">
+        </div>
+
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <div class="chart-title">Nifty Midcap 50 Price Movement (Last 10 Days)</div>
+            <canvas id="midcapChart"></canvas>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Company Name</th>
+                        <th>Sector</th>
+                        <th>Price (₹)</th>
+                        <th>Change (₹)</th>
+                        <th>Change (%)</th>
+                        <th>Volume</th>
+                        <th>Market Cap</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="8" style="text-align: center; padding: 40px;">
+                            <div class="loading-spinner"></div> Loading Nifty Midcap 50 data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <p>📍 National Stock Exchange (NSE) | Nifty Midcap 50 Index</p>
+            <p>Data updates every 30 seconds | Last updated: <span id="footerTime">-</span></p>
+            <p style="font-size: 0.75rem; margin-top: 10px; color: #4b5563;">Disclaimer: This is a demo dashboard. For real-time trading, please use official NSE platforms.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Nifty Midcap 50 stocks data (sample)
+        const niftyMidcapStocks = [
+            { symbol: 'AUROPHARMA', name: 'Aurobindo Pharma', sector: 'Pharma', price: 1285.50, change: 45.30, changePercent: 3.65, volume: 2450000, marketCap: 98500 },
+            { symbol: 'AXISBANK', name: 'Axis Bank', sector: 'Banking', price: 1085.40, change: 65.60, changePercent: 6.43, volume: 3200000, marketCap: 325000 },
+            { symbol: 'BAJAJFINSV', name: 'Bajaj Finserv', sector: 'Finance', price: 1875.40, change: 85.60, changePercent: 4.78, volume: 1850000, marketCap: 445000 },
+            { symbol: 'BANDHANBNK', name: 'Bandhan Bank', sector: 'Banking', price: 185.80, change: 12.50, changePercent: 7.23, volume: 4500000, marketCap: 45000 },
+            { symbol: 'BERGEPAINT', name: 'Berger Paints', sector: 'Paint', price: 380.25, change: -8.75, changePercent: -2.25, volume: 2100000, marketCap: 28500 },
+            { symbol: 'BOSCHLTD', name: 'Bosch Limited', sector: 'Auto', price: 28450.00, change: 250.00, changePercent: 0.88, volume: 85000, marketCap: 285000 },
+            { symbol: 'CHOLAFIN', name: 'Chola Finance', sector: 'Finance', price: 1245.80, change: 65.40, changePercent: 5.53, volume: 1650000, marketCap: 75000 },
+            { symbol: 'COLPAL', name: 'Colgate-Palmolive', sector: 'FMCG', price: 2485.50, change: 85.30, changePercent: 3.54, volume: 950000, marketCap: 185000 },
+            { symbol: 'ESCORTS', name: 'Escorts Limited', sector: 'Auto', price: 3245.50, change: 145.60, changePercent: 4.69, volume: 1200000, marketCap: 195000 },
+            { symbol: 'EXIDEIND', name: 'Exide Industries', sector: 'Auto', price: 385.20, change: 28.50, changePercent: 7.99, volume: 2800000, marketCap: 58000 },
+            { symbol: 'GAIL', name: 'GAIL (India)', sector: 'Energy', price: 185.40, change: -5.60, changePercent: -2.93, volume: 5200000, marketCap: 125000 },
+            { symbol: 'GRASIM', name: 'Grasim Industries', sector: 'Cement', price: 2485.75, change: 95.30, changePercent: 3.98, volume: 1450000, marketCap: 325000 },
+            { symbol: 'HAVELLS', name: 'Havells India', sector: 'Electrical', price: 1485.60, change: 65.40, changePercent: 4.61, volume: 1950000, marketCap: 285000 },
+            { symbol: 'HEROMOTOCO', name: 'Hero MotoCorp', sector: 'Auto', price: 4285.75, change: 125.40, changePercent: 3.02, volume: 2100000, marketCap: 425000 },
+            { symbol: 'HINDALCO', name: 'Hindalco Industries', sector: 'Metal', price: 685.40, change: 35.60, changePercent: 5.48, volume: 3100000, marketCap: 185000 },
+            { symbol: 'IDFCBANK', name: 'IDFC Bank', sector: 'Banking', price: 85.40, change: 5.60, changePercent: 6.99, volume: 8500000, marketCap: 65000 },
+            { symbol: 'INDIGO', name: 'InterGlobe Aviation', sector: 'Aviation', price: 3485.75, change: 145.40, changePercent: 4.35, volume: 1650000, marketCap: 425000 },
+            { symbol: 'JSWSTEEL', name: 'JSW Steel', sector: 'Steel', price: 885.50, change: 45.30, changePercent: 5.38, volume: 2450000, marketCap: 285000 },
+            { symbol: 'MAXHEALTH', name: 'Max Healthcare', sector: 'Healthcare', price: 1085.40, change: 45.60, changePercent: 4.38, volume: 1850000, marketCap: 125000 },
+            { symbol: 'MOTHERSON', name: 'Motherson Sumi', sector: 'Auto', price: 385.50, change: 15.30, changePercent: 4.13, volume: 3200000, marketCap: 185000 },
+            { symbol: 'NATIONALUM', name: 'National Aluminium', sector: 'Metal', price: 185.40, change: 8.60, changePercent: 4.86, volume: 4100000, marketCap: 95000 },
+            { symbol: 'NMDC', name: 'NMDC Limited', sector: 'Mining', price: 185.80, change: -5.20, changePercent: -2.73, volume: 5600000, marketCap: 125000 },
+            { symbol: 'NTPC', name: 'NTPC Limited', sector: 'Power', price: 385.40, change: 15.60, changePercent: 4.23, volume: 6200000, marketCap: 425000 },
+            { symbol: 'ONGC', name: 'Oil & Natural Gas', sector: 'Energy', price: 385.50, change: 12.30, changePercent: 3.30, volume: 5800000, marketCap: 385000 },
+            { symbol: 'PAGEIND', name: 'Page Industries', sector: 'Textiles', price: 48500.75, change: 1250.40, changePercent: 2.65, volume: 125000, marketCap: 285000 },
+            { symbol: 'PIIND', name: 'Pharmaceutical Investments', sector: 'Pharma', price: 3485.25, change: -85.75, changePercent: -2.40, volume: 1450000, marketCap: 185000 },
+            { symbol: 'POWERGRID', name: 'Power Grid Corporation', sector: 'Power', price: 285.40, change: 8.60, changePercent: 3.11, volume: 4500000, marketCap: 325000 },
+            { symbol: 'SBICARD', name: 'SBI Card', sector: 'Finance', price: 685.75, change: 25.40, changePercent: 3.84, volume: 2800000, marketCap: 185000 },
+            { symbol: 'TATAMOTORS', name: 'Tata Motors', sector: 'Auto', price: 585.40, change: 28.50, changePercent: 5.12, volume: 3600000, marketCap: 285000 },
+            { symbol: 'TATASTEEL', name: 'Tata Steel', sector: 'Steel', price: 135.80, change: -8.20, changePercent: -5.70, volume: 4200000, marketCap: 185000 },
+            { symbol: 'TECHM', name: 'Tech Mahindra', sector: 'IT', price: 1485.25, change: -35.75, changePercent: -2.35, volume: 2100000, marketCap: 285000 },
+            { symbol: 'TORNTPHARM', name: 'Torrent Pharma', sector: 'Pharma', price: 2885.50, change: 85.30, changePercent: 3.05, volume: 1250000, marketCap: 185000 },
+            { symbol: 'ULTRACEMCO', name: 'UltraTech Cement', sector: 'Cement', price: 10485.75, change: 285.40, changePercent: 2.79, volume: 650000, marketCap: 425000 },
+            { symbol: 'UNIONBANK', name: 'Union Bank of India', sector: 'Banking', price: 85.40, change: 5.60, changePercent: 6.99, volume: 7200000, marketCap: 125000 },
+            { symbol: 'VEDL', name: 'Vedanta Limited', sector: 'Metal', price: 385.50, change: 12.30, changePercent: 3.30, volume: 4800000, marketCap: 285000 },
+            { symbol: 'VOLTAS', name: 'Voltas Limited', sector: 'Appliances', price: 1285.40, change: 45.60, changePercent: 3.67, volume: 2100000, marketCap: 185000 },
+            { symbol: 'WIPRO', name: 'Wipro Limited', sector: 'IT', price: 485.25, change: -15.75, changePercent: -3.15, volume: 3200000, marketCap: 285000 },
+            { symbol: 'YESBANK', name: 'Yes Bank', sector: 'Banking', price: 25.80, change: 1.50, changePercent: 6.17, volume: 12500000, marketCap: 85000 },
+            { symbol: 'ZEEL', name: 'Zee Entertainment', sector: 'Media', price: 285.40, change: -12.60, changePercent: -4.22, volume: 5600000, marketCap: 95000 },
+            { symbol: 'ZOMATO', name: 'Zomato Limited', sector: 'Internet', price: 185.50, change: 8.30, changePercent: 4.68, volume: 6200000, marketCap: 125000 },
+            { symbol: 'ADANIGREEN', name: 'Adani Green Energy', sector: 'Energy', price: 1485.75, change: 65.40, changePercent: 4.61, volume: 2450000, marketCap: 285000 },
+            { symbol: 'APOLLOTYRE', name: 'Apollo Tyres', sector: 'Auto', price: 385.20, change: 28.50, changePercent: 7.99, volume: 2800000, marketCap: 85000 },
+            { symbol: 'ASIANPAINT', name: 'Asian Paints', sector: 'Paint', price: 3245.75, change: -45.25, changePercent: -1.38, volume: 1450000, marketCap: 325000 },
+            { symbol: 'BAJAJHLDNG', name: 'Bajaj Holdings', sector: 'Finance', price: 6450.00, change: 150.00, changePercent: 2.38, volume: 850000, marketCap: 285000 },
+            { symbol: 'BANKBARODA', name: 'Bank of Baroda', sector: 'Banking', price: 245.80, change: 12.50, changePercent: 5.37, volume: 4200000, marketCap: 185000 },
+            { symbol: 'BHARTIARTL', name: 'Bharti Airtel', sector: 'Telecom', price: 1485.50, change: 45.30, changePercent: 3.15, volume: 2100000, marketCap: 425000 },
+            { symbol: 'BRITANNIA', name: 'Britannia Industries', sector: 'FMCG', price: 4580.75, change: -125.50, changePercent: -2.67, volume: 1250000, marketCap: 185000 },
+            { symbol: 'CANBK', name: 'Canara Bank', sector: 'Banking', price: 385.40, change: 28.60, changePercent: 7.99, volume: 3200000, marketCap: 125000 },
+            { symbol: 'CIPLA', name: 'Cipla Limited', sector: 'Pharma', price: 1485.25, change: -35.75, changePercent: -2.35, volume: 2100000, marketCap: 285000 },
+            { symbol: 'DABUR', name: 'Dabur India', sector: 'FMCG', price: 625.80, change: -15.20, changePercent: -2.37, volume: 1850000, marketCap: 125000 },
+            { symbol: 'DMART', name: 'Avenue Supermarts', sector: 'Retail', price: 4850.75, change: 125.40, changePercent: 2.66, volume: 1200000, marketCap: 285000 }
+        ];
+
+        let autoRefreshEnabled = true;
+        let refreshInterval = null;
+        let chartInstance = null;
+        let chartVisible = false;
+        let filteredData = [...niftyMidcapStocks];
+
+        // Historical data for chart
+        const historicalData = [
+            { date: '10 days ago', value: 28200 },
+            { date: '9 days ago', value: 28450 },
+            { date: '8 days ago', value: 27950 },
+            { date: '7 days ago', value: 28750 },
+            { date: '6 days ago', value: 28550 },
+            { date: '5 days ago', value: 29100 },
+            { date: '4 days ago', value: 28850 },
+            { date: '3 days ago', value: 29600 },
+            { date: '2 days ago', value: 29950 },
+            { date: 'Today', value: 30200 }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshData();
+            startAutoRefresh();
+            setupSearch();
+        });
+
+        function refreshData() {
+            updateStatus('Loading market data...', 'loading');
+            
+            setTimeout(() => {
+                try {
+                    // Simulate API call with slight data variation
+                    const updatedData = niftyMidcapStocks.map(stock => ({
+                        ...stock,
+                        price: stock.price + (Math.random() - 0.5) * 20,
+                        change: stock.change + (Math.random() - 0.5) * 5,
+                        changePercent: stock.changePercent + (Math.random() - 0.5) * 0.5
+                    }));
+
+                    filteredData = [...updatedData];
+                    renderTable(filteredData);
+                    updateMainStats(updatedData);
+                    updatePerformanceMetrics(updatedData);
+                    updateStatus('Market data live', 'success');
+                    updateTimestamp();
+                } catch (error) {
+                    showError('Failed to fetch market data: ' + error.message);
+                    updateStatus('Error loading data', 'error');
+                }
+            }, 500);
+        }
+
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">No stocks found</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(stock => `
+                <tr>
+                    <td class="symbol">${stock.symbol}</td>
+                    <td class="company-name">${stock.name}</td>
+                    <td>${stock.sector}</td>
+                    <td class="price">₹${stock.price.toFixed(2)}</td>
+                    <td class="${stock.change >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.change >= 0 ? '+' : ''}₹${stock.change.toFixed(2)}
+                    </td>
+                    <td class="${stock.changePercent >= 0 ? 'change-positive' : 'change-negative'}">
+                        ${stock.changePercent >= 0 ? '▲' : '▼'} ${Math.abs(stock.changePercent).toFixed(2)}%
+                    </td>
+                    <td>${(stock.volume / 1000000).toFixed(2)}M</td>
+                    <td>₹${(stock.marketCap * 1000).toLocaleString('en-IN')}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateMainStats(data) {
+            const avgPrice = data.reduce((sum, s) => sum + s.price, 0) / data.length;
+            const totalChange = data.reduce((sum, s) => sum + s.change, 0);
+            const totalChangePercent = data.reduce((sum, s) => sum + s.changePercent, 0) / data.length;
+            const maxPrice = Math.max(...data.map(s => s.price));
+            const minPrice = Math.min(...data.map(s => s.price));
+
+            document.getElementById('indexValue').textContent = `₹${avgPrice.toFixed(2)}`;
+            
+            const changeClass = totalChange >= 0 ? 'change-positive' : 'change-negative';
+            document.getElementById('indexChange').className = changeClass;
+            document.getElementById('indexChange').textContent = `${totalChange >= 0 ? '▲' : '▼'} ₹${Math.abs(totalChange).toFixed(2)}`;
+            
+            document.getElementById('indexChangePercent').className = changeClass;
+            document.getElementById('indexChangePercent').textContent = `${totalChangePercent >= 0 ? '+' : ''}${totalChangePercent.toFixed(2)}%`;
+            
+            document.getElementById('dayHigh').textContent = `₹${maxPrice.toFixed(2)}`;
+            document.getElementById('dayLow').textContent = `₹${minPrice.toFixed(2)}`;
+            document.getElementById('weekHigh').textContent = `₹${(maxPrice * 1.08).toFixed(2)}`;
+            document.getElementById('weekLow').textContent = `₹${(minPrice * 0.92).toFixed(2)}`;
+            document.getElementById('marketStatus').textContent = 'OPEN';
+        }
+
+        function updatePerformanceMetrics(data) {
+            const gainers = data.filter(s => s.change > 0).length;
+            const losers = data.filter(s => s.change < 0).length;
+            const avgVolume = (data.reduce((sum, s) => sum + s.volume, 0) / data.length / 1000000).toFixed(2);
+            const totalMarketCap = (data.reduce((sum, s) => sum + s.marketCap, 0) * 1000).toLocaleString('en-IN');
+
+            document.getElementById('gainers').textContent = gainers;
+            document.getElementById('losers').textContent = losers;
+            document.getElementById('avgVolume').textContent = avgVolume + 'M';
+            document.getElementById('marketCap').textContent = '₹' + totalMarketCap;
+        }
+
+        function updateStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.innerHTML = `<span class="status-dot"></span><span>${message}</span>`;
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            });
+            document.getElementById('lastUpdate').textContent = timeString;
+            document.getElementById('footerTime').textContent = now.toLocaleString('en-IN');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 5000);
+        }
+
+        function startAutoRefresh() {
+            if (refreshInterval) clearInterval(refreshInterval);
+            refreshInterval = setInterval(refreshData, 30000); // Refresh every 30 seconds
+        }
+
+        function toggleAutoRefresh() {
+            autoRefreshEnabled = !autoRefreshEnabled;
+            const button = event.target;
+            
+            if (autoRefreshEnabled) {
+                button.textContent = '⏱️ Auto Refresh: ON';
+                startAutoRefresh();
+            } else {
+                button.textContent = '⏱️ Auto Refresh: OFF';
+                clearInterval(refreshInterval);
+            }
+        }
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function(e) {
+                const query = e.target.value.toLowerCase();
+                filteredData = niftyMidcapStocks.filter(stock => 
+                    stock.symbol.toLowerCase().includes(query) || 
+                    stock.name.toLowerCase().includes(query) ||
+                    stock.sector.toLowerCase().includes(query)
+                );
+                renderTable(filteredData);
+            });
+        }
+
+        function toggleChart() {
+            chartVisible = !chartVisible;
+            const container = document.getElementById('chartContainer');
+            
+            if (chartVisible) {
+                container.style.display = 'block';
+                initChart();
+            } else {
+                container.style.display = 'none';
+            }
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('midcapChart');
+            
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: historicalData.map(d => d.date),
+                    datasets: [{
+                        label: 'Nifty Midcap 50',
+                        data: historicalData.map(d => d.value),
+                        borderColor: '#06b6d4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#06b6d4',
+                        pointBorderColor: '#0f1419',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e5e7eb',
+                                font: { size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(139, 92, 246, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(139, 92, 246, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function exportData() {
+            let csv = 'Symbol,Company Name,Sector,Price (₹),Change (₹),Change (%),Volume,Market Cap\n';
+            filteredData.forEach(stock => {
+                csv += `${stock.symbol},"${stock.name}","${stock.sector}",${stock.price.toFixed(2)},${stock.change.toFixed(2)},${stock.changePercent.toFixed(2)},${stock.volume},${stock.marketCap}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nifty-midcap-50-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

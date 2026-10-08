@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Information - Complete Guide</title>
+    <link rel="stylesheet" href="treading_basic.css">
+</head>
+<a href="home_page.html" class="back-btn">⬅ Back</a>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">📈 Stock Market Hub</div>
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#stocks">Stocks</a></li>
+                    <li><a href="#analysis">Analysis</a></li>
+                    <li><a href="#strategies">Strategies</a></li>
+                    <li><a href="#indicators">Indicators</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>Stock Market Information & Analysis</h1>
+            <p>Master the fundamentals of stock market investing and trading</p>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview">
+        <div class="container">
+            <h2>Market Overview</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">₹200T+</div>
+                    <div class="stat-label">Global Market Cap</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50M+</div>
+                    <div class="stat-label">Daily Traders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Market Operations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10%</div>
+                    <div class="stat-label">Average Annual Return</div>
+                </div>
+            </div>
+
+            <h3>What is the Stock Market?</h3>
+            <p>The stock market is a platform where shares of publicly-listed companies are bought and sold. It serves as a crucial mechanism for companies to raise capital and for investors to build wealth. The stock market reflects the overall health of the economy and investor sentiment.</p>
+
+            <div class="highlight-box">
+                <strong>Key Point:</strong> The stock market has historically provided average annual returns of around 10%, making it one of the most reliable ways to build long-term wealth.
+            </div>
+
+            <h3>Why Invest in Stocks?</h3>
+            <ul>
+                <li><strong>Capital Appreciation:</strong> Stock prices increase over time as companies grow</li>
+                <li><strong>Dividend Income:</strong> Earn regular cash payments from company profits</li>
+                <li><strong>Ownership:</strong> Become a partial owner of successful companies</li>
+                <li><strong>Wealth Building:</strong> Benefit from compound growth over decades</li>
+                <li><strong>Inflation Hedge:</strong> Stocks typically outpace inflation rates</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Stocks Section -->
+    <section id="stocks">
+        <div class="container">
+            <h2>Understanding Stocks</h2>
+
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab(event, 'stock-types')">Stock Types</button>
+                <button class="tab-button" onclick="switchTab(event, 'market-cap')">Market Cap</button>
+                <button class="tab-button" onclick="switchTab(event, 'stock-metrics')">Key Metrics</button>
+            </div>
+
+            <!-- Stock Types Tab -->
+            <div id="stock-types" class="tab-content active">
+                <div class="content-grid">
+                    <div class="card">
+                        <h3>Common Stocks</h3>
+                        <p>Represent ownership in a company. Shareholders have voting rights and can receive dividends. Prices fluctuate based on company performance and market conditions.</p>
+                        <span class="badge badge-primary">Most Popular</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Preferred Stocks</h3>
+                        <p>Hybrid securities combining features of stocks and bonds. Preferred stockholders receive fixed dividends and have priority in liquidation but typically don't have voting rights.</p>
+                        <span class="badge badge-warning">Lower Risk</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Growth Stocks</h3>
+                        <p>Companies with high growth potential. Often reinvest profits for expansion rather than paying dividends. Higher volatility but greater upside potential.</p>
+                        <span class="badge badge-danger">Higher Risk</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Value Stocks</h3>
+                        <p>Undervalued companies trading below intrinsic value. Often pay regular dividends. Lower volatility with steady, reliable returns.</p>
+                        <span class="badge badge-success">Stable</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Blue Chip Stocks</h3>
+                        <p>Large, established companies with strong market position. Considered safe investments with consistent performance and regular dividend payments.</p>
+                        <span class="badge badge-success">Stable</span>
+                    </div>
+
+                    <div class="card">
+                        <h3>Penny Stocks</h3>
+                        <p>Low-priced stocks (under $5) of small companies. High volatility and risk but potential for significant gains. Requires careful research.</p>
+                        <span class="badge badge-danger">Very High Risk</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Cap Tab -->
+            <div id="market-cap" class="tab-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Market Cap Range</th>
+                            <th>Risk Level</th>
+                            <th>Growth Potential</th>
+                            <th>Liquidity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mega Cap</strong></td>
+                            <td>$200B+</td>
+                            <td>Very Low</td>
+                            <td>Low</td>
+                            <td>Excellent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Large Cap</strong></td>
+                            <td>$10B - $200B</td>
+                            <td>Low</td>
+                            <td>Moderate</td>
+                            <td>Excellent</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mid Cap</strong></td>
+                            <td>$2B - $10B</td>
+                            <td>Moderate</td>
+                            <td>High</td>
+                            <td>Good</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Small Cap</strong></td>
+                            <td>$300M - $2B</td>
+                            <td>High</td>
+                            <td>Very High</td>
+                            <td>Fair</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Micro Cap</strong></td>
+                            <td>$50M - $300M</td>
+                            <td>Very High</td>
+                            <td>Extremely High</td>
+                            <td>Poor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Stock Metrics Tab -->
+            <div id="stock-metrics" class="tab-content">
+                <div class="content-grid">
+                    <div class="card">
+                        <h3>P/E Ratio (Price-to-Earnings)</h3>
+                        <p><strong>Formula:</strong> Stock Price ÷ Earnings Per Share</p>
+                        <p>Indicates how many times investors are willing to pay for each dollar of earnings. Lower P/E may suggest undervaluation; higher P/E suggests growth expectations.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Dividend Yield</h3>
+                        <p><strong>Formula:</strong> Annual Dividend ÷ Stock Price × 100</p>
+                        <p>Shows the percentage return from dividends alone. Higher yield indicates more income but may signal lower growth expectations.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Book Value</h3>
+                        <p><strong>Formula:</strong> (Assets - Liabilities) ÷ Shares Outstanding</p>
+                        <p>Represents the net asset value per share. Used to identify undervalued stocks and assess financial health.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Earnings Per Share (EPS)</h3>
+                        <p><strong>Formula:</strong> Net Income ÷ Shares Outstanding</p>
+                        <p>Measures company profitability on a per-share basis. Growing EPS indicates improving profitability.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Return on Equity (ROE)</h3>
+                        <p><strong>Formula:</strong> Net Income ÷ Shareholders' Equity × 100</p>
+                        <p>Shows how efficiently the company uses shareholder money. Higher ROE indicates better management.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Debt-to-Equity Ratio</h3>
+                        <p><strong>Formula:</strong> Total Debt ÷ Total Equity</p>
+                        <p>Measures financial leverage. Lower ratio indicates less financial risk and more stable company.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis">
+        <div class="container">
+            <h2>Stock Market Analysis</h2>
+
+            <h3>Fundamental Analysis</h3>
+            <p>Fundamental analysis involves evaluating a company's financial health, competitive position, and growth prospects to determine intrinsic value.</p>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Financial Statements Analysis</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Income Statement:</strong> Shows revenue, expenses, and profitability. Look for consistent revenue growth and improving profit margins.</p>
+                        <p><strong>Balance Sheet:</strong> Lists assets, liabilities, and equity. Assess liquidity, solvency, and financial stability.</p>
+                        <p><strong>Cash Flow Statement:</strong> Tracks cash inflows and outflows. Operating cash flow is crucial for sustainability.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Industry & Competitive Analysis</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Industry Trends:</strong> Understand the industry's growth trajectory and competitive dynamics.</p>
+                        <p><strong>Competitive Advantage:</strong> Identify moats (barriers to entry) like brand strength, patents, or cost advantages.</p>
+                        <p><strong>Market Position:</strong> Evaluate the company's market share and positioning relative to competitors.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Management & Governance</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Management Quality:</strong> Assess track record, experience, and alignment with shareholders.</p>
+                        <p><strong>Corporate Governance:</strong> Strong governance reduces risks and ensures accountability.</p>
+                        <p><strong>Insider Trading:</strong> Monitor insider buying/selling patterns as indicators of confidence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Technical Analysis</h3>
+            <p>Technical analysis uses price and volume data to identify trends and predict future price movements.</p>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Support & Resistance</h3>
+                    <p><strong>Support:</strong> Price level where buying interest prevents further decline.</p>
+                    <p><strong>Resistance:</strong> Price level where selling interest prevents further increase.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Trend Lines</h3>
+                    <p>Connect price points to identify uptrends, downtrends, and consolidation patterns. Help determine entry and exit points.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Moving Averages</h3>
+                    <p>Smooth price data to identify trends. Common types: Simple MA, Exponential MA. Used to confirm trend direction.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Volume Analysis</h3>
+                    <p>Examine trading volume to confirm price movements. High volume validates price trends; low volume suggests weakness.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Chart Patterns</h3>
+                    <p>Recognize patterns like head-and-shoulders, triangles, and flags that indicate potential price breakouts.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Candlestick Analysis</h3>
+                    <p>Interpret candlestick formations to understand market sentiment and potential reversals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategies Section -->
+    <section id="strategies">
+        <div class="container">
+            <h2>Investment Strategies</h2>
+
+            <h3>Long-Term Strategies</h3>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Buy & Hold</h3>
+                    <p>Purchase quality stocks and hold them for years or decades. Benefits from compound growth and dividend reinvestment. Requires patience and discipline.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Dollar-Cost Averaging</h3>
+                    <p>Invest a fixed amount regularly regardless of price. Reduces impact of volatility and removes emotion from investing. Ideal for beginners.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Value Investing</h3>
+                    <p>Buy undervalued stocks trading below intrinsic value. Wait for market recognition. Requires thorough research and patience.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Growth Investing</h3>
+                    <p>Focus on companies with high growth potential. Accept higher volatility for greater upside. Requires identifying future winners.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Dividend Investing</h3>
+                    <p>Build portfolio of dividend-paying stocks for regular income. Reinvest dividends for compounding. Provides passive income stream.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Index Investing</h3>
+                    <p>Invest in index funds or ETFs tracking market indices. Low fees, diversification, and consistent returns. Requires minimal research.</p>
+                </div>
+            </div>
+
+            <h3>Short-Term Strategies</h3>
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Day Trading</h3>
+                    <p>Buy and sell stocks within the same day. Profit from short-term price movements. Requires active monitoring and quick decisions.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Swing Trading</h3>
+                    <p>Hold stocks for days to weeks. Capture medium-term price swings. Requires technical analysis skills.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Momentum Trading</h3>
+                    <p>Trade stocks with strong price momentum. Follow the trend and exit before reversal. Requires timing and risk management.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Options Trading</h3>
+                    <p>Use options contracts for leverage and flexibility. Higher risk but potential for significant returns. Requires advanced knowledge.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Short Selling</h3>
+                    <p>Profit from declining stock prices by borrowing and selling. High risk with unlimited loss potential. Requires expertise.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Arbitrage</h3>
+                    <p>Exploit price differences across markets. Low risk but requires quick execution. Opportunities are rare and fleeting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Indicators Section -->
+    <section id="indicators">
+        <div class="container">
+            <h2>Technical Indicators</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Indicator</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Relative Strength Index (RSI)</strong></td>
+                        <td>Momentum</td>
+                        <td>Measure overbought/oversold conditions</td>
+                        <td>Above 70 = Overbought, Below 30 = Oversold</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MACD</strong></td>
+                        <td>Trend</td>
+                        <td>Identify trend changes and momentum</td>
+                        <td>Crossovers signal buy/sell opportunities</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bollinger Bands</strong></td>
+                        <td>Volatility</td>
+                        <td>Measure volatility and support/resistance</td>
+                        <td>Price outside bands suggests reversal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stochastic Oscillator</strong></td>
+                        <td>Momentum</td>
+                        <td>Identify overbought/oversold levels</td>
+                        <td>Above 80 = Overbought, Below 20 = Oversold</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average True Range (ATR)</strong></td>
+                        <td>Volatility</td>
+                        <td>Measure market volatility</td>
+                        <td>Higher ATR = Higher volatility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>On-Balance Volume (OBV)</strong></td>
+                        <td>Volume</td>
+                        <td>Confirm price trends with volume</td>
+                        <td>Rising OBV confirms uptrend</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accumulation/Distribution</strong></td>
+                        <td>Volume</td>
+                        <td>Measure buying/selling pressure</td>
+                        <td>Divergence signals potential reversal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Directional Index (ADX)</strong></td>
+                        <td>Trend</td>
+                        <td>Measure trend strength</td>
+                        <td>Above 25 = Strong trend</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Using Multiple Indicators</h3>
+            <div class="highlight-box">
+                <p><strong>Best Practice:</strong> Combine 2-4 indicators from different categories (trend, momentum, volume) for confirmation. Avoid indicator overload which can lead to conflicting signals. Always combine technical analysis with fundamental analysis for better decisions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Management Section -->
+    <section>
+        <div class="container">
+            <h2>Risk Management</h2>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Diversification</h3>
+                    <p>Spread investments across different stocks, sectors, and asset classes. Reduces impact of any single investment's poor performance.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Position Sizing</h3>
+                    <p>Allocate appropriate amounts to each position based on risk tolerance. Typical allocation: 60% large-cap, 25% mid-cap, 15% small-cap.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Stop Loss Orders</h3>
+                    <p>Set predetermined exit prices to limit losses. Protects capital from significant downside. Essential for active traders.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Asset Allocation</h3>
+                    <p>Balance portfolio among stocks, bonds, and cash based on age and risk tolerance. Younger investors can take more risk.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Portfolio Rebalancing</h3>
+                    <p>Periodically adjust portfolio to maintain target allocation. Sell winners and buy losers. Typically done quarterly or annually.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Hedging Strategies</h3>
+                    <p>Use options, futures, or inverse ETFs to protect against downside. Reduces potential losses but also limits gains.</p>
+                </div>
+            </div>
+
+            <h3>Risk Assessment Framework</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk Level</th>
+                        <th>Age Group</th>
+                        <th>Stock Allocation</th>
+                        <th>Bond Allocation</th>
+                        <th>Cash Allocation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Aggressive</strong></td>
+                        <td>20-30</td>
+                        <td>90%</td>
+                        <td>5%</td>
+                        <td>5%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate-Aggressive</strong></td>
+                        <td>30-40</td>
+                        <td>75%</td>
+                        <td>15%</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Moderate</strong></td>
+                        <td>40-50</td>
+                        <td>60%</td>
+                        <td>30%</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conservative</strong></td>
+                        <td>50-60</td>
+                        <td>40%</td>
+                        <td>50%</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Very Conservative</strong></td>
+                        <td>60+</td>
+                        <td>20%</td>
+                        <td>70%</td>
+                        <td>10%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section>
+        <div class="container">
+            <h2>Getting Started: Step-by-Step</h2>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 1: Open a Brokerage Account</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Choose a reputable stock broker and open a trading account. Compare fees, platforms, research tools, and customer service. Most brokers offer commission-free trading nowadays.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 2: Complete KYC Verification</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Provide identity proof, address proof, and tax identification. This is mandatory for regulatory compliance and takes 1-2 business days.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 3: Fund Your Account</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Link your bank account and deposit funds. Start with an amount you can afford to lose while learning. Most brokers allow transfers within 24 hours.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 4: Learn the Basics</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Understand fundamental concepts like stocks, indices, P/E ratios, and risk management. Use educational resources provided by your broker or online courses.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 5: Start Small & Diversify</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Begin with index funds or large-cap stocks. Invest small amounts regularly through dollar-cost averaging. Build a diversified portfolio gradually.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Step 6: Monitor & Rebalance</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Review portfolio quarterly. Rebalance to maintain target allocation. Stay informed about holdings but avoid overtrading. Focus on long-term goals.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Stock Market Information Hub. All rights reserved.</p>
+        <p>Disclaimer: This content is for educational purposes only. Not financial advice. Consult a financial advisor before investing.</p>
+    </footer>
+
+    <script>
+        // Tab Switching
+        function switchTab(event, tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Accordion Toggle
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

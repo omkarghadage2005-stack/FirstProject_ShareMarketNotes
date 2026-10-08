@@ -1,0 +1,77 @@
+
+body{
+    background-image: url("sector_Imeage/bear_blue.jpg");
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    color:#fff;
+    margin:0;
+    padding:0;
+}
+.back-btn{
+    text-decoration:none;
+    padding:10px 20px;
+    background:transparent;
+    color:white;
+    border-radius:6px;
+    font-size:16px;
+    border: 1px solid gray;
+    margin: 10px 10px 10px 10px;
+}
+
+.back-btn:hover{
+    background:transparent;
+}
+
+
+.contact{
+    max-width:600px;
+    margin:80px auto;
+    background:#111827;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+}
+.contact h1{
+    color:#38bdf8;
+}
+.contact p{
+    color:#cbd5f5;
+    margin-bottom:30px;
+}
+
+.social-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.social-buttons a{
+    text-decoration:none;
+    padding:15px 25px;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:bold;
+    color:#fff;
+    transition:0.3s;
+}
+
+.instagram{
+    background:linear-gradient(45deg,#f58529,#366fb1,#34a7af,#b8d451);
+}
+.instagram:hover{
+    opacity:0.85;
+}
+
+.whatsapp{
+    background:#25D366;
+}
+.whatsapp:hover{
+    background:#1ebe57;
+}
+
+footer{
+    margin-top:30px;
+    font-size:14px;
+    color:#94a3b8;
+}

@@ -1,0 +1,173 @@
+(function(self, ns){
+    var GENERIC_BUNDLE_URL = "https://fast.appcues.com/generic/main/7.17.6/appcues.main.0aa93b691f53f8b2a7b7dce6ad16f640d96c3b21.js";
+    var ACCOUNT_DETAILS = {"API_HOSTNAME":"api.appcues.net","GENERIC_BUNDLE_DOMAIN":"https://fast.appcues.com","GENERIC_BUNDLE_PATH":"/generic/main/7.17.6/appcues.main.0aa93b691f53f8b2a7b7dce6ad16f640d96c3b21.js","RELEASE_ID":"0aa93b691f53f8b2a7b7dce6ad16f640d96c3b21","VERSION":"7.17.6","account":{"buffer":0,"entitlements":{"enableCTTEventIntegrations":false},"gates":{"enableCTTEventIntegrations":false,"enableClientSideEventIntegrations":false,"responseFormatV2Enabled":true},"isTrial":false,"isTrialExpired":true,"skipAutoProperties":false,"stripQueryParams":null,"stripePlanId":"11988-enterprise-yearly"},"accountId":"213722","custom_events":[{"accountId":null,"buildUrl":null,"createdAt":null,"createdBy":null,"disabledAt":null,"disabledBy":null,"enabled":null,"enabledAt":null,"enabledBy":null,"id":null,"name":"appcues_custom:EnterTrade[TradeIdeas]","state":"ENABLED","targets":[{"event":"click","selector":{"selector":"mi-signal-enter-trade-button button"}}],"updatedAt":null,"updatedBy":null,"urls":["*"]},{"accountId":null,"buildUrl":null,"createdAt":null,"createdBy":null,"disabledAt":null,"disabledBy":null,"enabled":null,"enabledAt":null,"enabledBy":null,"id":null,"name":"appcues_custom:NotificationClick","state":"ENABLED","targets":[{"event":"click","selector":{"selector":"#notifications-button"}}],"updatedAt":null,"updatedBy":null,"urls":["https://test-my.xm.com/*","https://sionita.test-my.xm.com/*"]}],"defaultAppId":"4daeb65a-69c4-4b6d-a8ed-2b34e5b6820c","integrations":{},"styling":{}};
+    var VERSION = ACCOUNT_DETAILS.VERSION;
+    var RELEASE_ID = ACCOUNT_DETAILS.RELEASE_ID;
+    var GENERIC_BUNDLE_DOMAIN = ACCOUNT_DETAILS.GENERIC_BUNDLE_DOMAIN;
+    var accountId = ACCOUNT_DETAILS.accountId;
+    var isBootstrapped = false;
+
+    self.AppcuesBundleSettings = {
+      accountId: accountId,
+      VERSION: VERSION,
+      RELEASE_ID: RELEASE_ID,
+      GENERIC_BUNDLE_DOMAIN: GENERIC_BUNDLE_DOMAIN,
+      GENERIC_BUNDLE_PATH: ACCOUNT_DETAILS.GENERIC_BUNDLE_PATH,
+      styling:  ACCOUNT_DETAILS.styling,
+      integrations: ACCOUNT_DETAILS.integrations,
+      account: ACCOUNT_DETAILS.account,
+      events: ACCOUNT_DETAILS.custom_events,
+      defaultAppId: ACCOUNT_DETAILS.defaultAppId,
+      API_HOSTNAME: ACCOUNT_DETAILS.API_HOSTNAME
+    };
+
+    var skipAMD = false;
+    var windowGlobals = window["AppcuesSettings"];
+    if (
+      windowGlobals &&
+      typeof windowGlobals === "object" &&
+      windowGlobals.skipAMD === true
+    ) {
+      skipAMD = true;
+    }
+
+    var doc = self.document;
+    self[ns] = self[ns] || [];
+    var Appcues = self[ns];
+    if (Appcues.invoked) {
+        if (self.console && console.error) {
+            console.error('Appcues snippet included twice.');
+        }
+        return;
+    }
+
+    if (Appcues.identify) return;
+    Appcues.invoked = true;
+
+    var methods = [
+        "identify",
+        "track",
+        "page",
+        "anonymous",
+        "start",
+        "show",
+        "loadLaunchpad",
+        "clearShow",
+        "on",
+        "off",
+        "once",
+        "reset",
+        "debug",
+        "user",
+        "call",
+        "settings",
+        "content",
+        "initMixpanel",
+        "initHeap",
+        "initIntercom",
+        "initCIO",
+        "initWoopra",
+        "initAmplitude",
+        "initKlaviyo",
+        "initTD",
+        "initLl",
+        "initCalq",
+        "initKM",
+        "initGA",
+        "initGTM",
+        "initSegment",
+        "initRudderstack",
+        "initBraze",
+        "initFullStory",
+        "initHotjar",
+        "initLogRocket",
+        "group",
+
+        // Methods solely for the injectable
+        "injectContent",
+        "injectStyles",
+    ];
+
+    var promises = [
+        "user"
+    ];
+
+    function factory(method){
+        return function(){
+            var args = Array.prototype.slice.call(arguments);
+            if (isBootstrapped) {
+              self.Appcues[method].apply(self.Appcues, args);
+            } else {
+              args.unshift(method);
+              Appcues.push(args);
+            }
+            return self.Appcues;
+        };
+    }
+
+    // For each of our methods, generate a queueing stub.
+    for (var i = 0; i < methods.length; i++) {
+        var key = methods[i];
+        Appcues[key] = factory(key);
+    }
+
+    for (var i = 0; i < promises.length; i++) {
+        var key = promises[i];
+        Appcues[key] = function() {
+          var args = Array.prototype.slice.call(arguments);
+          if (isBootstrapped) {
+            return self.Appcues[key].apply(self.Appcues, args);
+          } else {
+            return new Promise(function(resolve, _reject) {
+              args.unshift(resolve);
+              args.unshift(key);
+              Appcues.push(args);
+            });
+          }
+        };
+    }
+
+    if (
+      !skipAMD &&
+      typeof window.define === "function" &&
+      window.define.amd &&
+      (window.define.amd.vendor == null ||
+        window.define.amd.vendor !== "dojotoolkit.org")
+    ) {
+      window.define(function() { return Appcues; });
+    }
+
+    function load(){
+        var bundleScript = doc.createElement("script");
+
+        bundleScript.crossOrigin = "anonymous";
+        bundleScript.integrity = "sha256-ax91O1jrPXaQkJOlp8AkKJsfnNBbdN+qYdAqo/NumbI=";
+
+        bundleScript.type = "text/javascript";
+        bundleScript.src = GENERIC_BUNDLE_URL;
+        bundleScript.async = true;
+        bundleScript.onload = function () {
+            isBootstrapped = true;
+            Appcues.forEach(function(call) {
+                var fnName = call[0];
+                var args = call.slice(1);
+                if (promises.indexOf(fnName) === -1) {
+                  self[ns] && self[ns][fnName] &&
+                      self[ns][fnName].apply(self[ns], args);
+                } else {
+                  var resolve = args[0];
+                  var promiseArgs = args.slice(1);
+                  self[ns] && self[ns][fnName] &&
+                    self[ns][fnName].apply(self[ns], promiseArgs).then(
+                      function() { resolve(arguments[0]); }
+                    );
+                }
+            });
+        };
+
+        var firstScript = doc.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(bundleScript, firstScript);
+    }
+    Appcues.SNIPPET_VERSION = VERSION;
+    load();
+})(window, 'Appcues');
